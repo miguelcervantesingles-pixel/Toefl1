@@ -1,0 +1,1049 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TOEFL Practice Test</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0e1a;
+    --surface: #111827;
+    --surface2: #1a2235;
+    --accent: #3b82f6;
+    --accent2: #60a5fa;
+    --gold: #f59e0b;
+    --green: #10b981;
+    --red: #ef4444;
+    --purple: #8b5cf6;
+    --text: #e2e8f0;
+    --muted: #64748b;
+    --border: #1e293b;
+    --radius: 12px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+  }
+  h1,h2,h3 { font-family: 'Playfair Display', serif; }
+
+  /* SCREEN MANAGEMENT */
+  .screen { display: none; min-height: 100vh; }
+  .screen.active { display: flex; flex-direction: column; }
+
+  /* ===== HOME SCREEN ===== */
+  #home {
+    background: radial-gradient(ellipse at 20% 50%, #1e3a5f22 0%, transparent 60%),
+                radial-gradient(ellipse at 80% 20%, #4c1d9522 0%, transparent 50%),
+                var(--bg);
+    align-items: center; justify-content: center; text-align: center; padding: 2rem;
+  }
+  .home-badge {
+    display: inline-block;
+    background: linear-gradient(135deg, #1e3a5f, #1e1b4b);
+    border: 1px solid #3b82f620;
+    border-radius: 50px; padding: 6px 18px;
+    font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--accent2); margin-bottom: 1.5rem;
+  }
+  .home-title {
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    line-height: 1.1;
+    background: linear-gradient(135deg, #e2e8f0 30%, #60a5fa 70%, #8b5cf6);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+  }
+  .home-sub { font-size: 1.1rem; color: var(--muted); max-width: 500px; line-height: 1.7; margin: 0 auto 3rem; }
+  .sections-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 480px; margin: 0 auto 2.5rem; }
+  .section-card {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.2rem;
+    transition: all 0.3s; cursor: default;
+  }
+  .section-card:hover { border-color: var(--accent); transform: translateY(-2px); }
+  .section-card .icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  .section-card h3 { font-size: 0.95rem; font-family: 'DM Sans', sans-serif; font-weight: 600; }
+  .section-card p { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--accent), var(--purple));
+    border: none; color: white; font-family: 'DM Sans', sans-serif;
+    font-size: 1rem; font-weight: 600; padding: 1rem 2.5rem;
+    border-radius: 50px; cursor: pointer;
+    transition: all 0.3s; letter-spacing: 0.5px;
+    box-shadow: 0 4px 20px #3b82f630;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px #3b82f650; }
+  .info-bar { display: flex; gap: 2rem; justify-content: center; margin-top: 1.5rem; }
+  .info-item { font-size: 0.8rem; color: var(--muted); }
+  .info-item strong { color: var(--text); display: block; font-size: 1rem; }
+
+  /* ===== TEST LAYOUT ===== */
+  #test { flex-direction: column; }
+  .test-header {
+    background: var(--surface); border-bottom: 1px solid var(--border);
+    padding: 0.8rem 1.5rem; display: flex; align-items: center;
+    gap: 1rem; position: sticky; top: 0; z-index: 100;
+  }
+  .test-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--accent2); }
+  .section-tabs { display: flex; gap: 0.5rem; margin: 0 auto; }
+  .tab {
+    padding: 5px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 500;
+    border: 1px solid transparent; cursor: default; transition: all 0.3s;
+    color: var(--muted);
+  }
+  .tab.done { color: var(--green); border-color: #10b98130; background: #10b98110; }
+  .tab.active { color: white; background: var(--accent); border-color: var(--accent); }
+  .tab.locked { opacity: 0.4; }
+  .timer {
+    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
+    color: var(--gold); background: #f59e0b15; border: 1px solid #f59e0b30;
+    padding: 4px 12px; border-radius: 20px;
+  }
+  .test-body { flex: 1; overflow-y: auto; padding: 2rem; max-width: 860px; margin: 0 auto; width: 100%; }
+  .section-title { font-size: 1.6rem; margin-bottom: 0.3rem; }
+  .section-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
+  .progress-bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 2rem; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--purple)); border-radius: 2px; transition: width 0.4s; }
+
+  /* READING */
+  .reading-passage {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.5rem; margin-bottom: 1.5rem; font-size: 0.92rem; line-height: 1.85;
+    color: #cbd5e1; max-height: 280px; overflow-y: auto;
+  }
+  .reading-passage h4 { font-family: 'Playfair Display', serif; color: var(--text); margin-bottom: 0.8rem; font-size: 1.1rem; }
+  .question-block { margin-bottom: 1.5rem; }
+  .question-text { font-weight: 500; margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem; }
+  .options { display: flex; flex-direction: column; gap: 0.5rem; }
+  .option {
+    display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.85rem 1rem;
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    cursor: pointer; transition: all 0.2s; font-size: 0.88rem; line-height: 1.5;
+  }
+  .option:hover { border-color: var(--accent2); background: var(--surface2); }
+  .option.selected { border-color: var(--accent); background: #3b82f615; }
+  .option.correct { border-color: var(--green); background: #10b98115; }
+  .option.wrong { border-color: var(--red); background: #ef444415; }
+  .option-letter {
+    width: 22px; height: 22px; min-width: 22px; border-radius: 50%;
+    border: 1.5px solid var(--muted); display: flex; align-items: center; justify-content: center;
+    font-size: 0.75rem; font-weight: 700; color: var(--muted);
+  }
+  .option.selected .option-letter { border-color: var(--accent); color: var(--accent); }
+
+  /* LISTENING */
+  .audio-player {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.5rem; margin-bottom: 1.5rem; text-align: center;
+  }
+  .audio-icon { font-size: 3rem; margin-bottom: 1rem; }
+  .audio-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .audio-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.2rem; }
+  .audio-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+  .btn-play {
+    background: var(--accent); border: none; color: white; width: 48px; height: 48px;
+    border-radius: 50%; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
+    transition: all 0.2s;
+  }
+  .btn-play:hover { background: var(--accent2); transform: scale(1.05); }
+  .audio-waveform {
+    display: flex; gap: 3px; align-items: center; height: 40px;
+    background: var(--surface); border-radius: 8px; padding: 0 1rem;
+    overflow: hidden; min-width: 180px;
+  }
+  .wave-bar {
+    width: 3px; border-radius: 2px; background: var(--muted);
+    animation: none; transition: height 0.1s;
+  }
+  .playing .wave-bar {
+    background: var(--accent);
+    animation: wave 1s ease-in-out infinite;
+  }
+  @keyframes wave {
+    0%,100% { height: 6px; } 50% { height: 28px; }
+  }
+  .transcript-box {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
+    padding: 1.2rem; margin-bottom: 1rem; font-size: 0.88rem; line-height: 1.8;
+    color: #94a3b8; font-style: italic;
+  }
+  .transcript-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent2); margin-bottom: 0.5rem; font-style: normal; font-weight: 600; }
+
+  /* WRITING */
+  .writing-prompt {
+    background: linear-gradient(135deg, #1e3a5f20, #1e1b4b20);
+    border: 1px solid #3b82f630; border-radius: var(--radius); padding: 1.3rem;
+    margin-bottom: 1.2rem; font-size: 0.9rem; line-height: 1.7; color: var(--accent2);
+  }
+  .writing-prompt strong { color: var(--text); display: block; margin-bottom: 0.5rem; font-family: 'Playfair Display', serif; }
+  .writing-area {
+    width: 100%; min-height: 200px; background: var(--surface); border: 1px solid var(--border);
+    border-radius: var(--radius); padding: 1.2rem; color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 0.92rem; line-height: 1.8; resize: vertical;
+    transition: border-color 0.2s;
+  }
+  .writing-area:focus { outline: none; border-color: var(--accent); }
+  .word-count { text-align: right; font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem; }
+  .word-count.good { color: var(--green); }
+
+  /* SPEAKING */
+  .speaking-prompt {
+    background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.5rem; margin-bottom: 1.5rem;
+  }
+  .speaking-prompt h4 { color: var(--accent2); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.8rem; font-family: 'DM Sans',sans-serif; }
+  .speaking-prompt p { font-size: 0.95rem; line-height: 1.7; }
+  .record-area { text-align: center; padding: 2rem 1rem; }
+  .record-btn {
+    width: 80px; height: 80px; border-radius: 50%; border: none; cursor: pointer;
+    background: linear-gradient(135deg, var(--red), #dc2626);
+    color: white; font-size: 1.5rem; margin: 0 auto 1rem;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 20px #ef444430; transition: all 0.3s;
+  }
+  .record-btn.recording {
+    animation: pulse-red 1.2s ease-in-out infinite;
+    background: linear-gradient(135deg, #dc2626, #991b1b);
+  }
+  @keyframes pulse-red {
+    0%,100% { box-shadow: 0 4px 20px #ef444430; transform: scale(1); }
+    50% { box-shadow: 0 4px 40px #ef444460; transform: scale(1.05); }
+  }
+  .record-status { font-size: 0.85rem; color: var(--muted); }
+  .record-status.recording { color: var(--red); }
+  .speaking-tips {
+    background: var(--surface); border-radius: 8px; padding: 1rem;
+    font-size: 0.82rem; color: var(--muted); line-height: 1.6;
+  }
+  .speaking-tips strong { color: var(--text); display: block; margin-bottom: 0.4rem; }
+
+  /* NAVIGATION */
+  .test-footer {
+    background: var(--surface); border-top: 1px solid var(--border);
+    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
+    position: sticky; bottom: 0;
+  }
+  .btn-nav {
+    padding: 0.7rem 1.5rem; border-radius: 8px; font-family: 'DM Sans', sans-serif;
+    font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
+    border: none;
+  }
+  .btn-back { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
+  .btn-back:hover { background: var(--border); }
+  .btn-next { background: var(--accent); color: white; }
+  .btn-next:hover { background: var(--accent2); }
+  .btn-submit { background: linear-gradient(135deg, var(--green), #059669); color: white; }
+  .q-counter { font-size: 0.82rem; color: var(--muted); }
+
+  /* ===== RESULTS SCREEN ===== */
+  #results {
+    background: radial-gradient(ellipse at 50% 0%, #1e3a5f30 0%, transparent 60%), var(--bg);
+    align-items: center; justify-content: flex-start; padding: 2rem;
+  }
+  .results-inner { max-width: 800px; width: 100%; margin: 0 auto; }
+  .results-header { text-align: center; margin-bottom: 3rem; }
+  .results-header h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
+  .level-badge {
+    display: inline-block; padding: 8px 24px; border-radius: 50px;
+    font-weight: 700; font-size: 1rem; letter-spacing: 1px;
+    margin: 1rem 0;
+  }
+  .total-score-ring {
+    width: 160px; height: 160px; border-radius: 50%;
+    background: conic-gradient(var(--accent) 0%, var(--purple) 100%);
+    display: flex; align-items: center; justify-content: center;
+    margin: 1.5rem auto; position: relative;
+  }
+  .total-score-ring::before {
+    content: ''; position: absolute; inset: 12px; background: var(--bg); border-radius: 50%;
+  }
+  .score-center { position: relative; z-index: 1; text-align: center; }
+  .score-number { font-size: 2.5rem; font-weight: 900; font-family: 'Playfair Display', serif; }
+  .score-label { font-size: 0.75rem; color: var(--muted); }
+  .sections-results { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
+  .result-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem;
+  }
+  .result-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
+  .result-card-title { font-weight: 600; font-size: 0.9rem; }
+  .result-score { font-size: 1.4rem; font-weight: 700; font-family: 'Playfair Display', serif; }
+  .result-bar-bg { height: 6px; background: var(--border); border-radius: 3px; }
+  .result-bar-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
+  .result-feedback { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; }
+  .level-desc {
+    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 1.5rem; margin-bottom: 2rem;
+  }
+  .level-desc h3 { margin-bottom: 0.8rem; }
+  .level-desc p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+  .cefr-grid { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
+  .cefr-item {
+    padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
+    border: 1px solid var(--border); color: var(--muted);
+  }
+  .cefr-item.current { background: var(--accent); border-color: var(--accent); color: white; }
+  .btn-restart { width: 100%; padding: 1rem; border-radius: var(--radius); background: linear-gradient(135deg, var(--accent), var(--purple)); border: none; color: white; font-family: 'DM Sans',sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+  .btn-restart:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* AI FEEDBACK */
+  .ai-feedback {
+    background: linear-gradient(135deg, #1e3a5f15, #1e1b4b20);
+    border: 1px solid #3b82f630; border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem;
+  }
+  .ai-feedback h4 { color: var(--accent2); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem; }
+  .ai-feedback-text { font-size: 0.88rem; line-height: 1.7; color: #94a3b8; }
+  .ai-loading { display: flex; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.85rem; }
+  .dot-pulse { display: flex; gap: 4px; }
+  .dot-pulse span { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: dp 1.2s ease-in-out infinite; }
+  .dot-pulse span:nth-child(2) { animation-delay: 0.2s; }
+  .dot-pulse span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes dp { 0%,80%,100% { opacity: 0.2; transform: scale(0.8); } 40% { opacity: 1; transform: scale(1); } }
+
+  @media (max-width: 600px) {
+    .sections-grid, .sections-results { grid-template-columns: 1fr; }
+    .test-body { padding: 1rem; }
+    .section-tabs { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HOME SCREEN -->
+<div id="home" class="screen active">
+  <div>
+    <div class="home-badge">🎓 Official Practice Format</div>
+    <h1 class="home-title">TOEFL iBT<br>Practice Test</h1>
+    <p class="home-sub">A full-length mini practice test covering all four TOEFL sections. Get instant AI-powered feedback and discover your English proficiency level.</p>
+    <div class="sections-grid">
+      <div class="section-card">
+        <div class="icon">📖</div>
+        <h3>Reading</h3>
+        <p>3 varied passages · 9 questions</p>
+      </div>
+      <div class="section-card">
+        <div class="icon">🎧</div>
+        <h3>Listening</h3>
+        <p>2 audio clips · 6 questions</p>
+      </div>
+      <div class="section-card">
+        <div class="icon">🎤</div>
+        <h3>Speaking</h3>
+        <p>2 tasks · AI scoring rubric</p>
+      </div>
+      <div class="section-card">
+        <div class="icon">✍️</div>
+        <h3>Writing</h3>
+        <p>2 tasks · AI essay feedback</p>
+      </div>
+    </div>
+    <button class="btn-primary" onclick="startTest()">Begin Practice Test →</button>
+    <div class="info-bar">
+      <div class="info-item"><strong>~45 min</strong>Estimated time</div>
+      <div class="info-item"><strong>120</strong>Max score</div>
+      <div class="info-item"><strong>Free</strong>No account needed</div>
+    </div>
+  </div>
+</div>
+
+<!-- TEST SCREEN -->
+<div id="test" class="screen">
+  <div class="test-header">
+    <div class="test-logo">TOEFL Practice</div>
+    <div class="section-tabs" id="sectionTabs"></div>
+    <div class="timer" id="timer">⏱ 45:00</div>
+  </div>
+  <div class="test-body" id="testBody"></div>
+  <div class="test-footer">
+    <div>
+      <div class="q-counter" id="qCounter"></div>
+    </div>
+    <div style="display:flex;gap:0.5rem">
+      <button class="btn-nav btn-back" id="btnBack" onclick="prevQuestion()">← Back</button>
+      <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()">Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULTS SCREEN -->
+<div id="results" class="screen">
+  <div class="results-inner" id="resultsInner"></div>
+</div>
+
+<script>
+// ============================================================
+//  DATA
+// ============================================================
+const testData = {
+  reading: [
+    {
+      passage: `<h4>The Amazon Rainforest: Earth's Lungs</h4>
+        The Amazon rainforest, often referred to as the "lungs of the Earth," spans approximately 5.5 million square kilometers across nine South American countries, with Brazil containing about 60% of its total area. This vast ecosystem is home to an estimated 10% of all species on Earth, many of which remain undiscovered by science. The Amazon River, which runs through this forest, discharges roughly 20% of all fresh water that enters the world's oceans daily.
+        <br><br>Deforestation poses the most immediate threat to the Amazon. Agricultural expansion, illegal logging, and infrastructure development have destroyed approximately 17% of the original forest in the last 50 years. Scientists warn that if deforestation continues at its current rate, the Amazon could reach a "tipping point" beyond which it would be unable to generate enough rainfall to sustain itself, potentially transforming into a savanna-like landscape. This transformation would release billions of tons of stored carbon into the atmosphere, dramatically accelerating global climate change.
+        <br><br>Indigenous communities have inhabited the Amazon for thousands of years and possess invaluable traditional knowledge about its ecosystems. Studies consistently show that territories managed by indigenous peoples have lower rates of deforestation compared to other protected areas, suggesting that supporting indigenous land rights may be one of the most effective strategies for forest conservation.`,
+      questions: [
+        { q: "According to the passage, what percentage of the world's fresh water entering oceans comes from the Amazon River daily?", opts: ["10%","17%","20%","60%"], ans: 2 },
+        { q: "What does the author mean by the Amazon's 'tipping point'?", opts: ["When deforestation reaches 17% of the forest","When the forest can no longer sustain its own rainfall","When all indigenous communities leave","When carbon emissions double"], ans: 1 },
+        { q: "Which of the following best describes the author's attitude toward indigenous land rights?", opts: ["Skeptical","Neutral","Supportive","Critical"], ans: 2 },
+      ]
+    },
+    {
+      passage: `<h4>The Psychology of Flow: Optimal Human Experience</h4>
+        Psychologist Mihaly Csikszentmihalyi introduced the concept of "flow" in the 1970s after studying artists, chess players, and athletes who became so absorbed in their activities that they lost track of time and self-consciousness. Flow is defined as a state of complete immersion in a challenging activity, characterized by intense focus, a sense of control, and intrinsic reward. Csikszentmihalyi described it as "the state in which people are so involved in an activity that nothing else seems to matter."
+        <br><br>Flow occurs at a precise intersection: when the challenge of a task is well-matched to an individual's skill level. If a task is too easy, boredom results; if it is too difficult, anxiety prevails. This delicate balance, which Csikszentmihalyi called the "flow channel," suggests that personal growth and happiness are inextricably linked to engaging with tasks that are appropriately challenging.
+        <br><br>Research has demonstrated that people in flow states report greater happiness and satisfaction, are more creative, and perform at higher levels. These findings have had significant implications for education, workplace design, and therapy. Modern educators use flow theory to design curricula that appropriately challenge students, while companies implement flow principles in employee engagement programs to improve productivity without burnout.`,
+      questions: [
+        { q: "According to the passage, when does flow occur?", opts: ["When tasks are very easy","When challenge matches skill level","When someone works alone","When a task takes many hours"], ans: 1 },
+        { q: "The word 'intrinsic' in paragraph 1 most nearly means:", opts: ["external","difficult","coming from within","related to sports"], ans: 2 },
+        { q: "Which of the following is NOT mentioned as an application of flow theory?", opts: ["Education curriculum design","Employee engagement","Medical surgery","Therapy"], ans: 2 },
+      ]
+    },
+    {
+      passage: `<h4>Quantum Computing: The Next Frontier</h4>
+        Classical computers, which power everything from smartphones to supercomputers, process information using bits—binary units that exist in one of two states: 0 or 1. Quantum computers, by contrast, use quantum bits, or "qubits," which exploit the principles of quantum mechanics to exist in multiple states simultaneously—a phenomenon known as superposition. Additionally, qubits can be "entangled," meaning the state of one qubit instantly influences its partner regardless of the distance separating them.
+        <br><br>These properties give quantum computers an exponential advantage for certain computational tasks. A classical computer solving a complex optimization problem might evaluate possibilities sequentially, taking years; a quantum computer could theoretically explore all possibilities simultaneously, solving the same problem in minutes. This makes quantum computing particularly valuable for drug discovery, materials science, financial modeling, and cryptography.
+        <br><br>However, quantum computers face significant technical challenges. Qubits are extremely fragile and must be maintained at temperatures colder than outer space—near absolute zero—to prevent "decoherence," the loss of quantum properties due to environmental interference. As of 2024, the most advanced quantum computers can only maintain coherence for fractions of a second, limiting their practical applications. Researchers worldwide are racing to overcome these challenges, with some experts predicting practical quantum advantage within the next decade.`,
+      questions: [
+        { q: "According to the passage, what is superposition?", opts: ["When qubits are connected to each other","When qubits exist in multiple states simultaneously","When computers work faster than light","When bits are stored at cold temperatures"], ans: 1 },
+        { q: "Why must qubits be maintained at extremely cold temperatures?", opts: ["To make them process faster","To prevent decoherence","To allow entanglement","To save energy"], ans: 1 },
+        { q: "The author's tone when discussing quantum computing can best be described as:", opts: ["Dismissive","Optimistic but cautious","Wholly enthusiastic","Deeply pessimistic"], ans: 1 },
+      ]
+    }
+  ],
+
+  listening: [
+    {
+      title: "Lecture: The History of Jazz Music",
+      transcript: `"Good morning, everyone. Today we're going to explore the origins of jazz—one of America's most significant cultural exports. Jazz emerged in New Orleans around the turn of the 20th century, drawing from African American musical traditions including blues, ragtime, and gospel. Early jazz musicians, many of them African American, created an entirely new musical language based on improvisation—the ability to compose and perform music spontaneously. By the 1920s, often called the 'Jazz Age,' the genre had spread across the United States, particularly to Chicago and New York. Artists like Louis Armstrong, Duke Ellington, and later Miles Davis transformed jazz from a regional folk tradition into a sophisticated art form with global influence. What distinguishes jazz from other genres is its emphasis on individual expression within a collaborative framework—each musician has freedom to improvise while supporting the overall sound of the ensemble."`,
+      questions: [
+        { q: "According to the lecture, where did jazz originate?", opts: ["New York","Chicago","New Orleans","Memphis"], ans: 2 },
+        { q: "What does the professor say distinguishes jazz from other genres?", opts: ["Its use of written scores","Individual expression within collaboration","Its origin in gospel music","Its popularity in the 1920s"], ans: 1 },
+      ]
+    },
+    {
+      title: "Conversation: Student and Professor",
+      transcript: `Professor: "Come in, Sarah. You wanted to discuss your research paper?"
+Sarah: "Yes, Professor Chen. I've been struggling with my thesis statement. I want to write about social media's effects on teenage mental health, but I'm not sure how to narrow it down."
+Professor: "That's a broad topic. The research is actually quite divided—some studies show negative effects like increased anxiety and depression, particularly related to social comparison, while others demonstrate positive outcomes in terms of community building and social support for marginalized groups."
+Sarah: "That's exactly why I'm confused. The evidence seems contradictory."
+Professor: "Here's what I suggest: instead of arguing one side is entirely right, consider a thesis that acknowledges the nuance—that social media's impact depends on how it's used, the type of platform, and the individual user's circumstances. That would be a more defensible and academically rigorous position."`,
+      questions: [
+        { q: "What problem does Sarah bring to her professor?", opts: ["She cannot find enough sources","Her thesis statement is too narrow","She struggles to narrow her broad topic","She disagrees with her professor"], ans: 2 },
+        { q: "What does the professor recommend?", opts: ["Choosing one clear side of the debate","Acknowledging complexity and nuance","Avoiding the topic entirely","Writing about a different subject"], ans: 1 },
+      ]
+    }
+  ],
+
+  speaking: [
+    {
+      type: "Independent",
+      prompt: "Some people prefer to live in big cities, while others prefer small towns or rural areas. Which do you prefer and why? Use specific reasons and examples to support your answer.",
+      prep: 15, speak: 45
+    },
+    {
+      type: "Integrated",
+      readingText: "Universities are considering implementing mandatory internship programs for all undergraduate students before graduation. Proponents argue that practical work experience significantly improves employment prospects and helps students confirm their career choices. Critics, however, suggest that such requirements could disadvantage students who cannot afford to work for low or unpaid wages during their studies.",
+      prompt: "The professor will give his opinion on the university's proposal. Summarize his main points and explain how they relate to the reading.",
+      listenText: `"I've reviewed this proposal and while the intention is sound, the implementation concerns me. Yes, work experience is valuable—our data shows graduates with internships earn 15% more in their first year. However, mandatory unpaid internships would create a serious equity problem. Students from lower-income backgrounds often work jobs to pay tuition; requiring them to do unpaid work is essentially a financial penalty. I'd support a paid internship requirement with university subsidies for companies that cannot afford competitive wages. That way we get the educational benefit without creating barriers for the students who need this opportunity most."`,
+      prep: 30, speak: 60
+    }
+  ],
+
+  writing: [
+    {
+      type: "Integrated Task",
+      reading: `Recent research suggests that the 4-day work week—working 32 hours across four days instead of 40 hours across five—offers significant benefits for both employees and employers. Studies from Iceland, Japan, and several European nations demonstrate that employee productivity either maintained or improved during 4-day week trials. Workers reported lower stress levels and better work-life balance, which led to reduced absenteeism and lower turnover rates. Companies also saved on operational costs including utilities, office supplies, and facility maintenance. Proponents argue that this model represents the natural evolution of labor practices as technology makes workers more efficient.`,
+      prompt: "Summarize the main points in the reading passage, and explain how they support the argument for a 4-day work week. Your response should be approximately 150–225 words.",
+      minWords: 150
+    },
+    {
+      type: "Independent Task",
+      prompt: `Do you agree or disagree with the following statement?\n\n"Technology has made it easier for people to maintain strong personal relationships."\n\nUse specific reasons and examples to support your answer. Write at least 250 words.`,
+      minWords: 250
+    }
+  ]
+};
+
+// ============================================================
+//  STATE
+// ============================================================
+let state = {
+  currentSection: 0, // 0=reading,1=listening,2=speaking,3=writing
+  currentQ: 0,
+  readingAnswers: Array(9).fill(null),
+  listeningAnswers: Array(4).fill(null),
+  speakingDone: [false, false],
+  writingTexts: ['', ''],
+  writingSubQ: 0,
+  speakingSubQ: 0,
+  timerInterval: null,
+  timeLeft: 45 * 60,
+  audioPlaying: [false, false],
+  recordingIndex: null,
+  recordingTimer: null,
+  recordingTime: 0,
+};
+
+const sections = ['Reading','Listening','Speaking','Writing'];
+const sectionColors = ['#3b82f6','#8b5cf6','#ef4444','#10b981'];
+
+// ============================================================
+//  TIMER
+// ============================================================
+function startTimer() {
+  state.timerInterval = setInterval(() => {
+    state.timeLeft--;
+    const m = Math.floor(state.timeLeft / 60).toString().padStart(2,'0');
+    const s = (state.timeLeft % 60).toString().padStart(2,'0');
+    document.getElementById('timer').textContent = `⏱ ${m}:${s}`;
+    if (state.timeLeft <= 0) { clearInterval(state.timerInterval); submitTest(); }
+  }, 1000);
+}
+
+// ============================================================
+//  NAVIGATION
+// ============================================================
+function startTest() {
+  showScreen('test');
+  renderTabs();
+  startTimer();
+  renderSection();
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
+
+function renderTabs() {
+  const tabs = document.getElementById('sectionTabs');
+  tabs.innerHTML = sections.map((s,i) => `
+    <div class="tab ${i === state.currentSection ? 'active' : i < state.currentSection ? 'done' : 'locked'}" id="tab${i}">${s}</div>
+  `).join('');
+}
+
+function prevQuestion() {
+  if (state.currentSection === 0) {
+    if (state.currentQ > 0) { state.currentQ--; renderSection(); }
+  } else if (state.currentSection === 1) {
+    if (state.currentQ > 0) { state.currentQ--; renderSection(); }
+  } else if (state.currentSection === 2) {
+    if (state.speakingSubQ > 0) { state.speakingSubQ--; renderSection(); }
+  } else if (state.currentSection === 3) {
+    if (state.writingSubQ > 0) { state.writingSubQ--; renderSection(); }
+  }
+}
+
+function nextQuestion() {
+  if (state.currentSection === 0) {
+    const maxQ = testData.reading.reduce((a,r)=>a+r.questions.length,0);
+    if (state.currentQ < maxQ - 1) { state.currentQ++; renderSection(); }
+    else { state.currentSection = 1; state.currentQ = 0; renderTabs(); renderSection(); }
+  } else if (state.currentSection === 1) {
+    const maxQ = testData.listening.reduce((a,r)=>a+r.questions.length,0);
+    if (state.currentQ < maxQ - 1) { state.currentQ++; renderSection(); }
+    else { state.currentSection = 2; renderTabs(); renderSection(); }
+  } else if (state.currentSection === 2) {
+    if (state.speakingSubQ < testData.speaking.length - 1) { state.speakingSubQ++; renderSection(); }
+    else { state.currentSection = 3; renderTabs(); renderSection(); }
+  } else if (state.currentSection === 3) {
+    if (state.writingSubQ < testData.writing.length - 1) { state.writingSubQ++; renderSection(); }
+    else { submitTest(); }
+  }
+}
+
+// ============================================================
+//  RENDER SECTION
+// ============================================================
+function renderSection() {
+  const body = document.getElementById('testBody');
+  const btnNext = document.getElementById('btnNext');
+  const btnBack = document.getElementById('btnBack');
+
+  if (state.currentSection === 0) renderReading(body);
+  else if (state.currentSection === 1) renderListening(body);
+  else if (state.currentSection === 2) renderSpeaking(body);
+  else if (state.currentSection === 3) renderWriting(body);
+
+  // Last item submit button
+  const isLast = state.currentSection === 3 && state.writingSubQ === testData.writing.length - 1;
+  btnNext.className = `btn-nav ${isLast ? 'btn-submit' : 'btn-next'}`;
+  btnNext.textContent = isLast ? '✓ Submit Test' : 'Next →';
+  btnBack.style.display = (state.currentSection === 0 && state.currentQ === 0) ? 'none' : 'block';
+  body.scrollTop = 0;
+}
+
+// READING
+function renderReading(body) {
+  // figure out which passage and question
+  let qIdx = state.currentQ;
+  let passageIdx = 0;
+  let localQ = qIdx;
+  for (let i = 0; i < testData.reading.length; i++) {
+    if (localQ < testData.reading[i].questions.length) { passageIdx = i; break; }
+    localQ -= testData.reading[i].questions.length;
+  }
+  const passage = testData.reading[passageIdx];
+  const q = passage.questions[localQ];
+  const totalQ = testData.reading.reduce((a,r)=>a+r.questions.length,0);
+
+  document.getElementById('qCounter').textContent = `Question ${state.currentQ+1} of ${totalQ}`;
+  const progress = ((state.currentQ+1)/totalQ*100).toFixed(0);
+
+  const answerKey = `r${state.currentQ}`;
+  const saved = state.readingAnswers[state.currentQ];
+
+  body.innerHTML = `
+    <div class="section-title">📖 Reading</div>
+    <div class="section-desc">Read the passage carefully, then answer the question below.</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
+    <div class="reading-passage">${passage.passage}</div>
+    <div class="question-block">
+      <div class="question-text">${state.currentQ+1}. ${q.q}</div>
+      <div class="options">
+        ${q.opts.map((opt,i)=>`
+          <div class="option ${saved===i?'selected':''}" onclick="selectReading(${i})">
+            <div class="option-letter">${['A','B','C','D'][i]}</div>
+            <div>${opt}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function selectReading(i) {
+  state.readingAnswers[state.currentQ] = i;
+  renderReading(document.getElementById('testBody'));
+}
+
+// LISTENING
+function renderListening(body) {
+  // which clip / question
+  let qIdx = state.currentQ;
+  let clipIdx = 0;
+  let localQ = qIdx;
+  for (let i = 0; i < testData.listening.length; i++) {
+    if (localQ < testData.listening[i].questions.length) { clipIdx = i; break; }
+    localQ -= testData.listening[i].questions.length;
+  }
+  const clip = testData.listening[clipIdx];
+  const q = clip.questions[localQ];
+  const totalQ = testData.listening.reduce((a,r)=>a+r.questions.length,0);
+  document.getElementById('qCounter').textContent = `Question ${state.currentQ+1} of ${totalQ}`;
+  const progress = ((state.currentQ+1)/totalQ*100).toFixed(0);
+  const saved = state.listeningAnswers[state.currentQ];
+  const isPlaying = state.audioPlaying[clipIdx];
+
+  const waveBars = Array(18).fill(null).map((_,i)=>`<div class="wave-bar" style="height:${6+Math.sin(i)*10+Math.random()*8}px;animation-delay:${i*0.07}s"></div>`).join('');
+
+  body.innerHTML = `
+    <div class="section-title">🎧 Listening</div>
+    <div class="section-desc">Listen to the audio, then answer the question.</div>
+    <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
+    <div class="audio-player">
+      <div class="audio-icon">🎙️</div>
+      <div class="audio-title">${clip.title}</div>
+      <div class="audio-sub">Click play to listen — you may play the audio twice</div>
+      <div class="audio-controls">
+        <button class="btn-play" id="playBtn" onclick="toggleAudio(${clipIdx})">${isPlaying?'⏸':'▶'}</button>
+        <div class="audio-waveform ${isPlaying?'playing':''}" id="waveform">${waveBars}</div>
+      </div>
+    </div>
+    <div class="transcript-box">
+      <div class="transcript-label">📜 Transcript (Read as if listening)</div>
+      ${clip.transcript}
+    </div>
+    <div class="question-block">
+      <div class="question-text">${state.currentQ+1}. ${q.q}</div>
+      <div class="options">
+        ${q.opts.map((opt,i)=>`
+          <div class="option ${saved===i?'selected':''}" onclick="selectListening(${i})">
+            <div class="option-letter">${['A','B','C','D'][i]}</div>
+            <div>${opt}</div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+}
+
+function toggleAudio(idx) {
+  state.audioPlaying[idx] = !state.audioPlaying[idx];
+  // Simulate with Web Speech API if available
+  if (state.audioPlaying[idx] && window.speechSynthesis) {
+    const utter = new SpeechSynthesisUtterance(testData.listening[idx].transcript.replace(/"/g,''));
+    utter.rate = 0.9;
+    utter.onend = () => { state.audioPlaying[idx] = false; };
+    window.speechSynthesis.speak(utter);
+  } else if (!state.audioPlaying[idx] && window.speechSynthesis) {
+    window.speechSynthesis.cancel();
+  }
+  renderListening(document.getElementById('testBody'));
+}
+
+function selectListening(i) {
+  state.listeningAnswers[state.currentQ] = i;
+  renderListening(document.getElementById('testBody'));
+}
+
+// SPEAKING
+function renderSpeaking(body) {
+  const task = testData.speaking[state.speakingSubQ];
+  document.getElementById('qCounter').textContent = `Task ${state.speakingSubQ+1} of ${testData.speaking.length}`;
+  const isRec = state.recordingIndex === state.speakingSubQ;
+
+  let readingHtml = '';
+  if (task.readingText) {
+    readingHtml = `
+      <div class="speaking-prompt" style="margin-bottom:1rem">
+        <h4>📄 Reading Passage (45 seconds)</h4>
+        <p>${task.readingText}</p>
+      </div>
+      <div class="transcript-box" style="margin-bottom:1rem">
+        <div class="transcript-label">🎧 Lecture Audio (Transcript)</div>
+        ${task.listenText}
+      </div>
+    `;
+  }
+
+  body.innerHTML = `
+    <div class="section-title">🎤 Speaking — Task ${state.speakingSubQ+1} (${task.type})</div>
+    <div class="section-desc">Prepare your response, then record yourself speaking.</div>
+    ${readingHtml}
+    <div class="speaking-prompt">
+      <h4>🗣 Speaking Prompt</h4>
+      <p>${task.prompt}</p>
+    </div>
+    <div class="record-area">
+      <button class="record-btn ${isRec?'recording':''}" id="recBtn" onclick="toggleRecord(${state.speakingSubQ})">
+        ${isRec ? '⏹' : '🎤'}
+      </button>
+      <div class="record-status ${isRec?'recording':''}" id="recStatus">
+        ${state.speakingDone[state.speakingSubQ] ? '✅ Recording complete — click Next to continue' : isRec ? '🔴 Recording...' : 'Press to start recording'}
+      </div>
+      <div style="font-size:0.78rem;color:var(--muted);margin-top:0.5rem">
+        Prep: ${task.prep}s · Speaking: ${task.speak}s
+      </div>
+    </div>
+    <div class="speaking-tips">
+      <strong>💡 TOEFL Speaking Tips</strong>
+      State your main idea clearly in the first sentence. Support with 1–2 specific examples. Speak at a natural pace and avoid long pauses. Aim to use complex sentences and varied vocabulary.
+    </div>
+  `;
+}
+
+function toggleRecord(idx) {
+  if (state.recordingIndex === idx) {
+    // stop
+    state.recordingIndex = null;
+    clearInterval(state.recordingTimer);
+    state.speakingDone[idx] = true;
+    if (window.speechSynthesis) window.speechSynthesis.cancel();
+  } else {
+    state.recordingIndex = idx;
+    state.recordingTime = 0;
+    state.recordingTimer = setInterval(() => {
+      state.recordingTime++;
+      if (state.recordingTime >= testData.speaking[idx].speak) {
+        state.recordingIndex = null;
+        clearInterval(state.recordingTimer);
+        state.speakingDone[idx] = true;
+        renderSpeaking(document.getElementById('testBody'));
+      }
+    }, 1000);
+  }
+  renderSpeaking(document.getElementById('testBody'));
+}
+
+// WRITING
+function renderWriting(body) {
+  const task = testData.writing[state.writingSubQ];
+  const text = state.writingTexts[state.writingSubQ];
+  const words = text.trim().split(/\s+/).filter(w=>w).length;
+  const enough = words >= task.minWords;
+
+  document.getElementById('qCounter').textContent = `Task ${state.writingSubQ+1} of ${testData.writing.length}`;
+
+  let readingHtml = '';
+  if (task.reading) {
+    readingHtml = `
+      <div class="reading-passage" style="max-height:180px">
+        <h4>📄 Reading Passage</h4>${task.reading}
+      </div>
+    `;
+  }
+
+  body.innerHTML = `
+    <div class="section-title">✍️ Writing — ${task.type}</div>
+    <div class="section-desc">Write your response in the box below. Aim for ${task.minWords}+ words.</div>
+    ${readingHtml}
+    <div class="writing-prompt">
+      <strong>✏️ Task</strong>
+      ${task.prompt.replace(/\n/g,'<br>')}
+    </div>
+    <textarea class="writing-area" id="writingBox" placeholder="Begin writing your response here..." oninput="updateWriting(this.value)">${text}</textarea>
+    <div class="word-count ${enough?'good':''}">
+      ${words} words ${enough ? '✓ Minimum met' : `(minimum: ${task.minWords})`}
+    </div>
+  `;
+}
+
+function updateWriting(val) {
+  state.writingTexts[state.writingSubQ] = val;
+  const task = testData.writing[state.writingSubQ];
+  const words = val.trim().split(/\s+/).filter(w=>w).length;
+  const wc = document.querySelector('.word-count');
+  if (wc) {
+    wc.className = `word-count ${words >= task.minWords ? 'good' : ''}`;
+    wc.textContent = `${words} words ${words >= task.minWords ? '✓ Minimum met' : `(minimum: ${task.minWords})`}`;
+  }
+}
+
+// ============================================================
+//  SCORING
+// ============================================================
+function computeScores() {
+  // Reading: 9 questions → 0-30 scale
+  let readingCorrect = 0;
+  let qIdx = 0;
+  testData.reading.forEach(passage => {
+    passage.questions.forEach((q, i) => {
+      if (state.readingAnswers[qIdx] === q.ans) readingCorrect++;
+      qIdx++;
+    });
+  });
+  const readingScore = Math.round((readingCorrect / 9) * 30);
+
+  // Listening: 4 questions → 0-30
+  let listenCorrect = 0;
+  let lIdx = 0;
+  testData.listening.forEach(clip => {
+    clip.questions.forEach((q) => {
+      if (state.listeningAnswers[lIdx] === q.ans) listenCorrect++;
+      lIdx++;
+    });
+  });
+  const listeningScore = Math.round((listenCorrect / 4) * 30);
+
+  // Speaking: 0-30 (estimate based on completion)
+  const speakDone = state.speakingDone.filter(Boolean).length;
+  const speakingScore = Math.round((speakDone / 2) * 22 + (speakDone > 0 ? 5 : 0));
+
+  // Writing: 0-30 (estimate based on word count)
+  let writingScore = 0;
+  testData.writing.forEach((task, i) => {
+    const text = state.writingTexts[i] || '';
+    const words = text.trim().split(/\s+/).filter(w=>w).length;
+    const ratio = Math.min(words / task.minWords, 1.5);
+    writingScore += Math.round(ratio * 13);
+  });
+  writingScore = Math.min(writingScore, 30);
+
+  const total = readingScore + listeningScore + speakingScore + writingScore;
+
+  return { readingScore, listeningScore, speakingScore, writingScore, total, readingCorrect, listenCorrect };
+}
+
+function getLevel(total) {
+  if (total >= 95) return { level: 'Advanced', cefr: 'C2', color: '#10b981', desc: 'You demonstrate near-native proficiency in English. Your reading comprehension, listening, speaking, and writing skills are at a high academic level suitable for top-tier university programs.' };
+  if (total >= 80) return { level: 'Upper-Intermediate', cefr: 'C1', color: '#3b82f6', desc: 'You have strong English skills and can handle complex academic and professional tasks with ease. You are ready for most university-level programs in English-speaking countries.' };
+  if (total >= 60) return { level: 'Intermediate', cefr: 'B2', color: '#f59e0b', desc: 'You have a good foundation in English and can handle familiar topics with confidence. With targeted practice in weaker areas, you can reach C1 level within a few months.' };
+  if (total >= 42) return { level: 'Lower-Intermediate', cefr: 'B1', color: '#f97316', desc: 'You can manage basic academic English but struggle with complex texts and abstract topics. Focus on expanding vocabulary and academic writing skills.' };
+  return { level: 'Elementary', cefr: 'A2/B1', color: '#ef4444', desc: 'You are at an early stage of English proficiency. Intensive practice in all four skills is recommended before attempting the official TOEFL exam.' };
+}
+
+function getSectionFeedback(section, score) {
+  const pct = score / 30;
+  if (section === 'reading') {
+    if (pct >= 0.87) return 'Excellent comprehension of complex academic texts.';
+    if (pct >= 0.67) return 'Good understanding of main ideas; work on inference questions.';
+    if (pct >= 0.5) return 'Review reading strategies: skimming, scanning, and context clues.';
+    return 'Focus on vocabulary building and close reading practice.';
+  }
+  if (section === 'listening') {
+    if (pct >= 0.87) return 'Strong ability to identify details and speaker attitudes.';
+    if (pct >= 0.67) return 'Good comprehension; practice note-taking while listening.';
+    return 'Listen to academic lectures daily; practice identifying main ideas.';
+  }
+  if (section === 'speaking') {
+    if (score >= 22) return 'Clear delivery and organization; work on reducing hesitations.';
+    if (score >= 14) return 'Adequate communication; develop more complex sentence structures.';
+    return 'Practice speaking English daily; record yourself and listen back.';
+  }
+  if (section === 'writing') {
+    if (score >= 22) return 'Well-organized writing with good use of evidence.';
+    if (score >= 14) return 'Adequate structure; work on transitions and academic vocabulary.';
+    return 'Practice essay organization and expanding your written vocabulary.';
+  }
+}
+
+// ============================================================
+//  SUBMIT & RESULTS
+// ============================================================
+async function submitTest() {
+  clearInterval(state.timerInterval);
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  showScreen('results');
+  const scores = computeScores();
+  const level = getLevel(scores.total);
+  renderResults(scores, level);
+  await fetchAIFeedback(scores, level);
+}
+
+function renderResults(scores, level) {
+  const pct = Math.round(scores.total / 120 * 100);
+  const ringPct = pct;
+
+  const secs = [
+    { label: 'Reading', key: 'readingScore', icon: '📖', color: '#3b82f6' },
+    { label: 'Listening', key: 'listeningScore', icon: '🎧', color: '#8b5cf6' },
+    { label: 'Speaking', key: 'speakingScore', icon: '🎤', color: '#ef4444' },
+    { label: 'Writing', key: 'writingScore', icon: '✍️', color: '#10b981' },
+  ];
+
+  const cefrLevels = ['A1','A2','B1','B2','C1','C2'];
+
+  document.getElementById('resultsInner').innerHTML = `
+    <div class="results-header">
+      <h2>Your TOEFL Results</h2>
+      <div class="total-score-ring" style="background: conic-gradient(${level.color} ${ringPct}%, var(--border) ${ringPct}%)">
+        <div class="score-center">
+          <div class="score-number">${scores.total}</div>
+          <div class="score-label">/ 120</div>
+        </div>
+      </div>
+      <div>
+        <div class="level-badge" style="background:${level.color}20;color:${level.color};border:1px solid ${level.color}50">
+          ${level.cefr} · ${level.level}
+        </div>
+      </div>
+    </div>
+
+    <div class="sections-results">
+      ${secs.map(s => {
+        const score = scores[s.key];
+        const pct = Math.round(score/30*100);
+        const feedbackKey = s.label.toLowerCase();
+        return `
+          <div class="result-card">
+            <div class="result-card-header">
+              <div class="result-card-title">${s.icon} ${s.label}</div>
+              <div class="result-score" style="color:${s.color}">${score}<span style="font-size:0.9rem;color:var(--muted)">/30</span></div>
+            </div>
+            <div class="result-bar-bg">
+              <div class="result-bar-fill" style="width:${pct}%;background:${s.color}"></div>
+            </div>
+            <div class="result-feedback">${getSectionFeedback(feedbackKey, score)}</div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+
+    <div class="level-desc">
+      <h3>Your Proficiency Level: ${level.level}</h3>
+      <p>${level.desc}</p>
+      <div class="cefr-grid">
+        ${cefrLevels.map(l => `<div class="cefr-item ${l===level.cefr?'current':''}">${l}</div>`).join('')}
+      </div>
+    </div>
+
+    <div class="ai-feedback" id="aiFeedbackBox">
+      <h4>🤖 AI Personalized Feedback</h4>
+      <div class="ai-loading">
+        <div class="dot-pulse"><span></span><span></span><span></span></div>
+        <span>Analyzing your performance...</span>
+      </div>
+    </div>
+
+    <div style="margin-top:0.5rem;font-size:0.8rem;color:var(--muted);text-align:center;margin-bottom:1rem">
+      Reading: ${scores.readingCorrect}/9 correct · Listening: ${scores.listenCorrect}/4 correct
+    </div>
+
+    <button class="btn-restart" onclick="restartTest()">🔄 Take Another Practice Test</button>
+  `;
+
+  // Animate bars
+  setTimeout(() => {
+    document.querySelectorAll('.result-bar-fill').forEach(bar => {
+      const w = bar.style.width;
+      bar.style.width = '0';
+      requestAnimationFrame(() => { bar.style.width = w; });
+    });
+  }, 100);
+}
+
+async function fetchAIFeedback(scores, level) {
+  const essay1 = state.writingTexts[0] || '(not submitted)';
+  const essay2 = state.writingTexts[1] || '(not submitted)';
+  const readingPct = Math.round(scores.readingCorrect/9*100);
+  const listenPct = Math.round(scores.listenCorrect/4*100);
+
+  const prompt = `You are a TOEFL expert examiner. A student just completed a TOEFL practice test with these results:
+- Total Score: ${scores.total}/120
+- Reading: ${scores.readingScore}/30 (${scores.readingCorrect}/9 correct = ${readingPct}%)
+- Listening: ${scores.listeningScore}/30 (${scores.listenCorrect}/4 correct = ${listenPct}%)
+- Speaking: ${scores.speakingScore}/30 (completed ${state.speakingDone.filter(Boolean).length}/2 tasks)
+- Writing: ${scores.writingScore}/30
+- CEFR Level: ${level.cefr} (${level.level})
+
+Writing Sample 1 (Integrated Task, min 150 words):
+"${essay1.substring(0, 500)}${essay1.length > 500 ? '...' : ''}"
+
+Writing Sample 2 (Independent Task, min 250 words):
+"${essay2.substring(0, 500)}${essay2.length > 500 ? '...' : ''}"
+
+Provide a personalized 3-paragraph feedback in a warm, encouraging but honest academic tone:
+1. Overall strengths based on their scores
+2. Specific areas for improvement (be concrete with strategies)
+3. A customized 2-week study plan to improve their weakest sections
+
+Keep each paragraph 3-4 sentences. Do not use bullet points.`;
+
+  try {
+    const response = await fetch("https://api.anthropic.com/v1/messages", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        model: "claude-sonnet-4-20250514",
+        max_tokens: 1000,
+        messages: [{ role: "user", content: prompt }]
+      })
+    });
+    const data = await response.json();
+    const text = data.content?.find(b => b.type === 'text')?.text || '';
+    const box = document.getElementById('aiFeedbackBox');
+    if (box && text) {
+      box.innerHTML = `
+        <h4>🤖 AI Personalized Feedback</h4>
+        <div class="ai-feedback-text">${text.replace(/\n\n/g,'</p><p style="margin-top:0.8rem">').replace(/\n/g,' ')}</div>
+      `;
+    }
+  } catch(e) {
+    const box = document.getElementById('aiFeedbackBox');
+    if (box) {
+      box.innerHTML = `<h4>🤖 AI Feedback</h4><div class="ai-feedback-text">Based on your score of ${scores.total}/120 (${level.level} level), focus on your weakest section first. Practice consistently for 30 minutes daily, use official TOEFL prep materials, and aim to re-test in 4–6 weeks.</div>`;
+    }
+  }
+}
+
+function restartTest() {
+  state = {
+    currentSection: 0, currentQ: 0,
+    readingAnswers: Array(9).fill(null),
+    listeningAnswers: Array(4).fill(null),
+    speakingDone: [false, false],
+    writingTexts: ['',''],
+    writingSubQ: 0, speakingSubQ: 0,
+    timerInterval: null, timeLeft: 45*60,
+    audioPlaying: [false,false],
+    recordingIndex: null, recordingTimer: null, recordingTime: 0,
+  };
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+  showScreen('home');
+}
+</script>
+</body>
+</html>
