@@ -3,1046 +3,819 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>TOEFL Practice Test</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<title>English Skills Practice</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0a0e1a;
-    --surface: #111827;
-    --surface2: #1a2235;
-    --accent: #3b82f6;
-    --accent2: #60a5fa;
-    --gold: #f59e0b;
-    --green: #10b981;
-    --red: #ef4444;
-    --purple: #8b5cf6;
-    --text: #e2e8f0;
-    --muted: #64748b;
-    --border: #1e293b;
-    --radius: 12px;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-  }
-  h1,h2,h3 { font-family: 'Playfair Display', serif; }
+:root{--ink:#0b0f1a;--steel:#0f1929;--blue:#1d4ed8;--blu2:#3b82f6;--gold:#d97706;--gld2:#fbbf24;--grn:#059669;--red:#dc2626;--purp:#7c3aed;--text:#e2e8f0;--muted:#64748b;--dim:#334155;--bdr:rgba(255,255,255,0.07);--r:12px}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min-height:100vh;overflow-x:hidden}
+.screen{display:none;min-height:100vh}
+.screen.active{display:flex;flex-direction:column}
+#particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
+.pt{position:absolute;border-radius:50%;opacity:.12;animation:ptfly linear infinite}
+@keyframes ptfly{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:.12}90%{opacity:.08}100%{transform:translateY(-120px) rotate(720deg);opacity:0}}
 
-  /* SCREEN MANAGEMENT */
-  .screen { display: none; min-height: 100vh; }
-  .screen.active { display: flex; flex-direction: column; }
+/* SPLASH */
+#splash{background:radial-gradient(ellipse at 60% 40%,#1d4ed81a,transparent 60%),radial-gradient(ellipse at 20% 70%,#7c3aed12,transparent 50%),var(--ink);align-items:center;justify-content:center;text-align:center;padding:2rem;position:relative;overflow:hidden}
+.sglow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,#1d4ed814,transparent 70%);animation:breathe 5s ease-in-out infinite;pointer-events:none}
+@keyframes breathe{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.3)}}
+.splash-in{position:relative;z-index:1;max-width:640px;width:100%}
+.sbadge{display:inline-flex;align-items:center;gap:8px;background:rgba(29,78,216,.12);border:1px solid rgba(59,130,246,.25);border-radius:50px;padding:7px 20px;margin-bottom:2rem;font-size:.75rem;letter-spacing:3px;text-transform:uppercase;color:#93c5fd;animation:sdown .8s ease both}
+.sbadge::before{content:'●';color:#3b82f6;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+@keyframes sdown{from{opacity:0;transform:translateY(-20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes sup{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+.stitle{font-family:'Bebas Neue',sans-serif;font-size:clamp(3.5rem,10vw,7rem);line-height:.9;letter-spacing:5px;color:#f5f0e8;text-shadow:0 0 80px rgba(59,130,246,.3);animation:sup .8s .1s ease both}
+.stitle span{color:#3b82f6}
+.ssub{font-size:1rem;color:var(--muted);line-height:1.7;margin:1.5rem auto;max-width:440px;animation:sup .8s .2s ease both}
+.namefield{background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.1);border-radius:10px;padding:.85rem 1.3rem;color:#f5f0e8;font-family:'Outfit',sans-serif;font-size:1rem;width:100%;max-width:340px;margin:0 auto 1.5rem;display:block;text-align:center;outline:none;transition:border-color .2s;animation:sup .8s .25s ease both}
+.namefield:focus{border-color:#3b82f6}
+.namefield::placeholder{color:#334155}
+.prev-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:1.8rem 0;animation:sup .8s .3s ease both}
+.pcard{background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:12px;padding:1.1rem .8rem;text-align:center;transition:all .3s}
+.pcard:hover{background:rgba(59,130,246,.1);border-color:rgba(59,130,246,.3);transform:translateY(-4px)}
+.pc-icon{font-size:1.8rem;margin-bottom:.4rem}
+.pc-name{font-size:.78rem;font-weight:800;color:#e2e8f0;text-transform:uppercase;letter-spacing:1.5px}
+.pc-info{font-size:.7rem;color:#475569;margin-top:3px}
+.btn-start{background:linear-gradient(135deg,#1d4ed8,#7c3aed);border:none;color:white;font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:700;padding:1rem 3rem;border-radius:50px;cursor:pointer;letter-spacing:1px;box-shadow:0 8px 32px rgba(29,78,216,.4);transition:all .3s;animation:sup .8s .4s ease both;position:relative;overflow:hidden}
+.btn-start:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(29,78,216,.6)}
 
-  /* ===== HOME SCREEN ===== */
-  #home {
-    background: radial-gradient(ellipse at 20% 50%, #1e3a5f22 0%, transparent 60%),
-                radial-gradient(ellipse at 80% 20%, #4c1d9522 0%, transparent 50%),
-                var(--bg);
-    align-items: center; justify-content: center; text-align: center; padding: 2rem;
-  }
-  .home-badge {
-    display: inline-block;
-    background: linear-gradient(135deg, #1e3a5f, #1e1b4b);
-    border: 1px solid #3b82f620;
-    border-radius: 50px; padding: 6px 18px;
-    font-size: 0.75rem; letter-spacing: 3px; text-transform: uppercase;
-    color: var(--accent2); margin-bottom: 1.5rem;
-  }
-  .home-title {
-    font-size: clamp(2.5rem, 6vw, 5rem);
-    line-height: 1.1;
-    background: linear-gradient(135deg, #e2e8f0 30%, #60a5fa 70%, #8b5cf6);
-    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-    margin-bottom: 1rem;
-  }
-  .home-sub { font-size: 1.1rem; color: var(--muted); max-width: 500px; line-height: 1.7; margin: 0 auto 3rem; }
-  .sections-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; max-width: 480px; margin: 0 auto 2.5rem; }
-  .section-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 1.2rem;
-    transition: all 0.3s; cursor: default;
-  }
-  .section-card:hover { border-color: var(--accent); transform: translateY(-2px); }
-  .section-card .icon { font-size: 1.8rem; margin-bottom: 0.5rem; }
-  .section-card h3 { font-size: 0.95rem; font-family: 'DM Sans', sans-serif; font-weight: 600; }
-  .section-card p { font-size: 0.75rem; color: var(--muted); margin-top: 4px; }
-  .btn-primary {
-    background: linear-gradient(135deg, var(--accent), var(--purple));
-    border: none; color: white; font-family: 'DM Sans', sans-serif;
-    font-size: 1rem; font-weight: 600; padding: 1rem 2.5rem;
-    border-radius: 50px; cursor: pointer;
-    transition: all 0.3s; letter-spacing: 0.5px;
-    box-shadow: 0 4px 20px #3b82f630;
-  }
-  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px #3b82f650; }
-  .info-bar { display: flex; gap: 2rem; justify-content: center; margin-top: 1.5rem; }
-  .info-item { font-size: 0.8rem; color: var(--muted); }
-  .info-item strong { color: var(--text); display: block; font-size: 1rem; }
+/* EXAM HEADER */
+#ehdr{background:#0a0e1a;border-bottom:1px solid var(--bdr);padding:0 1.5rem;height:58px;display:flex;align-items:center;position:sticky;top:0;z-index:200;gap:1rem}
+.elogo{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:3px;color:#f5f0e8;flex-shrink:0}
+.elogo span{color:#3b82f6}
+.pills{display:flex;gap:6px;margin:0 auto}
+.pill{padding:4px 13px;border-radius:20px;font-size:.7rem;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;border:1px solid transparent;transition:all .3s}
+.pl{color:#1e293b;border-color:#1e293b}
+.pa{color:white;background:#1d4ed8;border-color:#1d4ed8}
+.pd{color:#10b981;border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.1)}
+.pd::after{content:' ✓'}
 
-  /* ===== TEST LAYOUT ===== */
-  #test { flex-direction: column; }
-  .test-header {
-    background: var(--surface); border-bottom: 1px solid var(--border);
-    padding: 0.8rem 1.5rem; display: flex; align-items: center;
-    gap: 1rem; position: sticky; top: 0; z-index: 100;
-  }
-  .test-logo { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--accent2); }
-  .section-tabs { display: flex; gap: 0.5rem; margin: 0 auto; }
-  .tab {
-    padding: 5px 14px; border-radius: 20px; font-size: 0.78rem; font-weight: 500;
-    border: 1px solid transparent; cursor: default; transition: all 0.3s;
-    color: var(--muted);
-  }
-  .tab.done { color: var(--green); border-color: #10b98130; background: #10b98110; }
-  .tab.active { color: white; background: var(--accent); border-color: var(--accent); }
-  .tab.locked { opacity: 0.4; }
-  .timer {
-    font-family: 'DM Sans', sans-serif; font-size: 0.9rem; font-weight: 600;
-    color: var(--gold); background: #f59e0b15; border: 1px solid #f59e0b30;
-    padding: 4px 12px; border-radius: 20px;
-  }
-  .test-body { flex: 1; overflow-y: auto; padding: 2rem; max-width: 860px; margin: 0 auto; width: 100%; }
-  .section-title { font-size: 1.6rem; margin-bottom: 0.3rem; }
-  .section-desc { color: var(--muted); font-size: 0.9rem; margin-bottom: 2rem; }
-  .progress-bar { height: 4px; background: var(--border); border-radius: 2px; margin-bottom: 2rem; }
-  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--accent), var(--purple)); border-radius: 2px; transition: width 0.4s; }
+/* EXAM AREA */
+#earea{flex:1;overflow-y:auto;background:var(--steel)}
+.swrap{padding:2rem;max-width:900px;width:100%;margin:0 auto}
+.shero{background:linear-gradient(135deg,rgba(29,78,216,.13),rgba(124,58,237,.08));border:1px solid rgba(59,130,246,.18);border-radius:14px;padding:1.3rem 1.8rem;margin-bottom:1.8rem;display:flex;align-items:center;gap:1.2rem}
+.shero-icon{font-size:2.2rem}
+.shero h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:#f5f0e8;letter-spacing:3px}
+.shero p{font-size:.82rem;color:var(--muted);margin-top:2px}
+.shero-r{margin-left:auto;text-align:right}
+.qbadge{background:rgba(59,130,246,.18);border:1px solid rgba(59,130,246,.28);border-radius:8px;padding:7px 14px;display:inline-block}
+.qbn{font-family:'Bebas Neue',sans-serif;font-size:1.6rem;color:#60a5fa;line-height:1}
+.qbl{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.ptrack{height:5px;background:rgba(255,255,255,.05);border-radius:3px;margin-bottom:1.8rem;overflow:hidden}
+.pfill{height:100%;border-radius:3px;background:linear-gradient(90deg,#1d4ed8,#7c3aed);transition:width .6s cubic-bezier(.4,0,.2,1)}
+.passage{background:#f5f0e8;border-radius:12px;padding:1.8rem;margin-bottom:1.5rem;max-height:290px;overflow-y:auto;box-shadow:0 4px 30px rgba(0,0,0,.35)}
+.ptitle{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;color:#1e293b;margin-bottom:.9rem;padding-bottom:.7rem;border-bottom:2px solid #d1c7b0}
+.ptxt{font-size:.9rem;line-height:1.9;color:#374151}
+.ptxt p{margin-bottom:.9rem}
+.qcard{background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:12px;padding:1.4rem;margin-bottom:.9rem;animation:qin .4s ease}
+@keyframes qin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.qnum{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:#3b82f6;font-weight:700;margin-bottom:.7rem}
+.qtxt{font-size:.98rem;color:#e2e8f0;font-weight:500;line-height:1.6;margin-bottom:1.1rem}
+.opts{display:flex;flex-direction:column;gap:7px}
+.opt{display:flex;align-items:flex-start;gap:11px;padding:.9rem 1.1rem;border-radius:9px;border:1.5px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02);cursor:pointer;transition:all .2s;color:#cbd5e1;font-size:.88rem;line-height:1.5}
+.opt:hover{border-color:rgba(59,130,246,.5);background:rgba(59,130,246,.08);color:#e2e8f0}
+.opt.sel{border-color:#1d4ed8;background:rgba(29,78,216,.15);color:#93c5fd}
+.opt.cor{border-color:#059669;background:rgba(5,150,105,.15);color:#6ee7b7}
+.opt.wrn{border-color:#dc2626;background:rgba(220,38,38,.12);color:#fca5a5}
+.oltr{width:26px;height:26px;min-width:26px;border-radius:7px;border:1.5px solid currentColor;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:800;flex-shrink:0;color:inherit}
+.opt.sel .oltr{background:#1d4ed8;border-color:#1d4ed8;color:white}
+.opt.cor .oltr{background:#059669;border-color:#059669;color:white}
+.opt.wrn .oltr{background:#dc2626;border-color:#dc2626;color:white}
 
-  /* READING */
-  .reading-passage {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 1.5rem; margin-bottom: 1.5rem; font-size: 0.92rem; line-height: 1.85;
-    color: #cbd5e1; max-height: 280px; overflow-y: auto;
-  }
-  .reading-passage h4 { font-family: 'Playfair Display', serif; color: var(--text); margin-bottom: 0.8rem; font-size: 1.1rem; }
-  .question-block { margin-bottom: 1.5rem; }
-  .question-text { font-weight: 500; margin-bottom: 1rem; line-height: 1.6; font-size: 0.95rem; }
-  .options { display: flex; flex-direction: column; gap: 0.5rem; }
-  .option {
-    display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.85rem 1rem;
-    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-    cursor: pointer; transition: all 0.2s; font-size: 0.88rem; line-height: 1.5;
-  }
-  .option:hover { border-color: var(--accent2); background: var(--surface2); }
-  .option.selected { border-color: var(--accent); background: #3b82f615; }
-  .option.correct { border-color: var(--green); background: #10b98115; }
-  .option.wrong { border-color: var(--red); background: #ef444415; }
-  .option-letter {
-    width: 22px; height: 22px; min-width: 22px; border-radius: 50%;
-    border: 1.5px solid var(--muted); display: flex; align-items: center; justify-content: center;
-    font-size: 0.75rem; font-weight: 700; color: var(--muted);
-  }
-  .option.selected .option-letter { border-color: var(--accent); color: var(--accent); }
+/* AUDIO */
+.acard{background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(29,78,216,.08));border:1px solid rgba(124,58,237,.22);border-radius:12px;padding:1.4rem;margin-bottom:1.4rem;display:flex;flex-direction:column;align-items:center;gap:.9rem;text-align:center}
+.albl{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:#8b5cf6;font-weight:700}
+.atitle-audio{font-size:.95rem;font-weight:700;color:#e2e8f0}
+.aplaybtn{width:52px;height:52px;border-radius:50%;border:none;cursor:pointer;background:linear-gradient(135deg,#7c3aed,#1d4ed8);color:white;font-size:1.3rem;display:flex;align-items:center;justify-content:center;box-shadow:0 4px 20px rgba(124,58,237,.5);transition:all .2s}
+.aplaybtn:hover{transform:scale(1.08);box-shadow:0 6px 28px rgba(124,58,237,.7)}
+.aplaybtn:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.wv-wrap{display:flex;gap:3px;align-items:center;height:44px;width:100%;max-width:240px}
+.wv{flex:1;border-radius:2px;background:rgba(139,92,246,.25);transition:height .1s}
+.wv.on{background:#8b5cf6}
+.pleft{font-size:.7rem;color:#fbbf24}
+.speaker-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);border-radius:20px;padding:4px 12px;font-size:.72rem;color:#c4b5fd;margin-bottom:.4rem}
 
-  /* LISTENING */
-  .audio-player {
-    background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 1.5rem; margin-bottom: 1.5rem; text-align: center;
-  }
-  .audio-icon { font-size: 3rem; margin-bottom: 1rem; }
-  .audio-title { font-size: 1rem; font-weight: 600; margin-bottom: 0.4rem; }
-  .audio-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.2rem; }
-  .audio-controls { display: flex; align-items: center; justify-content: center; gap: 1rem; }
-  .btn-play {
-    background: var(--accent); border: none; color: white; width: 48px; height: 48px;
-    border-radius: 50%; cursor: pointer; font-size: 1.1rem; display: flex; align-items: center; justify-content: center;
-    transition: all 0.2s;
-  }
-  .btn-play:hover { background: var(--accent2); transform: scale(1.05); }
-  .audio-waveform {
-    display: flex; gap: 3px; align-items: center; height: 40px;
-    background: var(--surface); border-radius: 8px; padding: 0 1rem;
-    overflow: hidden; min-width: 180px;
-  }
-  .wave-bar {
-    width: 3px; border-radius: 2px; background: var(--muted);
-    animation: none; transition: height 0.1s;
-  }
-  .playing .wave-bar {
-    background: var(--accent);
-    animation: wave 1s ease-in-out infinite;
-  }
-  @keyframes wave {
-    0%,100% { height: 6px; } 50% { height: 28px; }
-  }
-  .transcript-box {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-    padding: 1.2rem; margin-bottom: 1rem; font-size: 0.88rem; line-height: 1.8;
-    color: #94a3b8; font-style: italic;
-  }
-  .transcript-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 2px; color: var(--accent2); margin-bottom: 0.5rem; font-style: normal; font-weight: 600; }
+/* WRITING */
+.writing-q{background:rgba(5,150,105,.06);border:1px solid rgba(5,150,105,.2);border-radius:12px;padding:1.4rem;margin-bottom:1rem}
+.writing-q h4{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:#34d399;margin-bottom:.7rem}
+.writing-q p{font-size:.95rem;color:#e2e8f0;line-height:1.7}
+.level-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem}
+.level-easy{background:rgba(5,150,105,.15);border:1px solid rgba(5,150,105,.3);color:#34d399}
+.level-medium{background:rgba(217,119,6,.15);border:1px solid rgba(217,119,6,.3);color:#fbbf24}
+.level-hard{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3);color:#f87171}
 
-  /* WRITING */
-  .writing-prompt {
-    background: linear-gradient(135deg, #1e3a5f20, #1e1b4b20);
-    border: 1px solid #3b82f630; border-radius: var(--radius); padding: 1.3rem;
-    margin-bottom: 1.2rem; font-size: 0.9rem; line-height: 1.7; color: var(--accent2);
-  }
-  .writing-prompt strong { color: var(--text); display: block; margin-bottom: 0.5rem; font-family: 'Playfair Display', serif; }
-  .writing-area {
-    width: 100%; min-height: 200px; background: var(--surface); border: 1px solid var(--border);
-    border-radius: var(--radius); padding: 1.2rem; color: var(--text);
-    font-family: 'DM Sans', sans-serif; font-size: 0.92rem; line-height: 1.8; resize: vertical;
-    transition: border-color 0.2s;
-  }
-  .writing-area:focus { outline: none; border-color: var(--accent); }
-  .word-count { text-align: right; font-size: 0.78rem; color: var(--muted); margin-top: 0.5rem; }
-  .word-count.good { color: var(--green); }
+/* SPEAKING (now multiple choice) */
+.sp-scenario{background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.2);border-radius:12px;padding:1.4rem;margin-bottom:1.4rem}
+.sp-scenario h4{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:#60a5fa;margin-bottom:.8rem}
+.sp-scenario p{font-size:.95rem;color:#e2e8f0;line-height:1.7}
+.sp-question{font-size:1rem;font-weight:600;color:#f5f0e8;margin-top:.8rem;padding-top:.8rem;border-top:1px solid rgba(255,255,255,.08)}
+.level-indicator{background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:9px;padding:.7rem 1rem;margin-bottom:1.2rem;font-size:.82rem;color:var(--muted);text-align:center}
+.level-indicator span{font-weight:700}
+.streak-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);border-radius:9px;padding:.6rem 1rem;margin-bottom:1rem;font-size:.82rem;color:#fbbf24;text-align:center}
+.feedback-banner{border-radius:10px;padding:1rem 1.2rem;margin-bottom:1rem;font-size:.9rem;font-weight:600;animation:qin .3s ease}
+.feedback-correct{background:rgba(5,150,105,.15);border:1px solid rgba(5,150,105,.3);color:#6ee7b7}
+.feedback-wrong{background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.3);color:#fca5a5}
 
-  /* SPEAKING */
-  .speaking-prompt {
-    background: var(--surface2); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 1.5rem; margin-bottom: 1.5rem;
-  }
-  .speaking-prompt h4 { color: var(--accent2); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 0.8rem; font-family: 'DM Sans',sans-serif; }
-  .speaking-prompt p { font-size: 0.95rem; line-height: 1.7; }
-  .record-area { text-align: center; padding: 2rem 1rem; }
-  .record-btn {
-    width: 80px; height: 80px; border-radius: 50%; border: none; cursor: pointer;
-    background: linear-gradient(135deg, var(--red), #dc2626);
-    color: white; font-size: 1.5rem; margin: 0 auto 1rem;
-    display: flex; align-items: center; justify-content: center;
-    box-shadow: 0 4px 20px #ef444430; transition: all 0.3s;
-  }
-  .record-btn.recording {
-    animation: pulse-red 1.2s ease-in-out infinite;
-    background: linear-gradient(135deg, #dc2626, #991b1b);
-  }
-  @keyframes pulse-red {
-    0%,100% { box-shadow: 0 4px 20px #ef444430; transform: scale(1); }
-    50% { box-shadow: 0 4px 40px #ef444460; transform: scale(1.05); }
-  }
-  .record-status { font-size: 0.85rem; color: var(--muted); }
-  .record-status.recording { color: var(--red); }
-  .speaking-tips {
-    background: var(--surface); border-radius: 8px; padding: 1rem;
-    font-size: 0.82rem; color: var(--muted); line-height: 1.6;
-  }
-  .speaking-tips strong { color: var(--text); display: block; margin-bottom: 0.4rem; }
+/* IMAGE section */
+.img-card{background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;margin-bottom:1.4rem}
+.img-display{width:100%;height:280px;object-fit:cover;display:block;background:#1e293b;font-size:4rem;display:flex;align-items:center;justify-content:center;color:#334155}
+.img-label{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:#3b82f6;font-weight:700;padding:1rem 1.4rem .4rem}
+.img-desc-prompt{font-size:.9rem;color:#e2e8f0;padding:.2rem 1.4rem 1rem;font-weight:500}
+.img-emoji{font-size:5rem;display:flex;align-items:center;justify-content:center;height:220px;background:linear-gradient(135deg,rgba(29,78,216,.1),rgba(124,58,237,.08));border-bottom:1px solid var(--bdr)}
 
-  /* NAVIGATION */
-  .test-footer {
-    background: var(--surface); border-top: 1px solid var(--border);
-    padding: 1rem 1.5rem; display: flex; justify-content: space-between; align-items: center;
-    position: sticky; bottom: 0;
-  }
-  .btn-nav {
-    padding: 0.7rem 1.5rem; border-radius: 8px; font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem; font-weight: 600; cursor: pointer; transition: all 0.2s;
-    border: none;
-  }
-  .btn-back { background: var(--surface2); color: var(--text); border: 1px solid var(--border); }
-  .btn-back:hover { background: var(--border); }
-  .btn-next { background: var(--accent); color: white; }
-  .btn-next:hover { background: var(--accent2); }
-  .btn-submit { background: linear-gradient(135deg, var(--green), #059669); color: white; }
-  .q-counter { font-size: 0.82rem; color: var(--muted); }
+/* section complete */
+.sc-complete{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem;gap:1.4rem}
+.sc-ico{font-size:4.5rem;animation:scpop .6s cubic-bezier(.175,.885,.32,1.275)}
+@keyframes scpop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+.sc-title{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:5px;color:#f5f0e8}
+.sc-sub{color:var(--muted);font-size:.93rem;max-width:360px;line-height:1.7}
+.sc-score{background:rgba(255,255,255,.04);border:1px solid var(--bdr);border-radius:11px;padding:1.1rem 2rem}
+.sc-slbl{font-size:.7rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:3px}
+.sc-snum{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:3px}
+.btn-continue{padding:.9rem 2.5rem;border-radius:50px;background:linear-gradient(135deg,#1d4ed8,#7c3aed);border:none;color:white;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .3s;box-shadow:0 6px 24px rgba(29,78,216,.35)}
+.btn-continue:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(29,78,216,.55)}
 
-  /* ===== RESULTS SCREEN ===== */
-  #results {
-    background: radial-gradient(ellipse at 50% 0%, #1e3a5f30 0%, transparent 60%), var(--bg);
-    align-items: center; justify-content: flex-start; padding: 2rem;
-  }
-  .results-inner { max-width: 800px; width: 100%; margin: 0 auto; }
-  .results-header { text-align: center; margin-bottom: 3rem; }
-  .results-header h2 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-  .level-badge {
-    display: inline-block; padding: 8px 24px; border-radius: 50px;
-    font-weight: 700; font-size: 1rem; letter-spacing: 1px;
-    margin: 1rem 0;
-  }
-  .total-score-ring {
-    width: 160px; height: 160px; border-radius: 50%;
-    background: conic-gradient(var(--accent) 0%, var(--purple) 100%);
-    display: flex; align-items: center; justify-content: center;
-    margin: 1.5rem auto; position: relative;
-  }
-  .total-score-ring::before {
-    content: ''; position: absolute; inset: 12px; background: var(--bg); border-radius: 50%;
-  }
-  .score-center { position: relative; z-index: 1; text-align: center; }
-  .score-number { font-size: 2.5rem; font-weight: 900; font-family: 'Playfair Display', serif; }
-  .score-label { font-size: 0.75rem; color: var(--muted); }
-  .sections-results { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; margin-bottom: 2rem; }
-  .result-card {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.3rem;
-  }
-  .result-card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.8rem; }
-  .result-card-title { font-weight: 600; font-size: 0.9rem; }
-  .result-score { font-size: 1.4rem; font-weight: 700; font-family: 'Playfair Display', serif; }
-  .result-bar-bg { height: 6px; background: var(--border); border-radius: 3px; }
-  .result-bar-fill { height: 100%; border-radius: 3px; transition: width 1s ease; }
-  .result-feedback { font-size: 0.8rem; color: var(--muted); margin-top: 0.5rem; }
-  .level-desc {
-    background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius);
-    padding: 1.5rem; margin-bottom: 2rem;
-  }
-  .level-desc h3 { margin-bottom: 0.8rem; }
-  .level-desc p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
-  .cefr-grid { display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1rem; }
-  .cefr-item {
-    padding: 4px 12px; border-radius: 20px; font-size: 0.75rem; font-weight: 600;
-    border: 1px solid var(--border); color: var(--muted);
-  }
-  .cefr-item.current { background: var(--accent); border-color: var(--accent); color: white; }
-  .btn-restart { width: 100%; padding: 1rem; border-radius: var(--radius); background: linear-gradient(135deg, var(--accent), var(--purple)); border: none; color: white; font-family: 'DM Sans',sans-serif; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; }
-  .btn-restart:hover { opacity: 0.9; transform: translateY(-1px); }
+/* footer */
+#eftr{background:#0a0e1a;border-top:1px solid var(--bdr);padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;bottom:0;z-index:100;gap:1rem}
+.fninfo{font-size:.78rem;color:#334155}
+.fninfo strong{color:#64748b}
+.fbtns{display:flex;gap:8px}
+.bnav{padding:.6rem 1.4rem;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.86rem;font-weight:700;cursor:pointer;border:none;transition:all .2s;letter-spacing:.5px}
+.bfwd{background:linear-gradient(135deg,#1d4ed8,#7c3aed);color:white;box-shadow:0 4px 16px rgba(29,78,216,.32)}
+.bfwd:hover{box-shadow:0 6px 24px rgba(29,78,216,.52);transform:translateY(-1px)}
+.bsub{background:linear-gradient(135deg,#059669,#0d9488);box-shadow:0 4px 16px rgba(5,150,105,.32)}
 
-  /* AI FEEDBACK */
-  .ai-feedback {
-    background: linear-gradient(135deg, #1e3a5f15, #1e1b4b20);
-    border: 1px solid #3b82f630; border-radius: var(--radius); padding: 1.5rem; margin-bottom: 1.5rem;
-  }
-  .ai-feedback h4 { color: var(--accent2); font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 0.8rem; }
-  .ai-feedback-text { font-size: 0.88rem; line-height: 1.7; color: #94a3b8; }
-  .ai-loading { display: flex; align-items: center; gap: 0.5rem; color: var(--muted); font-size: 0.85rem; }
-  .dot-pulse { display: flex; gap: 4px; }
-  .dot-pulse span { width: 6px; height: 6px; border-radius: 50%; background: var(--accent); animation: dp 1.2s ease-in-out infinite; }
-  .dot-pulse span:nth-child(2) { animation-delay: 0.2s; }
-  .dot-pulse span:nth-child(3) { animation-delay: 0.4s; }
-  @keyframes dp { 0%,80%,100% { opacity: 0.2; transform: scale(0.8); } 40% { opacity: 1; transform: scale(1); } }
+/* toast */
+.toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(16px);padding:9px 24px;border-radius:50px;font-size:.88rem;font-weight:600;z-index:999;opacity:0;transition:all .3s;white-space:nowrap;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.tg{background:#059669;color:white;box-shadow:0 4px 20px rgba(5,150,105,.5)}
+.tr{background:#dc2626;color:white;box-shadow:0 4px 20px rgba(220,38,38,.5)}
 
-  @media (max-width: 600px) {
-    .sections-grid, .sections-results { grid-template-columns: 1fr; }
-    .test-body { padding: 1rem; }
-    .section-tabs { display: none; }
-  }
+/* REPORT */
+#report{background:var(--ink);padding:0 1rem 4rem;overflow-y:auto}
+.rinner{max-width:780px;margin:0 auto}
+.rhero{text-align:center;padding:4rem 2rem 3rem;background:linear-gradient(180deg,rgba(29,78,216,.07),transparent);border-bottom:1px solid var(--bdr);margin-bottom:2.5rem}
+.rgreet{font-size:.75rem;text-transform:uppercase;letter-spacing:3px;color:var(--muted);margin-bottom:.4rem}
+.rname{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,6vw,3.5rem);letter-spacing:4px;color:#f5f0e8}
+.rdate{font-size:.75rem;color:#334155;margin-top:.2rem}
+.ring-wrap{position:relative;width:190px;height:190px;margin:2rem auto}
+.ring-svg{transform:rotate(-90deg)}
+.ring-bg{fill:none;stroke:rgba(255,255,255,.05);stroke-width:11}
+.ring-fg{fill:none;stroke-width:11;stroke-linecap:round;transition:stroke-dashoffset 1.6s cubic-bezier(.4,0,.2,1)}
+.ring-txt{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.ring-num{font-family:'Bebas Neue',sans-serif;font-size:3.5rem;line-height:1;color:#f5f0e8}
+.ring-max{font-size:.82rem;color:#475569}
+.lvl-pill{display:inline-block;padding:7px 26px;border-radius:50px;font-weight:800;font-size:.88rem;letter-spacing:2px;text-transform:uppercase;margin:.9rem 0}
+.cefr-row{display:flex;gap:5px;justify-content:center;flex-wrap:wrap;margin-top:1.4rem}
+.cdot{padding:4px 13px;border-radius:20px;font-size:.73rem;font-weight:700;letter-spacing:1px;border:1px solid var(--bdr);color:#1e293b;transition:all .5s}
+.cdot.act{color:white;border-color:transparent}
+.scores-4{display:grid;grid-template-columns:repeat(5,1fr);gap:11px;margin-bottom:2.5rem}
+.sc4{background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:13px;padding:1.2rem;text-align:center}
+.sc4-ico{font-size:1.4rem;margin-bottom:.4rem}
+.sc4-lbl{font-size:.66rem;text-transform:uppercase;letter-spacing:2px;color:#475569;font-weight:700}
+.sc4-result{font-size:1.8rem;margin:6px 0}
+.sc4-acc{font-size:.73rem;color:var(--muted);margin-top:5px}
+.sec-summary{background:rgba(255,255,255,.02);border:1px solid var(--bdr);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:.8rem;display:flex;align-items:center;gap:14px}
+.ss-icon{font-size:1.6rem}
+.ss-name{font-size:.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-weight:700}
+.ss-result{font-size:1.1rem;font-weight:700;margin-top:2px}
+.ss-result.correct{color:#34d399}
+.ss-result.wrong{color:#f87171}
+.ss-result.partial{color:#fbbf24}
+.atitle-r{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:3px;color:#f5f0e8;margin-bottom:1.3rem;display:flex;align-items:center;gap:10px;margin-top:2rem}
+.atitle-r::before,.atitle-r::after{content:'';flex:1;height:1px;background:var(--bdr)}
+.aicard{background:linear-gradient(135deg,rgba(29,78,216,.07),rgba(124,58,237,.07));border:1px solid rgba(59,130,246,.18);border-radius:14px;padding:1.8rem;margin-bottom:1.8rem}
+.aihdr{display:flex;align-items:center;gap:9px;margin-bottom:1.1rem}
+.aidot{width:9px;height:9px;border-radius:50%;background:#3b82f6;animation:blink 1.5s infinite}
+.ailbl{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:#60a5fa;font-weight:700}
+.aitxt{font-size:.87rem;color:#94a3b8;line-height:1.9}
+.aitxt p{margin-bottom:.7rem}
+.ld-wrap{display:flex;gap:5px;align-items:center}
+.ld{width:7px;height:7px;border-radius:50%;background:#3b82f6;animation:ldp 1.4s ease-in-out infinite}
+.ld:nth-child(2){animation-delay:.2s}
+.ld:nth-child(3){animation-delay:.4s}
+@keyframes ldp{0%,80%,100%{transform:scale(.6);opacity:.3}40%{transform:scale(1);opacity:1}}
+.btn-again{width:100%;padding:1.05rem;border-radius:11px;background:linear-gradient(135deg,#1d4ed8,#7c3aed);border:none;color:white;font-family:'Outfit',sans-serif;font-size:.98rem;font-weight:700;cursor:pointer;transition:all .3s;margin-top:.8rem;letter-spacing:1px}
+.btn-again:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 8px 28px rgba(29,78,216,.4)}
+@media(max-width:640px){.prev-grid,.scores-4{grid-template-columns:repeat(2,1fr)}.pills{display:none}.swrap{padding:1rem}.shero{flex-direction:column;text-align:center}.shero-r{margin:0 auto}}
 </style>
 </head>
 <body>
+<div id="particles"></div>
 
-<!-- HOME SCREEN -->
-<div id="home" class="screen active">
-  <div>
-    <div class="home-badge">🎓 Official Practice Format</div>
-    <h1 class="home-title">TOEFL iBT<br>Practice Test</h1>
-    <p class="home-sub">A full-length mini practice test covering all four TOEFL sections. Get instant AI-powered feedback and discover your English proficiency level.</p>
-    <div class="sections-grid">
-      <div class="section-card">
-        <div class="icon">📖</div>
-        <h3>Reading</h3>
-        <p>3 varied passages · 9 questions</p>
-      </div>
-      <div class="section-card">
-        <div class="icon">🎧</div>
-        <h3>Listening</h3>
-        <p>2 audio clips · 6 questions</p>
-      </div>
-      <div class="section-card">
-        <div class="icon">🎤</div>
-        <h3>Speaking</h3>
-        <p>2 tasks · AI scoring rubric</p>
-      </div>
-      <div class="section-card">
-        <div class="icon">✍️</div>
-        <h3>Writing</h3>
-        <p>2 tasks · AI essay feedback</p>
-      </div>
+<!-- SPLASH -->
+<div id="splash" class="screen active">
+  <div class="sglow"></div>
+  <div class="splash-in">
+    <div class="sbadge">English Skills Practice</div>
+    <h1 class="stitle">Learn<br><span>English</span></h1>
+    <p class="ssub">Practice your reading, listening, writing, speaking, and image skills — with helpful feedback along the way!</p>
+    <input class="namefield" id="sname" placeholder="Your name..." maxlength="40"/>
+    <div class="prev-grid">
+      <div class="pcard"><div class="pc-icon">📖</div><div class="pc-name">Reading</div><div class="pc-info">3 stories · 9 questions</div></div>
+      <div class="pcard"><div class="pc-icon">🎧</div><div class="pc-name">Listening</div><div class="pc-info">3 audios · 6 questions</div></div>
+      <div class="pcard"><div class="pc-icon">✍️</div><div class="pc-name">Writing</div><div class="pc-info">Adaptive difficulty</div></div>
+      <div class="pcard"><div class="pc-icon">💬</div><div class="pc-name">Speaking</div><div class="pc-info">Adaptive responses</div></div>
+      <div class="pcard"><div class="pc-icon">🖼️</div><div class="pc-name">Images</div><div class="pc-info">3 pictures · best description</div></div>
     </div>
-    <button class="btn-primary" onclick="startTest()">Begin Practice Test →</button>
-    <div class="info-bar">
-      <div class="info-item"><strong>~45 min</strong>Estimated time</div>
-      <div class="info-item"><strong>120</strong>Max score</div>
-      <div class="info-item"><strong>Free</strong>No account needed</div>
+    <button class="btn-start" onclick="beginTest()">START PRACTICE →</button>
+  </div>
+</div>
+
+<!-- EXAM -->
+<div id="exam" class="screen">
+  <div id="ehdr">
+    <div class="elogo">English <span>Practice</span></div>
+    <div class="pills" id="pillsRow"></div>
+  </div>
+  <div id="earea"></div>
+  <div id="eftr">
+    <div class="fninfo" id="fninfo"></div>
+    <div class="fbtns">
+      <button class="bnav bfwd" id="bfwd" onclick="goFwd()">Next →</button>
     </div>
   </div>
 </div>
 
-<!-- TEST SCREEN -->
-<div id="test" class="screen">
-  <div class="test-header">
-    <div class="test-logo">TOEFL Practice</div>
-    <div class="section-tabs" id="sectionTabs"></div>
-    <div class="timer" id="timer">⏱ 45:00</div>
-  </div>
-  <div class="test-body" id="testBody"></div>
-  <div class="test-footer">
-    <div>
-      <div class="q-counter" id="qCounter"></div>
-    </div>
-    <div style="display:flex;gap:0.5rem">
-      <button class="btn-nav btn-back" id="btnBack" onclick="prevQuestion()">← Back</button>
-      <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()">Next →</button>
-    </div>
-  </div>
-</div>
-
-<!-- RESULTS SCREEN -->
-<div id="results" class="screen">
-  <div class="results-inner" id="resultsInner"></div>
-</div>
+<!-- REPORT -->
+<div id="report" class="screen"></div>
+<div class="toast" id="toast"></div>
 
 <script>
-// ============================================================
-//  DATA
-// ============================================================
-const testData = {
-  reading: [
-    {
-      passage: `<h4>The Amazon Rainforest: Earth's Lungs</h4>
-        The Amazon rainforest, often referred to as the "lungs of the Earth," spans approximately 5.5 million square kilometers across nine South American countries, with Brazil containing about 60% of its total area. This vast ecosystem is home to an estimated 10% of all species on Earth, many of which remain undiscovered by science. The Amazon River, which runs through this forest, discharges roughly 20% of all fresh water that enters the world's oceans daily.
-        <br><br>Deforestation poses the most immediate threat to the Amazon. Agricultural expansion, illegal logging, and infrastructure development have destroyed approximately 17% of the original forest in the last 50 years. Scientists warn that if deforestation continues at its current rate, the Amazon could reach a "tipping point" beyond which it would be unable to generate enough rainfall to sustain itself, potentially transforming into a savanna-like landscape. This transformation would release billions of tons of stored carbon into the atmosphere, dramatically accelerating global climate change.
-        <br><br>Indigenous communities have inhabited the Amazon for thousands of years and possess invaluable traditional knowledge about its ecosystems. Studies consistently show that territories managed by indigenous peoples have lower rates of deforestation compared to other protected areas, suggesting that supporting indigenous land rights may be one of the most effective strategies for forest conservation.`,
-      questions: [
-        { q: "According to the passage, what percentage of the world's fresh water entering oceans comes from the Amazon River daily?", opts: ["10%","17%","20%","60%"], ans: 2 },
-        { q: "What does the author mean by the Amazon's 'tipping point'?", opts: ["When deforestation reaches 17% of the forest","When the forest can no longer sustain its own rainfall","When all indigenous communities leave","When carbon emissions double"], ans: 1 },
-        { q: "Which of the following best describes the author's attitude toward indigenous land rights?", opts: ["Skeptical","Neutral","Supportive","Critical"], ans: 2 },
-      ]
-    },
-    {
-      passage: `<h4>The Psychology of Flow: Optimal Human Experience</h4>
-        Psychologist Mihaly Csikszentmihalyi introduced the concept of "flow" in the 1970s after studying artists, chess players, and athletes who became so absorbed in their activities that they lost track of time and self-consciousness. Flow is defined as a state of complete immersion in a challenging activity, characterized by intense focus, a sense of control, and intrinsic reward. Csikszentmihalyi described it as "the state in which people are so involved in an activity that nothing else seems to matter."
-        <br><br>Flow occurs at a precise intersection: when the challenge of a task is well-matched to an individual's skill level. If a task is too easy, boredom results; if it is too difficult, anxiety prevails. This delicate balance, which Csikszentmihalyi called the "flow channel," suggests that personal growth and happiness are inextricably linked to engaging with tasks that are appropriately challenging.
-        <br><br>Research has demonstrated that people in flow states report greater happiness and satisfaction, are more creative, and perform at higher levels. These findings have had significant implications for education, workplace design, and therapy. Modern educators use flow theory to design curricula that appropriately challenge students, while companies implement flow principles in employee engagement programs to improve productivity without burnout.`,
-      questions: [
-        { q: "According to the passage, when does flow occur?", opts: ["When tasks are very easy","When challenge matches skill level","When someone works alone","When a task takes many hours"], ans: 1 },
-        { q: "The word 'intrinsic' in paragraph 1 most nearly means:", opts: ["external","difficult","coming from within","related to sports"], ans: 2 },
-        { q: "Which of the following is NOT mentioned as an application of flow theory?", opts: ["Education curriculum design","Employee engagement","Medical surgery","Therapy"], ans: 2 },
-      ]
-    },
-    {
-      passage: `<h4>Quantum Computing: The Next Frontier</h4>
-        Classical computers, which power everything from smartphones to supercomputers, process information using bits—binary units that exist in one of two states: 0 or 1. Quantum computers, by contrast, use quantum bits, or "qubits," which exploit the principles of quantum mechanics to exist in multiple states simultaneously—a phenomenon known as superposition. Additionally, qubits can be "entangled," meaning the state of one qubit instantly influences its partner regardless of the distance separating them.
-        <br><br>These properties give quantum computers an exponential advantage for certain computational tasks. A classical computer solving a complex optimization problem might evaluate possibilities sequentially, taking years; a quantum computer could theoretically explore all possibilities simultaneously, solving the same problem in minutes. This makes quantum computing particularly valuable for drug discovery, materials science, financial modeling, and cryptography.
-        <br><br>However, quantum computers face significant technical challenges. Qubits are extremely fragile and must be maintained at temperatures colder than outer space—near absolute zero—to prevent "decoherence," the loss of quantum properties due to environmental interference. As of 2024, the most advanced quantum computers can only maintain coherence for fractions of a second, limiting their practical applications. Researchers worldwide are racing to overcome these challenges, with some experts predicting practical quantum advantage within the next decade.`,
-      questions: [
-        { q: "According to the passage, what is superposition?", opts: ["When qubits are connected to each other","When qubits exist in multiple states simultaneously","When computers work faster than light","When bits are stored at cold temperatures"], ans: 1 },
-        { q: "Why must qubits be maintained at extremely cold temperatures?", opts: ["To make them process faster","To prevent decoherence","To allow entanglement","To save energy"], ans: 1 },
-        { q: "The author's tone when discussing quantum computing can best be described as:", opts: ["Dismissive","Optimistic but cautious","Wholly enthusiastic","Deeply pessimistic"], ans: 1 },
-      ]
-    }
-  ],
+// PARTICLES
+(()=>{const c=document.getElementById('particles');for(let i=0;i<22;i++){const p=document.createElement('div');p.className='pt';const s=4+Math.random()*12;p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${['#1d4ed8','#7c3aed','#059669','#d97706'][Math.floor(Math.random()*4)]};animation-duration:${13+Math.random()*18}s;animation-delay:${-Math.random()*20}s;`;c.appendChild(p);}})();
 
-  listening: [
-    {
-      title: "Lecture: The History of Jazz Music",
-      transcript: `"Good morning, everyone. Today we're going to explore the origins of jazz—one of America's most significant cultural exports. Jazz emerged in New Orleans around the turn of the 20th century, drawing from African American musical traditions including blues, ragtime, and gospel. Early jazz musicians, many of them African American, created an entirely new musical language based on improvisation—the ability to compose and perform music spontaneously. By the 1920s, often called the 'Jazz Age,' the genre had spread across the United States, particularly to Chicago and New York. Artists like Louis Armstrong, Duke Ellington, and later Miles Davis transformed jazz from a regional folk tradition into a sophisticated art form with global influence. What distinguishes jazz from other genres is its emphasis on individual expression within a collaborative framework—each musician has freedom to improvise while supporting the overall sound of the ensemble."`,
-      questions: [
-        { q: "According to the lecture, where did jazz originate?", opts: ["New York","Chicago","New Orleans","Memphis"], ans: 2 },
-        { q: "What does the professor say distinguishes jazz from other genres?", opts: ["Its use of written scores","Individual expression within collaboration","Its origin in gospel music","Its popularity in the 1920s"], ans: 1 },
-      ]
-    },
-    {
-      title: "Conversation: Student and Professor",
-      transcript: `Professor: "Come in, Sarah. You wanted to discuss your research paper?"
-Sarah: "Yes, Professor Chen. I've been struggling with my thesis statement. I want to write about social media's effects on teenage mental health, but I'm not sure how to narrow it down."
-Professor: "That's a broad topic. The research is actually quite divided—some studies show negative effects like increased anxiety and depression, particularly related to social comparison, while others demonstrate positive outcomes in terms of community building and social support for marginalized groups."
-Sarah: "That's exactly why I'm confused. The evidence seems contradictory."
-Professor: "Here's what I suggest: instead of arguing one side is entirely right, consider a thesis that acknowledges the nuance—that social media's impact depends on how it's used, the type of platform, and the individual user's circumstances. That would be a more defensible and academically rigorous position."`,
-      questions: [
-        { q: "What problem does Sarah bring to her professor?", opts: ["She cannot find enough sources","Her thesis statement is too narrow","She struggles to narrow her broad topic","She disagrees with her professor"], ans: 2 },
-        { q: "What does the professor recommend?", opts: ["Choosing one clear side of the debate","Acknowledging complexity and nuance","Avoiding the topic entirely","Writing about a different subject"], ans: 1 },
-      ]
-    }
-  ],
+// DATA
+const SECS=[
+  {id:'reading',name:'READING',icon:'📖'},
+  {id:'listening',name:'LISTENING',icon:'🎧'},
+  {id:'writing',name:'WRITING',icon:'✍️'},
+  {id:'speaking',name:'SPEAKING',icon:'💬'},
+  {id:'images',name:'IMAGES',icon:'🖼️'},
+];
 
-  speaking: [
-    {
-      type: "Independent",
-      prompt: "Some people prefer to live in big cities, while others prefer small towns or rural areas. Which do you prefer and why? Use specific reasons and examples to support your answer.",
-      prep: 15, speak: 45
-    },
-    {
-      type: "Integrated",
-      readingText: "Universities are considering implementing mandatory internship programs for all undergraduate students before graduation. Proponents argue that practical work experience significantly improves employment prospects and helps students confirm their career choices. Critics, however, suggest that such requirements could disadvantage students who cannot afford to work for low or unpaid wages during their studies.",
-      prompt: "The professor will give his opinion on the university's proposal. Summarize his main points and explain how they relate to the reading.",
-      listenText: `"I've reviewed this proposal and while the intention is sound, the implementation concerns me. Yes, work experience is valuable—our data shows graduates with internships earn 15% more in their first year. However, mandatory unpaid internships would create a serious equity problem. Students from lower-income backgrounds often work jobs to pay tuition; requiring them to do unpaid work is essentially a financial penalty. I'd support a paid internship requirement with university subsidies for companies that cannot afford competitive wages. That way we get the educational benefit without creating barriers for the students who need this opportunity most."`,
-      prep: 30, speak: 60
-    }
-  ],
+const DATA={
+reading:[
+  {title:'My Dog Max',cat:'Everyday Life',
+   text:`<p>I have a dog named Max. He is a big brown dog with a white spot on his nose. Every morning, Max wakes me up by licking my face. I don't always like it, but it makes me laugh!</p>
+<p>Max loves to play in the park. He runs very fast and jumps over small puddles. His favorite toy is a red ball. When I throw the ball, he always brings it back to me.</p>
+<p>At night, Max sleeps on a soft blue blanket near my bed. He makes a funny sound when he is sleeping. My family loves Max very much. He is our best friend.</p>`,
+   qs:[
+     {q:"What color is Max's ball?",opts:['Blue','Yellow','Red','Green'],ans:2},
+     {q:'Where does Max sleep at night?',opts:['On the bed','On a blue blanket','In the kitchen','Outside'],ans:1},
+     {q:'What does Max do every morning?',opts:['Eats breakfast','Barks loudly','Licks the person\'s face','Plays with his ball'],ans:2},
+   ]},
+  {title:'The School Lunch',cat:'School Life',
+   text:`<p>Today at school, Maria sat with her friends in the cafeteria. She opened her lunchbox and found a sandwich, an apple, and a small bottle of juice. Her friend Tom had pizza from the school kitchen.</p>
+<p>"Can I try your sandwich?" asked Tom. "Sure!" said Maria. She gave him half. It had cheese and tomato inside. Tom liked it a lot. He gave Maria one slice of his pizza.</p>
+<p>After lunch, they threw away their trash and went back to class. Maria felt happy because she shared her food. Her teacher always said, "Sharing makes friends."</p>`,
+   qs:[
+     {q:"What was inside Maria's sandwich?",opts:['Ham and lettuce','Cheese and tomato','Butter and jam','Chicken and mustard'],ans:1},
+     {q:'What did Tom give Maria in return?',opts:['His juice','A cookie','A slice of pizza','His apple'],ans:2},
+     {q:"What does Maria's teacher always say?",opts:['"Be quiet at lunch"','"Eat all your food"','"Sharing makes friends"','"Always bring money"'],ans:2},
+   ]},
+  {title:'A Rainy Day',cat:'Weather & Activities',
+   text:`<p>Last Saturday, it was raining very hard. Lucy could not go to the park. She was a little sad at first, but then she had an idea. She decided to make a cake with her grandmother.</p>
+<p>They used flour, eggs, sugar, and butter. Lucy's job was to mix everything in a big bowl. The kitchen smelled very good. After 30 minutes in the oven, the cake was ready.</p>
+<p>The cake was chocolate. Lucy decorated it with small white stars. Her grandmother said it was the best cake she had ever eaten. Lucy smiled and ate two pieces. The rainy day became a wonderful day!</p>`,
+   qs:[
+     {q:'Why could Lucy not go to the park?',opts:['She was sick','It was raining','The park was closed','She had homework'],ans:1},
+     {q:'What was Lucy\'s job when making the cake?',opts:['Turn on the oven','Buy the ingredients','Mix everything in a bowl','Decorate with stars'],ans:2},
+     {q:'What did Lucy use to decorate the cake?',opts:['Red hearts','Blue flowers','Small white stars','Yellow candles'],ans:2},
+   ]},
+],
 
-  writing: [
-    {
-      type: "Integrated Task",
-      reading: `Recent research suggests that the 4-day work week—working 32 hours across four days instead of 40 hours across five—offers significant benefits for both employees and employers. Studies from Iceland, Japan, and several European nations demonstrate that employee productivity either maintained or improved during 4-day week trials. Workers reported lower stress levels and better work-life balance, which led to reduced absenteeism and lower turnover rates. Companies also saved on operational costs including utilities, office supplies, and facility maintenance. Proponents argue that this model represents the natural evolution of labor practices as technology makes workers more efficient.`,
-      prompt: "Summarize the main points in the reading passage, and explain how they support the argument for a 4-day work week. Your response should be approximately 150–225 words.",
-      minWords: 150
-    },
-    {
-      type: "Independent Task",
-      prompt: `Do you agree or disagree with the following statement?\n\n"Technology has made it easier for people to maintain strong personal relationships."\n\nUse specific reasons and examples to support your answer. Write at least 250 words.`,
-      minWords: 250
-    }
-  ]
+listening:[
+  {title:'At the Supermarket',
+   speakers:1,
+   speakerNames:['Sarah'],
+   transcript:`Hi! My name is Sarah. Today I am at the supermarket. I need to buy some things for dinner. I have a list: bread, milk, eggs, and apples. I walk down the first aisle and find the bread. It is next to the cereal. Then I go to the milk section. The milk is cold because it is in a big refrigerator. I find the eggs near the milk. Finally, I pick up some red apples. They look fresh and delicious. I pay at the checkout and walk home. Dinner will be ready soon!`,
+   qs:[
+     {q:'What does Sarah need to buy for dinner?',opts:['Pasta, cheese, and tomatoes','Bread, milk, eggs, and apples','Rice, chicken, and carrots','Butter, flour, and sugar'],ans:1},
+     {q:'Where does Sarah find the bread?',opts:['Next to the eggs','Near the apples','Next to the cereal','In the refrigerator'],ans:2},
+   ]},
+  {title:'After School Plans',
+   speakers:2,
+   speakerNames:['Jake','Emma'],
+   transcript:`Jake: Hey Emma! Do you want to study together after school today? Emma: Sure, Jake! What subject do we have a test on? Jake: We have a math test on Friday. I think we should practice multiplication. Emma: Good idea. My house or the library? Jake: The library is better. It is quiet and we can use the computers. Emma: Okay. Let's meet at four o'clock. Jake: Perfect. Don't forget to bring your notebook. Emma: I won't. See you there!`,
+   qs:[
+     {q:'What subject do Jake and Emma need to study?',opts:['Science','History','Math','English'],ans:2},
+     {q:'Where do they decide to meet?',opts:['At Jake\'s house','At Emma\'s house','At the park','At the library'],ans:3},
+   ]},
+  {title:'A Trip to the Museum',
+   speakers:3,
+   speakerNames:['Teacher','Student 1','Student 2'],
+   transcript:`Teacher: Good morning, class! Today we are visiting the Natural History Museum. I want everyone to stay with the group. Student 1: Mrs. Torres, will we see dinosaurs? Teacher: Yes! The dinosaur exhibit is on the second floor. It has a very large T-Rex skeleton. Student 2: I heard the museum also has an ocean section with real shark teeth! Teacher: That's correct. After the dinosaurs, we'll go to the ocean hall. There you can touch some of the displays. Student 1: Can we buy things in the gift shop? Teacher: Yes, at the end of the visit. But first, let's focus on learning. The museum guide will meet us at the entrance in five minutes. Everyone ready? Students together: Yes!`,
+   qs:[
+     {q:'Where is the dinosaur exhibit?',opts:['On the first floor','In the gift shop','On the second floor','Near the entrance'],ans:2},
+     {q:'What can students do in the ocean hall?',opts:['Watch a movie','Touch some of the displays','See live fish','Buy shark teeth'],ans:1},
+   ]},
+],
+
+// Writing — adaptive levels
+writing:{
+  easy:[
+    {q:'Choose the correct sentence:',opts:['She go to school every day.','She goes to school every day.','She going to school every day.','She goed to school every day.'],ans:1,explain:'Use "goes" with he/she/it in the simple present tense.'},
+    {q:'Which sentence uses "a" correctly?',opts:['I have a umbrella.','I have a orange.','I have a book.','I have a apple.'],ans:2,explain:'Use "a" before consonant sounds and "an" before vowel sounds.'},
+    {q:'Pick the correct word: "There ___ two cats on the roof."',opts:['is','am','are','be'],ans:2,explain:'"Are" is used with plural subjects like "two cats".'},
+    {q:'Which sentence is correct?',opts:['He don\'t like coffee.','He doesn\'t likes coffee.','He doesn\'t like coffee.','He not like coffee.'],ans:2,explain:'With he/she/it, use "doesn\'t" + base verb in negative sentences.'},
+  ],
+  medium:[
+    {q:'Choose the correct sentence:',opts:['When I arrived, she already left.','When I arrived, she has already left.','When I arrived, she had already left.','When I arrived, she was already left.'],ans:2,explain:'Use past perfect (had + past participle) for an action completed before another past action.'},
+    {q:'Which word completes the sentence? "She is ___ intelligent than her brother."',opts:['more','most','much','better'],ans:0,explain:'Use "more" before multi-syllable adjectives to form comparatives.'},
+    {q:'Pick the passive voice: "Someone stole my wallet."',opts:['My wallet was stolen.','My wallet has stolen.','My wallet is stealing.','My wallet stolen was.'],ans:0,explain:'Passive voice: subject + was/were + past participle.'},
+    {q:'Choose the correct conditional: "If it ___ tomorrow, we will cancel the trip."',opts:['rains','rained','rain','is raining'],ans:0,explain:'In first conditional (real possibility), use present simple after "if".'},
+  ],
+  hard:[
+    {q:'Which sentence uses the subjunctive correctly?',opts:['I suggest that he goes home.','I suggest that he go home.','I suggest that he going home.','I suggest that he to go home.'],ans:1,explain:'The subjunctive mood uses the base form of the verb: "I suggest that he go".'},
+    {q:'Select the correct use of "despite":',opts:['Despite of the rain, we played.','Despite the rain, we played.','Despite that the rain, we played.','Despite from the rain, we played.'],ans:1,explain:'"Despite" is followed directly by a noun phrase, not "of" or "that".'},
+    {q:'Which sentence is grammatically correct?',opts:['Had I known, I will have helped.','Had I known, I would helped.','Had I known, I would have helped.','Had I know, I would have helped.'],ans:2,explain:'Third conditional: Had + past participle... would have + past participle.'},
+    {q:'Pick the correct sentence:',opts:['Neither the students nor the teacher are ready.','Neither the students nor the teacher is ready.','Neither the students nor the teacher were ready.','Neither the students nor the teacher be ready.'],ans:1,explain:'With neither...nor, the verb agrees with the closest subject ("teacher" = singular = "is").'},
+  ],
+},
+
+// Speaking — adaptive levels (real-life multiple choice)
+speaking:{
+  easy:[
+    {scenario:"You are at a coffee shop. The waiter asks: 'Can I help you?'",q:"What is the best response?",opts:["Yes, I want coffee now!","I would like a large coffee, please.","Coffee! Give me!","I don't know what I want."],ans:1,explain:'Polite requests use "I would like" and end with "please".'},
+    {scenario:"You meet your neighbor in the hallway. She says: 'Good morning!'",q:"What is the best response?",opts:["What do you want?","Good morning! How are you?","I am busy.","Hello, bye."],ans:1,explain:'A friendly greeting + question is natural and polite.'},
+    {scenario:"Your friend asks: 'Do you want to go to the movies tonight?'",q:"You can't go. What do you say?",opts:["No.","Movies are boring.","I'm sorry, I can't tonight. Maybe next time?","I don't like movies."],ans:2,explain:'Politely declining includes an apology and a positive alternative.'},
+    {scenario:"You are at a store and you can't find the bathroom.",q:"What do you ask the worker?",opts:["Bathroom!","Where is bathroom?","Excuse me, could you tell me where the bathroom is?","I need bathroom very much."],ans:2,explain:'"Excuse me" + polite question is the correct way to ask for help.'},
+  ],
+  medium:[
+    {scenario:"You are in a job interview. The interviewer asks: 'Tell me about yourself.'",q:"Which answer is most appropriate?",opts:["I am a very nice person and I like food.","I have 3 years of experience in marketing and I enjoy working in teams.","I don't know what to say about myself.","My name is John and I am here for the job."],ans:1,explain:'Mention relevant experience and a professional strength.'},
+    {scenario:"Your colleague made a mistake that affected your project.",q:"How do you address it professionally?",opts:["You always make mistakes! This is your fault.","Could we talk about what happened? I'd like to find a solution together.","I will tell the manager about this.","Don't worry, it's fine (while clearly upset)."],ans:1,explain:'Collaborative language ("we", "together") resolves conflict professionally.'},
+    {scenario:"A customer complains that their order was wrong.",q:"What is the best response as an employee?",opts:["It\'s not my fault.","I'm so sorry about that. Let me fix it right away.","You should have checked your order.","We are very busy today."],ans:1,explain:'Apologize sincerely and offer immediate action.'},
+    {scenario:"You disagree with a coworker's idea in a meeting.",q:"How do you express your opinion respectfully?",opts:["That idea is terrible.","I see your point, but I think we might also consider...","No, that won't work.","I disagree completely."],ans:1,explain:'Acknowledge their view first, then present yours with "but I think".'},
+  ],
+  hard:[
+    {scenario:"You're in a formal negotiation. The other party says their price is final.",q:"What is the most strategic response?",opts:["Fine, we'll take it.","Absolutely not.","I understand your position. Could we explore other ways to make this work for both sides?","We can offer you more money if you lower the price."],ans:2,explain:'Acknowledge their stance and propose mutual exploration — this keeps dialogue open.'},
+    {scenario:"A senior manager asks for your honest feedback on a flawed company policy.",q:"How do you respond?",opts:["Everything is perfect!","The policy is completely wrong and needs to be removed.","I appreciate you asking. I've noticed some areas that could be refined. May I share a few observations?","I don't have any feedback."],ans:2,explain:'Express appreciation, use hedged language ("could be refined"), and ask permission — this shows professional tact.'},
+    {scenario:"You're presenting data that contradicts your boss's previous statement.",q:"How do you handle it?",opts:["My data shows you were wrong.","Actually, the numbers say something different.","The data suggests a different picture from what was previously discussed. It might be worth reviewing together.","I will hide the data to avoid problems."],ans:2,explain:'Frame it as a collaborative discovery rather than a contradiction.'},
+    {scenario:"A client wants a discount you are not authorized to give.",q:"What do you say?",opts:["I can give you any discount you want.","I can't help you.","I completely understand your concern. Let me check with my manager to see what we can do for you.","Discounts are not our policy."],ans:2,explain:'Show empathy, take ownership, and commit to finding a solution.'},
+  ],
+},
+
+// Image descriptions
+images:[
+  {emoji:'🌅🏖️',scene:'A beautiful sunset at the beach',
+   options:[
+     'A bright orange and pink sky above calm ocean water, with people walking along the sandy shore.',
+     'A dark stormy night with large waves crashing against a rocky cliff.',
+   ],ans:0,
+   explain:'The first description matches the image: colorful sky, calm water, sandy beach.'},
+  {emoji:'🏫📚',scene:'Children in a classroom',
+   options:[
+     'A large empty room with broken windows and no furniture.',
+     'Students sitting at desks, looking at a teacher who is writing on a whiteboard.',
+   ],ans:1,
+   explain:'The second description correctly shows an active classroom with students and a teacher.'},
+  {emoji:'🍽️👨‍🍳',scene:'A chef cooking in a restaurant kitchen',
+   options:[
+     'A professional chef in a white uniform stirring a large pot on a stove, surrounded by cooking equipment.',
+     'A child eating a bowl of cereal alone at a kitchen table in the morning.',
+   ],ans:0,
+   explain:'The first description correctly shows a professional chef in a restaurant kitchen.'},
+],
 };
 
-// ============================================================
-//  STATE
-// ============================================================
-let state = {
-  currentSection: 0, // 0=reading,1=listening,2=speaking,3=writing
-  currentQ: 0,
-  readingAnswers: Array(9).fill(null),
-  listeningAnswers: Array(4).fill(null),
-  speakingDone: [false, false],
-  writingTexts: ['', ''],
-  writingSubQ: 0,
-  speakingSubQ: 0,
-  timerInterval: null,
-  timeLeft: 45 * 60,
-  audioPlaying: [false, false],
-  recordingIndex: null,
-  recordingTimer: null,
-  recordingTime: 0,
+// STATE
+let ST={
+  name:'Student',sec:0,
+  rQ:0,rAns:Array(9).fill(null),
+  lQ:0,lAns:Array(6).fill(null),lPlays:[2,2,2],
+  wLevel:'easy',wQ:0,wAns:[],wStreak:0,wMaxLevel:'easy',
+  spLevel:'easy',spQ:0,spAns:[],spStreak:0,spMaxLevel:'easy',spLastWrong:false,
+  imgQ:0,imgAns:Array(3).fill(null),
+  scores:{reading:0,listening:0,writing:0,speaking:0,images:0},
+  rCor:0,lCor:0,wCor:0,spCor:0,imgCor:0,
+  feedback:null,waitingNext:false,
 };
+let wvInt=null;
 
-const sections = ['Reading','Listening','Speaking','Writing'];
-const sectionColors = ['#3b82f6','#8b5cf6','#ef4444','#10b981'];
+// HELPERS
+function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
+function toast(msg,cls){const t=document.getElementById('toast');t.textContent=msg;t.className=`toast ${cls} show`;setTimeout(()=>t.classList.remove('show'),2200);}
+function beginTest(){ST.name=document.getElementById('sname').value.trim()||'Student';show('exam');document.getElementById('eftr').style.display='flex';renderSec();}
 
-// ============================================================
-//  TIMER
-// ============================================================
-function startTimer() {
-  state.timerInterval = setInterval(() => {
-    state.timeLeft--;
-    const m = Math.floor(state.timeLeft / 60).toString().padStart(2,'0');
-    const s = (state.timeLeft % 60).toString().padStart(2,'0');
-    document.getElementById('timer').textContent = `⏱ ${m}:${s}`;
-    if (state.timeLeft <= 0) { clearInterval(state.timerInterval); submitTest(); }
-  }, 1000);
+function renderPills(){
+  document.getElementById('pillsRow').innerHTML=SECS.map((s,i)=>{
+    let c=i<ST.sec?'pd':i===ST.sec?'pa':'pl';
+    return`<div class="pill ${c}">${s.name}</div>`;
+  }).join('');
 }
 
-// ============================================================
-//  NAVIGATION
-// ============================================================
-function startTest() {
-  showScreen('test');
-  renderTabs();
-  startTimer();
-  renderSection();
+function renderSec(){
+  renderPills();updFooter();
+  const a=document.getElementById('earea');
+  const id=SECS[ST.sec].id;
+  if(id==='reading')renderR(a);
+  else if(id==='listening')renderL(a);
+  else if(id==='writing')renderWr(a);
+  else if(id==='speaking')renderSp(a);
+  else renderImg(a);
+  a.scrollTop=0;
 }
 
-function showScreen(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
-function renderTabs() {
-  const tabs = document.getElementById('sectionTabs');
-  tabs.innerHTML = sections.map((s,i) => `
-    <div class="tab ${i === state.currentSection ? 'active' : i < state.currentSection ? 'done' : 'locked'}" id="tab${i}">${s}</div>
-  `).join('');
-}
-
-function prevQuestion() {
-  if (state.currentSection === 0) {
-    if (state.currentQ > 0) { state.currentQ--; renderSection(); }
-  } else if (state.currentSection === 1) {
-    if (state.currentQ > 0) { state.currentQ--; renderSection(); }
-  } else if (state.currentSection === 2) {
-    if (state.speakingSubQ > 0) { state.speakingSubQ--; renderSection(); }
-  } else if (state.currentSection === 3) {
-    if (state.writingSubQ > 0) { state.writingSubQ--; renderSection(); }
+function updFooter(){
+  const id=SECS[ST.sec].id;
+  let cur=1,tot=1,label='';
+  if(id==='reading'){cur=ST.rQ+1;tot=9;label=`Question ${cur} of ${tot}`;}
+  else if(id==='listening'){cur=ST.lQ+1;tot=6;label=`Question ${cur} of ${tot}`;}
+  else if(id==='writing'){
+    const lvls=['easy','medium','hard'];
+    const qi=DATA.writing[ST.wLevel].indexOf(DATA.writing[ST.wLevel][ST.wQ]);
+    label=`Writing · Level: ${ST.wLevel.charAt(0).toUpperCase()+ST.wLevel.slice(1)}`;
+    cur=ST.wAns.length+1;tot='?';
   }
-}
-
-function nextQuestion() {
-  if (state.currentSection === 0) {
-    const maxQ = testData.reading.reduce((a,r)=>a+r.questions.length,0);
-    if (state.currentQ < maxQ - 1) { state.currentQ++; renderSection(); }
-    else { state.currentSection = 1; state.currentQ = 0; renderTabs(); renderSection(); }
-  } else if (state.currentSection === 1) {
-    const maxQ = testData.listening.reduce((a,r)=>a+r.questions.length,0);
-    if (state.currentQ < maxQ - 1) { state.currentQ++; renderSection(); }
-    else { state.currentSection = 2; renderTabs(); renderSection(); }
-  } else if (state.currentSection === 2) {
-    if (state.speakingSubQ < testData.speaking.length - 1) { state.speakingSubQ++; renderSection(); }
-    else { state.currentSection = 3; renderTabs(); renderSection(); }
-  } else if (state.currentSection === 3) {
-    if (state.writingSubQ < testData.writing.length - 1) { state.writingSubQ++; renderSection(); }
-    else { submitTest(); }
+  else if(id==='speaking'){
+    label=`Speaking · Level: ${ST.spLevel.charAt(0).toUpperCase()+ST.spLevel.slice(1)}`;
+    cur=ST.spAns.length+1;tot='?';
   }
-}
-
-// ============================================================
-//  RENDER SECTION
-// ============================================================
-function renderSection() {
-  const body = document.getElementById('testBody');
-  const btnNext = document.getElementById('btnNext');
-  const btnBack = document.getElementById('btnBack');
-
-  if (state.currentSection === 0) renderReading(body);
-  else if (state.currentSection === 1) renderListening(body);
-  else if (state.currentSection === 2) renderSpeaking(body);
-  else if (state.currentSection === 3) renderWriting(body);
-
-  // Last item submit button
-  const isLast = state.currentSection === 3 && state.writingSubQ === testData.writing.length - 1;
-  btnNext.className = `btn-nav ${isLast ? 'btn-submit' : 'btn-next'}`;
-  btnNext.textContent = isLast ? '✓ Submit Test' : 'Next →';
-  btnBack.style.display = (state.currentSection === 0 && state.currentQ === 0) ? 'none' : 'block';
-  body.scrollTop = 0;
+  else{cur=ST.imgQ+1;tot=3;label=`Image ${cur} of ${tot}`;}
+  document.getElementById('fninfo').innerHTML=`<strong>${label}</strong>`;
+  const bfwd=document.getElementById('bfwd');
+  // Show next only when answered
+  const hasAns=id==='reading'?ST.rAns[ST.rQ]!==null:
+                id==='listening'?ST.lAns[ST.lQ]!==null:
+                id==='writing'?ST.feedback!==null:
+                id==='speaking'?ST.feedback!==null:
+                ST.imgAns[ST.imgQ]!==null;
+  bfwd.style.display='block';
+  bfwd.disabled=false;
 }
 
 // READING
-function renderReading(body) {
-  // figure out which passage and question
-  let qIdx = state.currentQ;
-  let passageIdx = 0;
-  let localQ = qIdx;
-  for (let i = 0; i < testData.reading.length; i++) {
-    if (localQ < testData.reading[i].questions.length) { passageIdx = i; break; }
-    localQ -= testData.reading[i].questions.length;
-  }
-  const passage = testData.reading[passageIdx];
-  const q = passage.questions[localQ];
-  const totalQ = testData.reading.reduce((a,r)=>a+r.questions.length,0);
-
-  document.getElementById('qCounter').textContent = `Question ${state.currentQ+1} of ${totalQ}`;
-  const progress = ((state.currentQ+1)/totalQ*100).toFixed(0);
-
-  const answerKey = `r${state.currentQ}`;
-  const saved = state.readingAnswers[state.currentQ];
-
-  body.innerHTML = `
-    <div class="section-title">📖 Reading</div>
-    <div class="section-desc">Read the passage carefully, then answer the question below.</div>
-    <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
-    <div class="reading-passage">${passage.passage}</div>
-    <div class="question-block">
-      <div class="question-text">${state.currentQ+1}. ${q.q}</div>
-      <div class="options">
-        ${q.opts.map((opt,i)=>`
-          <div class="option ${saved===i?'selected':''}" onclick="selectReading(${i})">
-            <div class="option-letter">${['A','B','C','D'][i]}</div>
-            <div>${opt}</div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `;
+function getRQ(qi){let idx=0;for(let i=0;i<DATA.reading.length;i++){if(qi<idx+DATA.reading[i].qs.length)return{p:DATA.reading[i],lq:qi-idx,pi:i};idx+=DATA.reading[i].qs.length;}return{p:DATA.reading[0],lq:0,pi:0};}
+function renderR(a){
+  const {p,lq,pi}=getRQ(ST.rQ),q=p.qs[lq],sv=ST.rAns[ST.rQ];
+  a.innerHTML=`<div class="swrap">
+    <div class="shero"><div class="shero-icon">📖</div><div><h2>READING</h2><p>Story ${pi+1} of 3 · <em>${p.cat}</em></p></div><div class="shero-r"><div class="qbadge"><div class="qbn">${ST.rQ+1}<span style="font-size:.95rem;color:#334155">/9</span></div><div class="qbl">Questions</div></div></div></div>
+    <div class="ptrack"><div class="pfill" style="width:${(ST.rQ+1)/9*100}%"></div></div>
+    <div class="passage"><div class="ptitle">${p.title}</div><div class="ptxt">${p.text}</div></div>
+    <div class="qcard"><div class="qnum">Question ${ST.rQ+1}</div><div class="qtxt">${q.q}</div>
+    <div class="opts">${q.opts.map((o,i)=>`<div class="opt${sv===i?' sel':''}" onclick="selR(${i})"><div class="oltr">${'ABCD'[i]}</div><div>${o}</div></div>`).join('')}</div></div>
+  </div>`;
 }
-
-function selectReading(i) {
-  state.readingAnswers[state.currentQ] = i;
-  renderReading(document.getElementById('testBody'));
-}
+function selR(i){ST.rAns[ST.rQ]=i;renderSec();}
 
 // LISTENING
-function renderListening(body) {
-  // which clip / question
-  let qIdx = state.currentQ;
-  let clipIdx = 0;
-  let localQ = qIdx;
-  for (let i = 0; i < testData.listening.length; i++) {
-    if (localQ < testData.listening[i].questions.length) { clipIdx = i; break; }
-    localQ -= testData.listening[i].questions.length;
-  }
-  const clip = testData.listening[clipIdx];
-  const q = clip.questions[localQ];
-  const totalQ = testData.listening.reduce((a,r)=>a+r.questions.length,0);
-  document.getElementById('qCounter').textContent = `Question ${state.currentQ+1} of ${totalQ}`;
-  const progress = ((state.currentQ+1)/totalQ*100).toFixed(0);
-  const saved = state.listeningAnswers[state.currentQ];
-  const isPlaying = state.audioPlaying[clipIdx];
-
-  const waveBars = Array(18).fill(null).map((_,i)=>`<div class="wave-bar" style="height:${6+Math.sin(i)*10+Math.random()*8}px;animation-delay:${i*0.07}s"></div>`).join('');
-
-  body.innerHTML = `
-    <div class="section-title">🎧 Listening</div>
-    <div class="section-desc">Listen to the audio, then answer the question.</div>
-    <div class="progress-bar"><div class="progress-fill" style="width:${progress}%"></div></div>
-    <div class="audio-player">
-      <div class="audio-icon">🎙️</div>
-      <div class="audio-title">${clip.title}</div>
-      <div class="audio-sub">Click play to listen — you may play the audio twice</div>
-      <div class="audio-controls">
-        <button class="btn-play" id="playBtn" onclick="toggleAudio(${clipIdx})">${isPlaying?'⏸':'▶'}</button>
-        <div class="audio-waveform ${isPlaying?'playing':''}" id="waveform">${waveBars}</div>
-      </div>
+function getLC(qi){let idx=0;for(let i=0;i<DATA.listening.length;i++){if(qi<idx+DATA.listening[i].qs.length)return{c:DATA.listening[i],lq:qi-idx,ci:i};idx+=DATA.listening[i].qs.length;}return{c:DATA.listening[0],lq:0,ci:0};}
+function renderL(a){
+  const {c,lq,ci}=getLC(ST.lQ),q=c.qs[lq],sv=ST.lAns[ST.lQ],pl=ST.lPlays[ci];
+  const wvs=Array(18).fill(null).map((_,i)=>`<div class="wv" id="wv${i}" style="height:${6+Math.sin(i*.7)*7}px"></div>`).join('');
+  const speakerInfo=c.speakers===1?'1 speaker':c.speakers===2?'2 speakers':'3 speakers';
+  a.innerHTML=`<div class="swrap">
+    <div class="shero"><div class="shero-icon">🎧</div><div><h2>LISTENING</h2><p>Audio ${ci+1} of 3</p></div><div class="shero-r"><div class="qbadge"><div class="qbn">${ST.lQ+1}<span style="font-size:.95rem;color:#334155">/6</span></div><div class="qbl">Questions</div></div></div></div>
+    <div class="ptrack"><div class="pfill" style="width:${(ST.lQ+1)/6*100}%"></div></div>
+    <div class="acard">
+      <div class="albl">${pl>0?'AUDIO CLIP':'NO PLAYS LEFT'}</div>
+      <div class="speaker-badge">🎙 ${speakerInfo}: ${c.speakerNames.join(', ')}</div>
+      <div class="atitle-audio">${c.title}</div>
+      <div class="wv-wrap" id="wvwrap">${wvs}</div>
+      <button class="aplaybtn" id="aplaybtn" onclick="playAudio(${ci})" ${pl===0?'disabled':''}>▶</button>
+      <div class="pleft">Plays remaining: ${pl}/2</div>
+      <div style="font-size:.75rem;color:#475569;margin-top:4px">Press play, listen carefully, then answer below</div>
     </div>
-    <div class="transcript-box">
-      <div class="transcript-label">📜 Transcript (Read as if listening)</div>
-      ${clip.transcript}
-    </div>
-    <div class="question-block">
-      <div class="question-text">${state.currentQ+1}. ${q.q}</div>
-      <div class="options">
-        ${q.opts.map((opt,i)=>`
-          <div class="option ${saved===i?'selected':''}" onclick="selectListening(${i})">
-            <div class="option-letter">${['A','B','C','D'][i]}</div>
-            <div>${opt}</div>
-          </div>
-        `).join('')}
-      </div>
-    </div>
-  `;
+    <div class="qcard"><div class="qnum">Question ${ST.lQ+1}</div><div class="qtxt">${q.q}</div>
+    <div class="opts">${q.opts.map((o,i)=>`<div class="opt${sv===i?' sel':''}" onclick="selL(${i})"><div class="oltr">${'ABCD'[i]}</div><div>${o}</div></div>`).join('')}</div></div>
+  </div>`;
 }
-
-function toggleAudio(idx) {
-  state.audioPlaying[idx] = !state.audioPlaying[idx];
-  // Simulate with Web Speech API if available
-  if (state.audioPlaying[idx] && window.speechSynthesis) {
-    const utter = new SpeechSynthesisUtterance(testData.listening[idx].transcript.replace(/"/g,''));
-    utter.rate = 0.9;
-    utter.onend = () => { state.audioPlaying[idx] = false; };
-    window.speechSynthesis.speak(utter);
-  } else if (!state.audioPlaying[idx] && window.speechSynthesis) {
+function playAudio(ci){
+  if(ST.lPlays[ci]<=0)return;
+  ST.lPlays[ci]--;
+  if(window.speechSynthesis){
     window.speechSynthesis.cancel();
+    const transcript=DATA.listening[ci].transcript;
+    const c=DATA.listening[ci];
+    // For multi-speaker: split on "Name:" pattern and speak with slight pauses
+    if(c.speakers>1){
+      // Speak the full text with natural rate
+      const u=new SpeechSynthesisUtterance(transcript);
+      u.rate=0.82;
+      u.pitch=1.0;
+      u.volume=1.0;
+      // Try to get a clear English voice
+      const voices=window.speechSynthesis.getVoices();
+      const engVoice=voices.find(v=>v.lang.startsWith('en-')&&(v.name.includes('Google')||v.name.includes('Samantha')||v.name.includes('Alex')||v.name.includes('Natural')));
+      if(engVoice)u.voice=engVoice;
+      u.onend=()=>{stopWv();};
+      window.speechSynthesis.speak(u);
+    } else {
+      const u=new SpeechSynthesisUtterance(transcript);
+      u.rate=0.80;
+      u.pitch=1.0;
+      u.volume=1.0;
+      const voices=window.speechSynthesis.getVoices();
+      const engVoice=voices.find(v=>v.lang.startsWith('en-')&&(v.name.includes('Google')||v.name.includes('Samantha')||v.name.includes('Alex')||v.name.includes('Natural')));
+      if(engVoice)u.voice=engVoice;
+      u.onend=()=>{stopWv();renderSec();};
+      window.speechSynthesis.speak(u);
+    }
+    startWv();
   }
-  renderListening(document.getElementById('testBody'));
+  const btn=document.getElementById('aplaybtn');
+  if(btn)btn.textContent='⏸';
+  const pl=document.querySelector('.pleft');
+  if(pl)pl.textContent=`Plays remaining: ${ST.lPlays[ci]}/2`;
 }
-
-function selectListening(i) {
-  state.listeningAnswers[state.currentQ] = i;
-  renderListening(document.getElementById('testBody'));
+// Load voices on page load
+if(window.speechSynthesis){
+  window.speechSynthesis.getVoices();
+  window.speechSynthesis.onvoiceschanged=()=>{window.speechSynthesis.getVoices();};
 }
+function startWv(){clearInterval(wvInt);wvInt=setInterval(()=>{document.querySelectorAll('.wv').forEach((el,i)=>{el.style.height=(6+Math.random()*30)+'px';el.classList.add('on');});},130);}
+function stopWv(){clearInterval(wvInt);document.querySelectorAll('.wv').forEach(el=>{el.style.height='6px';el.classList.remove('on');});}
+function selL(i){ST.lAns[ST.lQ]=i;renderSec();}
 
-// SPEAKING
-function renderSpeaking(body) {
-  const task = testData.speaking[state.speakingSubQ];
-  document.getElementById('qCounter').textContent = `Task ${state.speakingSubQ+1} of ${testData.speaking.length}`;
-  const isRec = state.recordingIndex === state.speakingSubQ;
-
-  let readingHtml = '';
-  if (task.readingText) {
-    readingHtml = `
-      <div class="speaking-prompt" style="margin-bottom:1rem">
-        <h4>📄 Reading Passage (45 seconds)</h4>
-        <p>${task.readingText}</p>
-      </div>
-      <div class="transcript-box" style="margin-bottom:1rem">
-        <div class="transcript-label">🎧 Lecture Audio (Transcript)</div>
-        ${task.listenText}
-      </div>
-    `;
-  }
-
-  body.innerHTML = `
-    <div class="section-title">🎤 Speaking — Task ${state.speakingSubQ+1} (${task.type})</div>
-    <div class="section-desc">Prepare your response, then record yourself speaking.</div>
-    ${readingHtml}
-    <div class="speaking-prompt">
-      <h4>🗣 Speaking Prompt</h4>
-      <p>${task.prompt}</p>
-    </div>
-    <div class="record-area">
-      <button class="record-btn ${isRec?'recording':''}" id="recBtn" onclick="toggleRecord(${state.speakingSubQ})">
-        ${isRec ? '⏹' : '🎤'}
-      </button>
-      <div class="record-status ${isRec?'recording':''}" id="recStatus">
-        ${state.speakingDone[state.speakingSubQ] ? '✅ Recording complete — click Next to continue' : isRec ? '🔴 Recording...' : 'Press to start recording'}
-      </div>
-      <div style="font-size:0.78rem;color:var(--muted);margin-top:0.5rem">
-        Prep: ${task.prep}s · Speaking: ${task.speak}s
-      </div>
-    </div>
-    <div class="speaking-tips">
-      <strong>💡 TOEFL Speaking Tips</strong>
-      State your main idea clearly in the first sentence. Support with 1–2 specific examples. Speak at a natural pace and avoid long pauses. Aim to use complex sentences and varied vocabulary.
-    </div>
-  `;
+// WRITING — adaptive
+function getWrQ(){return DATA.writing[ST.wLevel][ST.wQ%DATA.writing[ST.wLevel].length];}
+function renderWr(a){
+  const q=getWrQ();
+  const levelLabel=ST.wLevel==='easy'?'🟢 Basic':ST.wLevel==='medium'?'🟡 Intermediate':'🔴 Advanced';
+  const levelClass=`level-${ST.wLevel}`;
+  const feedbackHtml=ST.feedback?`<div class="feedback-banner ${ST.feedback.ok?'feedback-correct':'feedback-wrong'}">${ST.feedback.ok?'✅ Correct! Well done!':'❌ Not quite.'} ${ST.feedback.explain}</div>`:'';
+  const qNum=ST.wAns.length+1;
+  a.innerHTML=`<div class="swrap">
+    <div class="shero"><div class="shero-icon">✍️</div><div><h2>WRITING</h2><p>Grammar & Structure · Multiple Choice</p></div></div>
+    <div class="ptrack"><div class="pfill" style="width:${Math.min(ST.wAns.length/8*100,100)}%"></div></div>
+    <div class="level-indicator"><span class="${levelClass}" style="padding:3px 10px;border-radius:12px;">${levelLabel}</span> — Question ${qNum}</div>
+    ${ST.wStreak>=2?`<div class="streak-box">🔥 ${ST.wStreak} in a row correct! Level going up!</div>`:''}
+    ${feedbackHtml}
+    <div class="writing-q"><h4>✏️ Choose the correct answer</h4><p>${q.q}</p></div>
+    <div class="opts">${q.opts.map((o,i)=>{
+      let cls='';
+      if(ST.feedback){if(i===q.ans)cls=' cor';else if(ST.feedback.chosen===i&&i!==q.ans)cls=' wrn';}
+      return`<div class="opt${cls}${ST.feedback?'':''}" onclick="${ST.feedback?'':'selWr('+i+')'}" style="${ST.feedback?'cursor:default':''}"><div class="oltr">${'ABCD'[i]}</div><div>${o}</div></div>`;
+    }).join('')}</div>
+  </div>`;
 }
-
-function toggleRecord(idx) {
-  if (state.recordingIndex === idx) {
-    // stop
-    state.recordingIndex = null;
-    clearInterval(state.recordingTimer);
-    state.speakingDone[idx] = true;
-    if (window.speechSynthesis) window.speechSynthesis.cancel();
+function selWr(i){
+  if(ST.feedback)return;
+  const q=getWrQ();
+  const ok=i===q.ans;
+  ST.feedback={ok,chosen:i,explain:q.explain};
+  if(ok){
+    ST.wStreak++;ST.wCor++;
+    if(ST.wStreak>=2){
+      if(ST.wLevel==='easy')ST.wLevel='medium';
+      else if(ST.wLevel==='medium')ST.wLevel='hard';
+      ST.wStreak=0;
+    }
   } else {
-    state.recordingIndex = idx;
-    state.recordingTime = 0;
-    state.recordingTimer = setInterval(() => {
-      state.recordingTime++;
-      if (state.recordingTime >= testData.speaking[idx].speak) {
-        state.recordingIndex = null;
-        clearInterval(state.recordingTimer);
-        state.speakingDone[idx] = true;
-        renderSpeaking(document.getElementById('testBody'));
-      }
-    }, 1000);
+    ST.wStreak=0;
+    if(ST.wLevel==='hard')ST.wLevel='medium';
+    else if(ST.wLevel==='medium')ST.wLevel='easy';
   }
-  renderSpeaking(document.getElementById('testBody'));
+  if(ST.wLevel==='medium'&&ST.wMaxLevel==='easy')ST.wMaxLevel='medium';
+  if(ST.wLevel==='hard'&&ST.wMaxLevel!=='hard')ST.wMaxLevel='hard';
+  renderSec();
 }
 
-// WRITING
-function renderWriting(body) {
-  const task = testData.writing[state.writingSubQ];
-  const text = state.writingTexts[state.writingSubQ];
-  const words = text.trim().split(/\s+/).filter(w=>w).length;
-  const enough = words >= task.minWords;
-
-  document.getElementById('qCounter').textContent = `Task ${state.writingSubQ+1} of ${testData.writing.length}`;
-
-  let readingHtml = '';
-  if (task.reading) {
-    readingHtml = `
-      <div class="reading-passage" style="max-height:180px">
-        <h4>📄 Reading Passage</h4>${task.reading}
-      </div>
-    `;
-  }
-
-  body.innerHTML = `
-    <div class="section-title">✍️ Writing — ${task.type}</div>
-    <div class="section-desc">Write your response in the box below. Aim for ${task.minWords}+ words.</div>
-    ${readingHtml}
-    <div class="writing-prompt">
-      <strong>✏️ Task</strong>
-      ${task.prompt.replace(/\n/g,'<br>')}
+// SPEAKING — adaptive multiple choice
+function getSpQ(){return DATA.speaking[ST.spLevel][ST.spQ%DATA.speaking[ST.spLevel].length];}
+function renderSp(a){
+  const q=getSpQ();
+  const levelLabel=ST.spLevel==='easy'?'🟢 Basic':ST.spLevel==='medium'?'🟡 Intermediate':'🔴 Advanced';
+  const levelClass=`level-${ST.spLevel}`;
+  const feedbackHtml=ST.feedback?`<div class="feedback-banner ${ST.feedback.ok?'feedback-correct':'feedback-wrong'}">${ST.feedback.ok?'✅ Great response! That\'s natural English!':'❌ Not the best choice.'} ${ST.feedback.explain}</div>`:'';
+  const qNum=ST.spAns.length+1;
+  a.innerHTML=`<div class="swrap">
+    <div class="shero"><div class="shero-icon">💬</div><div><h2>SPEAKING</h2><p>Real-Life Situations · Best Response</p></div></div>
+    <div class="ptrack"><div class="pfill" style="width:${Math.min(ST.spAns.length/8*100,100)}%"></div></div>
+    <div class="level-indicator"><span class="${levelClass}" style="padding:3px 10px;border-radius:12px;">${levelLabel}</span> — Situation ${qNum}</div>
+    ${ST.spStreak>=2?`<div class="streak-box">🔥 ${ST.spStreak} correct in a row! Getting harder!</div>`:''}
+    ${feedbackHtml}
+    <div class="sp-scenario">
+      <h4>📍 Real-Life Situation</h4>
+      <p>${q.scenario}</p>
+      <p class="sp-question">${q.q}</p>
     </div>
-    <textarea class="writing-area" id="writingBox" placeholder="Begin writing your response here..." oninput="updateWriting(this.value)">${text}</textarea>
-    <div class="word-count ${enough?'good':''}">
-      ${words} words ${enough ? '✓ Minimum met' : `(minimum: ${task.minWords})`}
-    </div>
-  `;
+    <div class="opts">${q.opts.map((o,i)=>{
+      let cls='';
+      if(ST.feedback){if(i===q.ans)cls=' cor';else if(ST.feedback.chosen===i&&i!==q.ans)cls=' wrn';}
+      return`<div class="opt${cls}" onclick="${ST.feedback?'':'selSp('+i+')'}" style="${ST.feedback?'cursor:default':''}"><div class="oltr">${'ABCD'[i]}</div><div>${o}</div></div>`;
+    }).join('')}</div>
+  </div>`;
 }
-
-function updateWriting(val) {
-  state.writingTexts[state.writingSubQ] = val;
-  const task = testData.writing[state.writingSubQ];
-  const words = val.trim().split(/\s+/).filter(w=>w).length;
-  const wc = document.querySelector('.word-count');
-  if (wc) {
-    wc.className = `word-count ${words >= task.minWords ? 'good' : ''}`;
-    wc.textContent = `${words} words ${words >= task.minWords ? '✓ Minimum met' : `(minimum: ${task.minWords})`}`;
-  }
-}
-
-// ============================================================
-//  SCORING
-// ============================================================
-function computeScores() {
-  // Reading: 9 questions → 0-30 scale
-  let readingCorrect = 0;
-  let qIdx = 0;
-  testData.reading.forEach(passage => {
-    passage.questions.forEach((q, i) => {
-      if (state.readingAnswers[qIdx] === q.ans) readingCorrect++;
-      qIdx++;
-    });
-  });
-  const readingScore = Math.round((readingCorrect / 9) * 30);
-
-  // Listening: 4 questions → 0-30
-  let listenCorrect = 0;
-  let lIdx = 0;
-  testData.listening.forEach(clip => {
-    clip.questions.forEach((q) => {
-      if (state.listeningAnswers[lIdx] === q.ans) listenCorrect++;
-      lIdx++;
-    });
-  });
-  const listeningScore = Math.round((listenCorrect / 4) * 30);
-
-  // Speaking: 0-30 (estimate based on completion)
-  const speakDone = state.speakingDone.filter(Boolean).length;
-  const speakingScore = Math.round((speakDone / 2) * 22 + (speakDone > 0 ? 5 : 0));
-
-  // Writing: 0-30 (estimate based on word count)
-  let writingScore = 0;
-  testData.writing.forEach((task, i) => {
-    const text = state.writingTexts[i] || '';
-    const words = text.trim().split(/\s+/).filter(w=>w).length;
-    const ratio = Math.min(words / task.minWords, 1.5);
-    writingScore += Math.round(ratio * 13);
-  });
-  writingScore = Math.min(writingScore, 30);
-
-  const total = readingScore + listeningScore + speakingScore + writingScore;
-
-  return { readingScore, listeningScore, speakingScore, writingScore, total, readingCorrect, listenCorrect };
-}
-
-function getLevel(total) {
-  if (total >= 95) return { level: 'Advanced', cefr: 'C2', color: '#10b981', desc: 'You demonstrate near-native proficiency in English. Your reading comprehension, listening, speaking, and writing skills are at a high academic level suitable for top-tier university programs.' };
-  if (total >= 80) return { level: 'Upper-Intermediate', cefr: 'C1', color: '#3b82f6', desc: 'You have strong English skills and can handle complex academic and professional tasks with ease. You are ready for most university-level programs in English-speaking countries.' };
-  if (total >= 60) return { level: 'Intermediate', cefr: 'B2', color: '#f59e0b', desc: 'You have a good foundation in English and can handle familiar topics with confidence. With targeted practice in weaker areas, you can reach C1 level within a few months.' };
-  if (total >= 42) return { level: 'Lower-Intermediate', cefr: 'B1', color: '#f97316', desc: 'You can manage basic academic English but struggle with complex texts and abstract topics. Focus on expanding vocabulary and academic writing skills.' };
-  return { level: 'Elementary', cefr: 'A2/B1', color: '#ef4444', desc: 'You are at an early stage of English proficiency. Intensive practice in all four skills is recommended before attempting the official TOEFL exam.' };
-}
-
-function getSectionFeedback(section, score) {
-  const pct = score / 30;
-  if (section === 'reading') {
-    if (pct >= 0.87) return 'Excellent comprehension of complex academic texts.';
-    if (pct >= 0.67) return 'Good understanding of main ideas; work on inference questions.';
-    if (pct >= 0.5) return 'Review reading strategies: skimming, scanning, and context clues.';
-    return 'Focus on vocabulary building and close reading practice.';
-  }
-  if (section === 'listening') {
-    if (pct >= 0.87) return 'Strong ability to identify details and speaker attitudes.';
-    if (pct >= 0.67) return 'Good comprehension; practice note-taking while listening.';
-    return 'Listen to academic lectures daily; practice identifying main ideas.';
-  }
-  if (section === 'speaking') {
-    if (score >= 22) return 'Clear delivery and organization; work on reducing hesitations.';
-    if (score >= 14) return 'Adequate communication; develop more complex sentence structures.';
-    return 'Practice speaking English daily; record yourself and listen back.';
-  }
-  if (section === 'writing') {
-    if (score >= 22) return 'Well-organized writing with good use of evidence.';
-    if (score >= 14) return 'Adequate structure; work on transitions and academic vocabulary.';
-    return 'Practice essay organization and expanding your written vocabulary.';
-  }
-}
-
-// ============================================================
-//  SUBMIT & RESULTS
-// ============================================================
-async function submitTest() {
-  clearInterval(state.timerInterval);
-  if (window.speechSynthesis) window.speechSynthesis.cancel();
-  showScreen('results');
-  const scores = computeScores();
-  const level = getLevel(scores.total);
-  renderResults(scores, level);
-  await fetchAIFeedback(scores, level);
-}
-
-function renderResults(scores, level) {
-  const pct = Math.round(scores.total / 120 * 100);
-  const ringPct = pct;
-
-  const secs = [
-    { label: 'Reading', key: 'readingScore', icon: '📖', color: '#3b82f6' },
-    { label: 'Listening', key: 'listeningScore', icon: '🎧', color: '#8b5cf6' },
-    { label: 'Speaking', key: 'speakingScore', icon: '🎤', color: '#ef4444' },
-    { label: 'Writing', key: 'writingScore', icon: '✍️', color: '#10b981' },
-  ];
-
-  const cefrLevels = ['A1','A2','B1','B2','C1','C2'];
-
-  document.getElementById('resultsInner').innerHTML = `
-    <div class="results-header">
-      <h2>Your TOEFL Results</h2>
-      <div class="total-score-ring" style="background: conic-gradient(${level.color} ${ringPct}%, var(--border) ${ringPct}%)">
-        <div class="score-center">
-          <div class="score-number">${scores.total}</div>
-          <div class="score-label">/ 120</div>
-        </div>
-      </div>
-      <div>
-        <div class="level-badge" style="background:${level.color}20;color:${level.color};border:1px solid ${level.color}50">
-          ${level.cefr} · ${level.level}
-        </div>
-      </div>
-    </div>
-
-    <div class="sections-results">
-      ${secs.map(s => {
-        const score = scores[s.key];
-        const pct = Math.round(score/30*100);
-        const feedbackKey = s.label.toLowerCase();
-        return `
-          <div class="result-card">
-            <div class="result-card-header">
-              <div class="result-card-title">${s.icon} ${s.label}</div>
-              <div class="result-score" style="color:${s.color}">${score}<span style="font-size:0.9rem;color:var(--muted)">/30</span></div>
-            </div>
-            <div class="result-bar-bg">
-              <div class="result-bar-fill" style="width:${pct}%;background:${s.color}"></div>
-            </div>
-            <div class="result-feedback">${getSectionFeedback(feedbackKey, score)}</div>
-          </div>
-        `;
-      }).join('')}
-    </div>
-
-    <div class="level-desc">
-      <h3>Your Proficiency Level: ${level.level}</h3>
-      <p>${level.desc}</p>
-      <div class="cefr-grid">
-        ${cefrLevels.map(l => `<div class="cefr-item ${l===level.cefr?'current':''}">${l}</div>`).join('')}
-      </div>
-    </div>
-
-    <div class="ai-feedback" id="aiFeedbackBox">
-      <h4>🤖 AI Personalized Feedback</h4>
-      <div class="ai-loading">
-        <div class="dot-pulse"><span></span><span></span><span></span></div>
-        <span>Analyzing your performance...</span>
-      </div>
-    </div>
-
-    <div style="margin-top:0.5rem;font-size:0.8rem;color:var(--muted);text-align:center;margin-bottom:1rem">
-      Reading: ${scores.readingCorrect}/9 correct · Listening: ${scores.listenCorrect}/4 correct
-    </div>
-
-    <button class="btn-restart" onclick="restartTest()">🔄 Take Another Practice Test</button>
-  `;
-
-  // Animate bars
-  setTimeout(() => {
-    document.querySelectorAll('.result-bar-fill').forEach(bar => {
-      const w = bar.style.width;
-      bar.style.width = '0';
-      requestAnimationFrame(() => { bar.style.width = w; });
-    });
-  }, 100);
-}
-
-async function fetchAIFeedback(scores, level) {
-  const essay1 = state.writingTexts[0] || '(not submitted)';
-  const essay2 = state.writingTexts[1] || '(not submitted)';
-  const readingPct = Math.round(scores.readingCorrect/9*100);
-  const listenPct = Math.round(scores.listenCorrect/4*100);
-
-  const prompt = `You are a TOEFL expert examiner. A student just completed a TOEFL practice test with these results:
-- Total Score: ${scores.total}/120
-- Reading: ${scores.readingScore}/30 (${scores.readingCorrect}/9 correct = ${readingPct}%)
-- Listening: ${scores.listeningScore}/30 (${scores.listenCorrect}/4 correct = ${listenPct}%)
-- Speaking: ${scores.speakingScore}/30 (completed ${state.speakingDone.filter(Boolean).length}/2 tasks)
-- Writing: ${scores.writingScore}/30
-- CEFR Level: ${level.cefr} (${level.level})
-
-Writing Sample 1 (Integrated Task, min 150 words):
-"${essay1.substring(0, 500)}${essay1.length > 500 ? '...' : ''}"
-
-Writing Sample 2 (Independent Task, min 250 words):
-"${essay2.substring(0, 500)}${essay2.length > 500 ? '...' : ''}"
-
-Provide a personalized 3-paragraph feedback in a warm, encouraging but honest academic tone:
-1. Overall strengths based on their scores
-2. Specific areas for improvement (be concrete with strategies)
-3. A customized 2-week study plan to improve their weakest sections
-
-Keep each paragraph 3-4 sentences. Do not use bullet points.`;
-
-  try {
-    const response = await fetch("https://api.anthropic.com/v1/messages", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({
-        model: "claude-sonnet-4-20250514",
-        max_tokens: 1000,
-        messages: [{ role: "user", content: prompt }]
-      })
-    });
-    const data = await response.json();
-    const text = data.content?.find(b => b.type === 'text')?.text || '';
-    const box = document.getElementById('aiFeedbackBox');
-    if (box && text) {
-      box.innerHTML = `
-        <h4>🤖 AI Personalized Feedback</h4>
-        <div class="ai-feedback-text">${text.replace(/\n\n/g,'</p><p style="margin-top:0.8rem">').replace(/\n/g,' ')}</div>
-      `;
+function selSp(i){
+  if(ST.feedback)return;
+  const q=getSpQ();
+  const ok=i===q.ans;
+  ST.feedback={ok,chosen:i,explain:q.explain};
+  if(ok){
+    ST.spStreak++;ST.spCor++;
+    if(ST.spStreak>=2){
+      if(ST.spLevel==='easy')ST.spLevel='medium';
+      else if(ST.spLevel==='medium')ST.spLevel='hard';
+      ST.spStreak=0;
     }
-  } catch(e) {
-    const box = document.getElementById('aiFeedbackBox');
-    if (box) {
-      box.innerHTML = `<h4>🤖 AI Feedback</h4><div class="ai-feedback-text">Based on your score of ${scores.total}/120 (${level.level} level), focus on your weakest section first. Practice consistently for 30 minutes daily, use official TOEFL prep materials, and aim to re-test in 4–6 weeks.</div>`;
-    }
+  } else {
+    ST.spLastWrong=true;
+    ST.spStreak=0;
+  }
+  if(ST.spLevel==='medium'&&ST.spMaxLevel==='easy')ST.spMaxLevel='medium';
+  if(ST.spLevel==='hard'&&ST.spMaxLevel!=='hard')ST.spMaxLevel='hard';
+  renderSec();
+}
+
+// IMAGES
+function renderImg(a){
+  const img=DATA.images[ST.imgQ];
+  const sv=ST.imgAns[ST.imgQ];
+  a.innerHTML=`<div class="swrap">
+    <div class="shero"><div class="shero-icon">🖼️</div><div><h2>IMAGES</h2><p>Choose the best description</p></div><div class="shero-r"><div class="qbadge"><div class="qbn">${ST.imgQ+1}<span style="font-size:.95rem;color:#334155">/3</span></div><div class="qbl">Images</div></div></div></div>
+    <div class="ptrack"><div class="pfill" style="width:${(ST.imgQ+1)/3*100}%"></div></div>
+    <div class="img-card">
+      <div class="img-emoji">${img.emoji}</div>
+      <div class="img-label">🔍 What do you see?</div>
+      <div class="img-desc-prompt">Read both descriptions carefully and choose which one best matches the image above.</div>
+    </div>
+    <div class="qcard">
+      <div class="qnum">Choose the best description</div>
+      <div class="qtxt">Which description fits this image the most?</div>
+      <div class="opts">${img.options.map((o,i)=>{
+        let cls='';
+        if(sv!==null){if(i===img.ans)cls=' cor';else if(sv===i&&i!==img.ans)cls=' wrn';}
+        return`<div class="opt${cls}" onclick="${sv!==null?'':'selImg('+i+')'}" style="${sv!==null?'cursor:default':''}"><div class="oltr">${'AB'[i]}</div><div>${o}</div></div>`;
+      }).join('')}</div>
+      ${sv!==null?`<div style="margin-top:1rem;padding:.8rem 1rem;background:rgba(255,255,255,.03);border-radius:8px;font-size:.83rem;color:#94a3b8">💡 ${img.explain}</div>`:''}
+    </div>
+  </div>`;
+}
+function selImg(i){
+  if(ST.imgAns[ST.imgQ]!==null)return;
+  ST.imgAns[ST.imgQ]=i;
+  if(i===DATA.images[ST.imgQ].ans)ST.imgCor++;
+  renderSec();
+}
+
+// NAVIGATION
+function goFwd(){
+  const id=SECS[ST.sec].id;
+  if(id==='reading'){
+    if(ST.rAns[ST.rQ]===null){toast('Please choose an answer first!','tr');return;}
+    if(ST.rQ<8){ST.rQ++;renderSec();}else completeSection();
+  } else if(id==='listening'){
+    if(ST.lAns[ST.lQ]===null){toast('Please choose an answer first!','tr');return;}
+    if(ST.lQ<5){ST.lQ++;renderSec();}else completeSection();
+  } else if(id==='writing'){
+    if(ST.feedback===null){toast('Please choose an answer first!','tr');return;}
+    ST.wAns.push(ST.feedback.ok);
+    ST.feedback=null;
+    ST.wQ++;
+    if(ST.wAns.length>=8)completeSection();
+    else renderSec();
+  } else if(id==='speaking'){
+    if(ST.feedback===null){toast('Please pick a response first!','tr');return;}
+    ST.spAns.push(ST.feedback.ok);
+    const wasWrong=!ST.feedback.ok;
+    ST.feedback=null;
+    ST.spQ++;
+    if(wasWrong&&ST.spAns.length>=4){completeSection();}
+    else if(ST.spAns.length>=8)completeSection();
+    else renderSec();
+  } else {
+    if(ST.imgAns[ST.imgQ]===null){toast('Please choose a description first!','tr');return;}
+    if(ST.imgQ<2){ST.imgQ++;renderSec();}else completeSection();
   }
 }
 
-function restartTest() {
-  state = {
-    currentSection: 0, currentQ: 0,
-    readingAnswers: Array(9).fill(null),
-    listeningAnswers: Array(4).fill(null),
-    speakingDone: [false, false],
-    writingTexts: ['',''],
-    writingSubQ: 0, speakingSubQ: 0,
-    timerInterval: null, timeLeft: 45*60,
-    audioPlaying: [false,false],
-    recordingIndex: null, recordingTimer: null, recordingTime: 0,
-  };
-  if (window.speechSynthesis) window.speechSynthesis.cancel();
-  showScreen('home');
+function scoreSection(){
+  if(ST.sec===0){let c=0,qi=0;DATA.reading.forEach(p=>p.qs.forEach((q)=>{if(ST.rAns[qi]===q.ans)c++;qi++;}));ST.rCor=c;ST.scores.reading=Math.round(c/9*100);}
+  else if(ST.sec===1){let c=0,qi=0;DATA.listening.forEach(cl=>{cl.qs.forEach((q)=>{if(ST.lAns[qi]===q.ans)c++;qi++;});});ST.lCor=c;ST.scores.listening=Math.round(c/6*100);}
+  else if(ST.sec===2){ST.scores.writing=Math.round(ST.wCor/Math.max(ST.wAns.length,1)*100);}
+  else if(ST.sec===3){ST.scores.speaking=Math.round(ST.spCor/Math.max(ST.spAns.length,1)*100);}
+  else{ST.imgCor=ST.imgAns.filter((a,i)=>a===DATA.images[i].ans).length;ST.scores.images=Math.round(ST.imgCor/3*100);}
+}
+
+function completeSection(){
+  scoreSection();
+  const id=SECS[ST.sec].id;
+  const sc=ST.scores[id];
+  const col=['#3b82f6','#8b5cf6','#10b981','#ef4444','#f59e0b'][ST.sec];
+  const emoji=sc>=70?'🎉':sc>=50?'👍':'💪';
+  document.getElementById('earea').innerHTML=`<div class="sc-complete">
+    <div class="sc-ico">${SECS[ST.sec].icon}</div>
+    <div class="sc-title">${SECS[ST.sec].name} DONE!</div>
+    <div class="sc-sub">${ST.sec<SECS.length-1?'Great job! Ready for the next part?':'All done! Your report is ready!'}</div>
+    <div class="sc-score"><div class="sc-slbl">YOUR SCORE</div><div class="sc-snum" style="color:${col}">${emoji} ${sc}%</div></div>
+    <button class="btn-continue" onclick="advanceSection()">${ST.sec<SECS.length-1?`Next: ${SECS[ST.sec+1].name} →`:'See My Report →'}</button>
+  </div>`;
+  document.getElementById('eftr').style.display='none';
+}
+
+function advanceSection(){
+  if(ST.sec<SECS.length-1){
+    ST.sec++;
+    document.getElementById('eftr').style.display='flex';
+    renderSec();
+  } else {
+    buildReport();
+  }
+}
+
+// REPORT
+function buildReport(){
+  show('report');
+  const total=Math.round(Object.values(ST.scores).reduce((a,b)=>a+b,0)/5);
+  const lv=getLevel(total);
+  const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
+  const rResult=ST.rCor>=7?'✅ Excellent':ST.rCor>=5?'👍 Good':ST.rCor>=3?'🟡 Okay':'❌ Needs Work';
+  const lResult=ST.lCor>=5?'✅ Excellent':ST.lCor>=4?'👍 Good':ST.lCor>=2?'🟡 Okay':'❌ Needs Work';
+  const wLevel=ST.wMaxLevel==='hard'?'✅ Advanced':ST.wMaxLevel==='medium'?'👍 Intermediate':'🟡 Basic';
+  const spLevel=ST.spMaxLevel==='hard'?'✅ Advanced':ST.spMaxLevel==='medium'?'👍 Intermediate':'🟡 Basic';
+  const imgResult=ST.imgCor===3?'✅ Perfect':ST.imgCor===2?'👍 Good':'🟡 Keep Practicing';
+
+  document.getElementById('report').innerHTML=`<div class="rinner">
+    <div class="rhero">
+      <div class="rgreet">English Practice · Score Report</div>
+      <div class="rname">${ST.name}</div>
+      <div class="rdate">${date}</div>
+      <div class="ring-wrap">
+        <svg class="ring-svg" width="190" height="190" viewBox="0 0 190 190">
+          <circle class="ring-bg" cx="95" cy="95" r="78"/>
+          <circle class="ring-fg" id="ringfg" cx="95" cy="95" r="78" stroke="${lv.color}" stroke-dasharray="${2*Math.PI*78}" stroke-dashoffset="${2*Math.PI*78}"/>
+        </svg>
+        <div class="ring-txt"><div class="ring-num" id="rnum">0</div><div class="ring-max">/ 100</div></div>
+      </div>
+      <div class="lvl-pill" style="background:${lv.color}1e;color:${lv.color};border:1px solid ${lv.color}44">${lv.cefr} · ${lv.name}</div>
+      <div style="font-size:.85rem;color:var(--muted);max-width:400px;margin:.5rem auto;line-height:1.7">${lv.desc}</div>
+      <div class="cefr-row">${['A1','A2','B1','B2','C1','C2'].map(l=>`<div class="cdot${l===lv.cefr?' act':''}" style="${l===lv.cefr?'background:'+lv.color+';border-color:'+lv.color:''}">${l}</div>`).join('')}</div>
+    </div>
+    <div class="atitle-r">YOUR RESULTS</div>
+    <div class="scores-4">
+      ${[
+        {ico:'📖',lbl:'Reading',res:rResult,col:'#3b82f6'},
+        {ico:'🎧',lbl:'Listening',res:lResult,col:'#8b5cf6'},
+        {ico:'✍️',lbl:'Writing',res:wLevel,col:'#10b981'},
+        {ico:'💬',lbl:'Speaking',res:spLevel,col:'#ef4444'},
+        {ico:'🖼️',lbl:'Images',res:imgResult,col:'#f59e0b'},
+      ].map(s=>`<div class="sc4"><div class="sc4-ico">${s.ico}</div><div class="sc4-lbl">${s.lbl}</div><div class="sc4-result">${s.res}</div></div>`).join('')}
+    </div>
+    <div class="atitle-r">AI COACH FEEDBACK</div>
+    <div class="aicard" id="aicard">
+      <div class="aihdr"><div class="aidot"></div><div class="ailbl">Getting your personalized feedback...</div></div>
+      <div class="aitxt"><div class="ld-wrap"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div></div>
+    </div>
+    <button class="btn-again" onclick="restart()">🔄 Practice Again</button>
+  </div>`;
+
+  setTimeout(()=>{
+    const C=2*Math.PI*78,off=C-(total/100)*C;
+    document.getElementById('ringfg').style.strokeDashoffset=off;
+    animN('rnum',0,total,1500);
+  },300);
+  fetchAI(total,lv);
+}
+
+function animN(id,from,to,dur){const el=document.getElementById(id),t0=performance.now();function s(now){const p=Math.min((now-t0)/dur,1);el.textContent=Math.round(from+(to-from)*p);if(p<1)requestAnimationFrame(s);}requestAnimationFrame(s);}
+
+function getLevel(t){
+  if(t>=90)return{name:'Advanced',cefr:'C2',color:'#10b981',desc:'Excellent English skills! You are nearly fluent. Keep practicing to maintain your level.'};
+  if(t>=75)return{name:'Upper-Intermediate',cefr:'C1',color:'#3b82f6',desc:'Very good! You understand most English and can communicate well in many situations.'};
+  if(t>=60)return{name:'Intermediate',cefr:'B2',color:'#f59e0b',desc:'Good progress! You can handle everyday situations. Keep practicing grammar and vocabulary.'};
+  if(t>=45)return{name:'Lower-Intermediate',cefr:'B1',color:'#f97316',desc:'You are improving! Focus on listening more and reading simple stories every day.'};
+  return{name:'Beginner',cefr:'A2',color:'#ef4444',desc:'Great start! Practice a little every day — reading simple stories and listening to English will help a lot!'};
+}
+
+async function fetchAI(total,lv){
+  const wLevelTxt=ST.wMaxLevel==='hard'?'advanced grammar':ST.wMaxLevel==='medium'?'intermediate grammar':'basic grammar';
+  const spLevelTxt=ST.spMaxLevel==='hard'?'advanced conversations':ST.spMaxLevel==='medium'?'intermediate conversations':'basic conversations';
+  const prompt=`You are a friendly and encouraging English teacher. Your student is ${ST.name} and they just finished an English practice session. Here are their results:
+- Overall average: ${total}/100 → Level: ${lv.cefr} (${lv.name})
+- Reading: ${ST.rCor}/9 questions correct
+- Listening: ${ST.lCor}/6 questions correct
+- Writing (grammar): reached ${wLevelTxt} level
+- Speaking (best responses): reached ${spLevelTxt} level
+- Image descriptions: ${ST.imgCor}/3 correct
+
+Write a warm, simple, and encouraging message in 3 short paragraphs (2-3 sentences each):
+Paragraph 1: Greet ${ST.name} by name and say something genuinely positive about their overall result.
+Paragraph 2: Point out their strongest area and one area to improve, with one simple tip.
+Paragraph 3: Give them one fun activity they can do this week to practice English (example: watch a cartoon in English, read a simple news article, etc.)
+Use simple language. Be like a friendly teacher, not a robot. No bullet points, no headers.`;
+
+  try{
+    const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,messages:[{role:'user',content:prompt}]})});
+    const d=await r.json(),txt=d.content?.find(b=>b.type==='text')?.text||'';
+    const card=document.getElementById('aicard');
+    if(card&&txt)card.innerHTML=`<div class="aihdr"><div class="aidot"></div><div class="ailbl">Your Teacher's Feedback</div></div><div class="aitxt">${txt.split(/\n\n+/).map(p=>`<p>${p}</p>`).join('')}</div>`;
+  } catch(e){
+    const card=document.getElementById('aicard');
+    if(card)card.innerHTML=`<div class="aihdr"><div class="aidot"></div><div class="ailbl">Teacher's Note</div></div><div class="aitxt"><p>Great work, ${ST.name}! You completed all five sections of the practice — that already shows dedication. Your score of ${total}% puts you at the ${lv.name} level.</p><p>To improve, try to practice a little every day. Reading short stories in English and listening to simple podcasts are two great habits to start with.</p><p>This week's challenge: watch one short video in English (even 5 minutes!), and try to write 3 sentences about what you watched. You've got this! 🌟</p></div>`;
+  }
+}
+
+function restart(){
+  ST={name:'Student',sec:0,rQ:0,rAns:Array(9).fill(null),lQ:0,lAns:Array(6).fill(null),lPlays:[2,2,2],wLevel:'easy',wQ:0,wAns:[],wStreak:0,wMaxLevel:'easy',spLevel:'easy',spQ:0,spAns:[],spStreak:0,spMaxLevel:'easy',spLastWrong:false,imgQ:0,imgAns:Array(3).fill(null),scores:{reading:0,listening:0,writing:0,speaking:0,images:0},rCor:0,lCor:0,wCor:0,spCor:0,imgCor:0,feedback:null,waitingNext:false};
+  if(window.speechSynthesis)window.speechSynthesis.cancel();
+  stopWv();
+  document.getElementById('eftr').style.display='flex';
+  document.getElementById('sname').value='';
+  show('splash');
 }
 </script>
 </body>
