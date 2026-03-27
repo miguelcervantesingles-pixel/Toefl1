@@ -36,7 +36,8 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .pc-icon{font-size:1.8rem;margin-bottom:.4rem}
 .pc-name{font-size:.78rem;font-weight:800;color:#e2e8f0;text-transform:uppercase;letter-spacing:1.5px}
 .pc-info{font-size:.7rem;color:#475569;margin-top:3px}
-.btn-start{background:linear-gradient(135deg,#1d4ed8,#7c3aed);border:none;color:white;font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:700;padding:1rem 3rem;border-radius:50px;cursor:pointer;letter-spacing:1px;box-shadow:0 8px 32px rgba(29,78,216,.4);transition:all .3s;animation:sup .8s .4s ease both;position:relative;overflow:hidden}
+.pc-time{font-size:.68rem;color:#3b82f6;margin-top:2px;font-weight:600}
+.btn-start{background:linear-gradient(135deg,#1d4ed8,#7c3aed);border:none;color:white;font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:700;padding:1rem 3rem;border-radius:50px;cursor:pointer;letter-spacing:1px;box-shadow:0 8px 32px rgba(29,78,216,.4);transition:all .3s;animation:sup .8s .4s ease both}
 .btn-start:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(29,78,216,.6)}
 #ehdr{background:#0a0e1a;border-bottom:1px solid var(--bdr);padding:0 1.5rem;height:58px;display:flex;align-items:center;position:sticky;top:0;z-index:200;gap:1rem}
 .elogo{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:3px;color:#f5f0e8;flex-shrink:0}
@@ -47,6 +48,15 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .pa{color:white;background:#1d4ed8;border-color:#1d4ed8}
 .pd{color:#10b981;border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.1)}
 .pd::after{content:' ✓'}
+.timer-wrap{display:flex;align-items:center;gap:8px;flex-shrink:0}
+.timer-ring{position:relative;width:38px;height:38px}
+.timer-ring svg{transform:rotate(-90deg)}
+.timer-bg{fill:none;stroke:rgba(255,255,255,.07);stroke-width:3}
+.timer-fg{fill:none;stroke-width:3;stroke-linecap:round;transition:stroke-dashoffset .9s linear}
+.timer-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:.85rem;color:#e2e8f0}
+.timer-lbl{font-size:.68rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
+.timer-warn .timer-fg{stroke:#ef4444!important}
+.timer-warn .timer-num{color:#ef4444}
 #earea{flex:1;overflow-y:auto;background:var(--steel)}
 .swrap{padding:2rem;max-width:900px;width:100%;margin:0 auto}
 .shero{background:linear-gradient(135deg,rgba(29,78,216,.13),rgba(124,58,237,.08));border:1px solid rgba(59,130,246,.18);border-radius:14px;padding:1.3rem 1.8rem;margin-bottom:1.8rem;display:flex;align-items:center;gap:1.2rem}
@@ -88,6 +98,7 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .wv.on{background:#8b5cf6}
 .pleft{font-size:.7rem;color:#fbbf24}
 .speaker-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);border-radius:20px;padding:4px 12px;font-size:.72rem;color:#c4b5fd;margin-bottom:.4rem}
+.listen-note{font-size:.75rem;color:#475569;font-style:italic}
 .writing-q{background:rgba(5,150,105,.06);border:1px solid rgba(5,150,105,.2);border-radius:12px;padding:1.4rem;margin-bottom:1rem}
 .writing-q h4{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:#34d399;margin-bottom:.7rem}
 .writing-q p{font-size:.95rem;color:#e2e8f0;line-height:1.7}
@@ -128,8 +139,14 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .tg{background:#059669;color:white;box-shadow:0 4px 20px rgba(5,150,105,.5)}
 .tr{background:#dc2626;color:white;box-shadow:0 4px 20px rgba(220,38,38,.5)}
+.timeup-overlay{position:fixed;inset:0;background:rgba(0,0,0,.82);z-index:500;display:flex;align-items:center;justify-content:center}
+.timeup-box{background:#0f1929;border:1px solid rgba(220,38,38,.4);border-radius:16px;padding:2.5rem;text-align:center;max-width:360px;width:90%}
+.timeup-ico{font-size:3rem;margin-bottom:.8rem}
+.timeup-title{font-family:'Bebas Neue',sans-serif;font-size:2.2rem;letter-spacing:4px;color:#f87171;margin-bottom:.6rem}
+.timeup-sub{font-size:.9rem;color:var(--muted);line-height:1.7;margin-bottom:1.4rem}
+.timeup-btn{padding:.85rem 2rem;border-radius:50px;background:linear-gradient(135deg,#dc2626,#7c3aed);border:none;color:white;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer}
 #report{background:var(--ink);padding:0 1rem 4rem;overflow-y:auto}
-.rinner{max-width:780px;margin:0 auto}
+.rinner{max-width:820px;margin:0 auto}
 .rhero{text-align:center;padding:4rem 2rem 3rem;background:linear-gradient(180deg,rgba(29,78,216,.07),transparent);border-bottom:1px solid var(--bdr);margin-bottom:2.5rem}
 .rgreet{font-size:.75rem;text-transform:uppercase;letter-spacing:3px;color:var(--muted);margin-bottom:.4rem}
 .rname{font-family:'Bebas Neue',sans-serif;font-size:clamp(2.2rem,6vw,3.5rem);letter-spacing:4px;color:#f5f0e8}
@@ -152,6 +169,19 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .sc4-result{font-size:1.4rem;margin:6px 0}
 .atitle-r{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:3px;color:#f5f0e8;margin-bottom:1.3rem;display:flex;align-items:center;gap:10px;margin-top:2rem}
 .atitle-r::before,.atitle-r::after{content:'';flex:1;height:1px;background:var(--bdr)}
+/* WRONG REVIEW */
+.wrong-section{margin-bottom:2rem}
+.wrong-sec-title{font-size:.72rem;text-transform:uppercase;letter-spacing:2px;color:#60a5fa;font-weight:700;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid var(--bdr)}
+.wrong-card{background:rgba(220,38,38,.05);border:1px solid rgba(220,38,38,.16);border-radius:12px;padding:1.3rem;margin-bottom:.9rem}
+.wrong-q{font-size:.92rem;color:#e2e8f0;font-weight:600;line-height:1.6;margin-bottom:.9rem}
+.wrong-row{display:flex;gap:8px;margin-bottom:5px;font-size:.83rem;line-height:1.5;align-items:flex-start}
+.wrong-lbl{font-size:.68rem;text-transform:uppercase;letter-spacing:1px;font-weight:700;min-width:82px;flex-shrink:0;padding-top:2px}
+.wrong-lbl.yours{color:#f87171}
+.wrong-lbl.correct{color:#34d399}
+.wrong-ans{color:#94a3b8}
+.wrong-ans.correct-ans{color:#6ee7b7}
+.wrong-explain{margin-top:.8rem;padding:.7rem 1rem;background:rgba(59,130,246,.08);border-left:3px solid #3b82f6;border-radius:0 6px 6px 0;font-size:.82rem;color:#93c5fd;line-height:1.7}
+.no-wrong{text-align:center;padding:2rem;color:var(--muted);font-size:.9rem}
 .aicard{background:linear-gradient(135deg,rgba(29,78,216,.07),rgba(124,58,237,.07));border:1px solid rgba(59,130,246,.18);border-radius:14px;padding:1.8rem;margin-bottom:1.8rem}
 .aihdr{display:flex;align-items:center;gap:9px;margin-bottom:1.1rem}
 .aidot{width:9px;height:9px;border-radius:50%;background:#3b82f6;animation:blink 1.5s infinite}
@@ -174,16 +204,16 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 <div id="splash" class="screen active">
   <div class="sglow"></div>
   <div class="splash-in">
-    <div class="sbadge">English Skills Practice</div>
+    <div class="sbadge">TOEFL-Style English Practice</div>
     <h1 class="stitle">Learn<br><span>English</span></h1>
-    <p class="ssub">Practice your reading, listening, writing, speaking, and image skills — with helpful feedback along the way!</p>
+    <p class="ssub">A timed, TOEFL-style test covering reading, listening, writing, speaking and image skills — with a full wrong-answer review at the end.</p>
     <input class="namefield" id="sname" placeholder="Your name..." maxlength="40"/>
     <div class="prev-grid">
-      <div class="pcard"><div class="pc-icon">📖</div><div class="pc-name">Reading</div><div class="pc-info">3 stories · 9 questions</div></div>
-      <div class="pcard"><div class="pc-icon">🎧</div><div class="pc-name">Listening</div><div class="pc-info">3 audios · 6 questions</div></div>
-      <div class="pcard"><div class="pc-icon">✍️</div><div class="pc-name">Writing</div><div class="pc-info">Adaptive difficulty</div></div>
-      <div class="pcard"><div class="pc-icon">💬</div><div class="pc-name">Speaking</div><div class="pc-info">Adaptive responses</div></div>
-      <div class="pcard"><div class="pc-icon">🖼️</div><div class="pc-name">Images</div><div class="pc-info">3 pictures · best description</div></div>
+      <div class="pcard"><div class="pc-icon">📖</div><div class="pc-name">Reading</div><div class="pc-info">3 passages · 9 questions</div><div class="pc-time">⏱ 18 min</div></div>
+      <div class="pcard"><div class="pc-icon">🎧</div><div class="pc-name">Listening</div><div class="pc-info">3 audios · 6 questions</div><div class="pc-time">⏱ 12 min</div></div>
+      <div class="pcard"><div class="pc-icon">✍️</div><div class="pc-name">Writing</div><div class="pc-info">Adaptive · 8 questions</div><div class="pc-time">⏱ 10 min</div></div>
+      <div class="pcard"><div class="pc-icon">💬</div><div class="pc-name">Speaking</div><div class="pc-info">Adaptive · 8 situations</div><div class="pc-time">⏱ 10 min</div></div>
+      <div class="pcard"><div class="pc-icon">🖼️</div><div class="pc-name">Images</div><div class="pc-info">3 pictures · descriptions</div><div class="pc-time">⏱ 6 min</div></div>
     </div>
     <button class="btn-start" onclick="beginTest()">START PRACTICE →</button>
   </div>
@@ -193,311 +223,227 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
   <div id="ehdr">
     <div class="elogo">English <span>Practice</span></div>
     <div class="pills" id="pillsRow"></div>
+    <div class="timer-wrap" id="timerWrap">
+      <div class="timer-ring">
+        <svg width="38" height="38" viewBox="0 0 38 38">
+          <circle class="timer-bg" cx="19" cy="19" r="16"/>
+          <circle class="timer-fg" id="timerFg" cx="19" cy="19" r="16" stroke="#3b82f6" stroke-dasharray="100.53" stroke-dashoffset="0"/>
+        </svg>
+        <div class="timer-num" id="timerNum">--</div>
+      </div>
+      <div class="timer-lbl" id="timerLbl">TIME</div>
+    </div>
   </div>
   <div id="earea"></div>
   <div id="eftr">
     <div class="fninfo" id="fninfo"></div>
-    <div class="fbtns">
-      <button class="bnav bfwd" id="bfwd" onclick="goFwd()">Next →</button>
-    </div>
+    <div class="fbtns"><button class="bnav bfwd" id="bfwd" onclick="goFwd()">Next →</button></div>
   </div>
 </div>
 
 <div id="report" class="screen"></div>
 <div class="toast" id="toast"></div>
+<div id="timeupOverlay" style="display:none" class="timeup-overlay">
+  <div class="timeup-box">
+    <div class="timeup-ico">⏰</div>
+    <div class="timeup-title">TIME'S UP!</div>
+    <div class="timeup-sub">Time for this section has ended. Unanswered questions are marked incorrect.</div>
+    <button class="timeup-btn" onclick="dismissTimeup()">Continue →</button>
+  </div>
+</div>
 
 <script>
 (()=>{const c=document.getElementById('particles');for(let i=0;i<22;i++){const p=document.createElement('div');p.className='pt';const s=4+Math.random()*12;p.style.cssText='width:'+s+'px;height:'+s+'px;left:'+(Math.random()*100)+'%;background:'+['#1d4ed8','#7c3aed','#059669','#d97706'][Math.floor(Math.random()*4)]+';animation-duration:'+(13+Math.random()*18)+'s;animation-delay:'+(-Math.random()*20)+'s;';c.appendChild(p);}})();
 
 const SECS=[
-  {id:'reading',name:'READING',icon:'📖'},
-  {id:'listening',name:'LISTENING',icon:'🎧'},
-  {id:'writing',name:'WRITING',icon:'✍️'},
-  {id:'speaking',name:'SPEAKING',icon:'💬'},
-  {id:'images',name:'IMAGES',icon:'🖼️'},
+  {id:'reading', name:'READING',  icon:'📖', secs:18*60},
+  {id:'listening',name:'LISTENING',icon:'🎧', secs:12*60},
+  {id:'writing',  name:'WRITING',  icon:'✍️', secs:10*60},
+  {id:'speaking', name:'SPEAKING', icon:'💬', secs:10*60},
+  {id:'images',   name:'IMAGES',   icon:'🖼️', secs:6*60},
 ];
 
-// ─── DATA ───────────────────────────────────────────────────────────────────
-// READING: passages are now A2–B1 level — longer texts, more nuanced questions,
-// plausible distractors that require careful reading (not just scanning).
 const DATA={
 reading:[
-  {
-    title:'The Community Garden',
-    cat:'Community & Environment',
-    text:`<p>For years, the empty lot on Maple Street was an eyesore — a patch of cracked concrete covered in weeds and broken glass. Then, three summers ago, a retired teacher named Mr. Okafor had an idea. He knocked on doors, handed out flyers, and convinced twelve of his neighbours to transform the space into a community garden.</p>
+  {title:'The Community Garden',cat:'Community & Environment',
+   text:`<p>For years, the empty lot on Maple Street was an eyesore — a patch of cracked concrete covered in weeds and broken glass. Then, three summers ago, a retired teacher named Mr. Okafor had an idea. He knocked on doors, handed out flyers, and convinced twelve of his neighbours to transform the space into a community garden.</p>
 <p>Today, the garden is almost unrecognisable. Raised wooden beds overflow with tomatoes, herbs, and sunflowers. A hand-painted sign near the entrance reads "Grown with Neighbours, Not Strangers." Every Saturday morning, volunteers of all ages arrive to water, weed, and share whatever they have harvested that week. The surplus vegetables are donated to a local food bank.</p>
 <p>Not everything has gone smoothly. Last autumn, a dispute arose over whether to plant a walnut tree whose roots, some argued, would eventually damage the other beds. After two heated meetings, the group voted to plant a smaller fruit tree instead — an apple tree that now stands at the centre of the garden. Mr. Okafor says the argument was the best thing that ever happened to them. "We had to actually listen to each other," he told a local newspaper. "That's when we stopped being neighbours and started being a community."</p>`,
-    qs:[
-      {
-        q:'What was the main reason some members objected to planting a walnut tree?',
-        opts:[
-          'They preferred the taste of apples over walnuts.',
-          'They were concerned the roots might harm the other garden beds.',
-          'A walnut tree would block sunlight from reaching the tomatoes.',
-          'Mr. Okafor had already ordered an apple tree by mistake.'
-        ],
-        ans:1
-      },
-      {
-        q:'What does Mr. Okafor mean when he says they "stopped being neighbours and started being a community"?',
-        opts:[
-          'They moved closer together and sold their individual homes.',
-          'They began to truly communicate and understand each other.',
-          'They hired a professional community manager to run the garden.',
-          'They stopped having disagreements after the vote.'
-        ],
-        ans:1
-      },
-      {
-        q:'Which detail best shows that the garden benefits people beyond the immediate neighbourhood?',
-        opts:[
-          'Volunteers arrive every Saturday morning to water and weed.',
-          'Mr. Okafor handed out flyers to convince his neighbours.',
-          'Surplus vegetables are donated to a local food bank.',
-          'The sign near the entrance is hand-painted.'
-        ],
-        ans:2
-      },
-    ]
-  },
-  {
-    title:'The Interview',
-    cat:'Work & Ambition',
-    text:`<p>Marina had prepared for weeks. She had researched the company, rehearsed answers to common questions, and even timed herself so she would not speak for too long. On the morning of the interview, however, the train was delayed and she arrived seven minutes late — something she had always considered unforgivable in a professional setting.</p>
+   qs:[
+     {q:'What was the main reason some members objected to planting a walnut tree?',opts:["They preferred the taste of apples over walnuts.",'The roots might eventually damage the other beds.','It would block sunlight from the tomatoes.','Mr. Okafor had already ordered an apple tree by mistake.'],ans:1},
+     {q:'What does Mr. Okafor mean when he says they "stopped being neighbours and started being a community"?',opts:['They moved closer and sold their individual homes.','They began to truly communicate and understand each other.','They hired a professional manager to run the garden.','They stopped having disagreements after the vote.'],ans:1},
+     {q:'Which detail best shows that the garden benefits people beyond the immediate neighbourhood?',opts:['Volunteers arrive every Saturday to water and weed.','Mr. Okafor handed out flyers to recruit neighbours.','Surplus vegetables are donated to a local food bank.','The entrance sign is hand-painted.'],ans:2},
+   ]},
+  {title:'The Interview',cat:'Work & Ambition',
+   text:`<p>Marina had prepared for weeks. She had researched the company, rehearsed answers to common questions, and even timed herself so she would not speak for too long. On the morning of the interview, however, the train was delayed and she arrived seven minutes late — something she had always considered unforgivable in a professional setting.</p>
 <p>She apologised immediately and honestly, without making excuses. The interviewer, a calm woman named Dr. Patel, nodded and said, "Thank you for letting us know. Shall we begin?" The interview itself went well. Marina was articulate and enthusiastic, and she asked thoughtful questions about the team's current projects.</p>
 <p>Two days later, Marina received a phone call offering her the position. During her first week, she mentioned to a colleague how surprised she had been to get the job despite being late. Her colleague smiled. "Dr. Patel always says that how a person handles an unexpected problem tells her more than any rehearsed answer ever could."</p>`,
-    qs:[
-      {
-        q:'Why is Marina\'s lateness particularly significant to her?',
-        opts:[
-          'She had promised Dr. Patel she would arrive thirty minutes early.',
-          'She believed being late was a serious professional fault.',
-          'The company had a strict policy of rejecting late candidates.',
-          'She had been late to her previous job interview as well.'
-        ],
-        ans:1
-      },
-      {
-        q:'What does Dr. Patel\'s comment at the end of the story suggest about what she values in candidates?',
-        opts:[
-          'She prefers candidates who have researched the company thoroughly.',
-          'She thinks punctuality is the single most important quality.',
-          'She believes how people respond to problems reveals their true character.',
-          'She expects candidates to give long, detailed answers.'
-        ],
-        ans:2
-      },
-      {
-        q:'Which word best describes Marina\'s response when she arrived late?',
-        opts:['Defensive','Dishonest','Accountable','Indifferent'],
-        ans:2
-      },
-    ]
-  },
-  {
-    title:'Sleep and the Brain',
-    cat:'Science & Health',
-    text:`<p>Most people know that sleep is important, but fewer understand exactly what the brain is doing during those quiet hours. Far from simply "switching off," the brain remains remarkably active while we sleep — and some of its most vital work happens only then.</p>
+   qs:[
+     {q:"Why is Marina's lateness particularly significant to her personally?",opts:["She had promised Dr. Patel she would arrive thirty minutes early.",'She believed that being late was a serious professional failing.','The company had a strict policy of rejecting late candidates.','She had been late to her previous interview as well.'],ans:1},
+     {q:"What does Dr. Patel's comment at the end of the story suggest she values most in candidates?",opts:['Thorough research into the company before the interview.','Punctuality as the single most important quality.','How a person responds under unexpected pressure.','The ability to give long, detailed answers.'],ans:2},
+     {q:"Which word best describes Marina's response when she arrived late?",opts:['Defensive','Dishonest','Accountable','Indifferent'],ans:2},
+   ]},
+  {title:'Sleep and the Brain',cat:'Science & Health',
+   text:`<p>Most people know that sleep is important, but fewer understand exactly what the brain is doing during those quiet hours. Far from simply "switching off," the brain remains remarkably active while we sleep — and some of its most vital work happens only then.</p>
 <p>One key process is memory consolidation. During the day, new experiences are stored as fragile, short-term memories in a part of the brain called the hippocampus. At night, particularly during deep sleep, the brain replays these experiences and transfers the most important ones into long-term storage. This is why students who sleep well after studying tend to retain information better than those who stay up late revising.</p>
 <p>Sleep also plays a role in clearing waste products from the brain. A system called the glymphatic system becomes much more active during sleep, flushing out toxic proteins that accumulate during waking hours. Scientists believe a long-term build-up of these proteins may be linked to conditions such as Alzheimer's disease. Getting consistent, quality sleep is therefore not just about feeling rested — it may be one of the most powerful things a person can do for their long-term brain health.</p>`,
-    qs:[
-      {
-        q:'According to the passage, what happens to new memories during deep sleep?',
-        opts:[
-          'They are permanently deleted to make space for new ones.',
-          'They are moved from short-term storage to long-term storage.',
-          'They are replayed consciously as dreams.',
-          'They remain in the hippocampus until the person wakes up.'
-        ],
-        ans:1
-      },
-      {
-        q:'What is the main purpose of the glymphatic system as described in the passage?',
-        opts:[
-          'To create new memories during the night.',
-          'To regulate how long a person stays asleep.',
-          'To remove harmful proteins that build up while we are awake.',
-          'To transfer information between the hippocampus and other brain regions.'
-        ],
-        ans:2
-      },
-      {
-        q:'Which statement is best supported by the information in the final paragraph?',
-        opts:[
-          'People who sleep eight hours a night will never develop Alzheimer\'s disease.',
-          'Poor sleep may contribute to serious long-term neurological conditions.',
-          'The glymphatic system only activates in people over the age of fifty.',
-          'Scientists have fully explained the link between sleep and brain disease.'
-        ],
-        ans:1
-      },
-    ]
-  },
+   qs:[
+     {q:'According to the passage, what happens to new memories during deep sleep?',opts:['They are permanently deleted to make space for new ones.','They are moved from short-term storage into long-term storage.','They are replayed consciously as vivid dreams.','They remain stored in the hippocampus until the person wakes up.'],ans:1},
+     {q:'What is the main function of the glymphatic system as described in the passage?',opts:['To create new memories overnight.','To regulate how long a person stays asleep.','To flush out harmful proteins that build up during waking hours.','To transfer memories between different brain regions.'],ans:2},
+     {q:'Which statement is best supported by the information in the final paragraph?',opts:["Sleeping eight hours a night will prevent Alzheimer's disease entirely.",'Poor sleep over time may contribute to serious neurological conditions.','The glymphatic system only activates in people over fifty years old.','Scientists have fully explained the connection between sleep and brain disease.'],ans:1},
+   ]},
 ],
 
 listening:[
-  {title:'At the Supermarket',speakers:1,speakerNames:['Sarah'],
-   transcript:'Hi! My name is Sarah. Today I am at the supermarket. I need to buy some things for dinner. I have a list: bread, milk, eggs, and apples. I walk down the first aisle and find the bread. It is next to the cereal. Then I go to the milk section. The milk is cold because it is in a big refrigerator. I find the eggs near the milk. Finally, I pick up some red apples. They look fresh and delicious. I pay at the checkout and walk home. Dinner will be ready soon!',
+  {title:'Urban Heat Islands',speakers:1,speakerNames:['Prof. Chen'],
+   transcript:`Good morning, everyone. Today I want to discuss a phenomenon known as the urban heat island effect — something that affects nearly every major city on the planet. The basic idea is straightforward: cities are significantly warmer than the rural areas surrounding them. In some cases, the difference can be as large as five to seven degrees Celsius on a calm, clear night. But why does this happen? There are several reasons. First, traditional building materials like concrete and asphalt absorb heat during the day and release it slowly after dark, whereas soil and vegetation cool down much faster. Second, cities generate enormous amounts of heat from vehicles, air conditioning units, and industrial processes. Third, urban areas typically have far fewer trees and green spaces to provide shade and natural cooling through evaporation. The consequences are serious. Higher urban temperatures increase energy demand for cooling, worsen air quality, and put vulnerable populations — particularly the elderly and young children — at greater health risk. The good news is that cities are beginning to fight back. Green roofs, urban forests, and reflective road surfaces can all meaningfully reduce temperatures. Some cities have already seen measurable improvements after adopting these strategies.`,
    qs:[
-     {q:'What does Sarah need to buy for dinner?',opts:['Pasta, cheese, and tomatoes','Bread, milk, eggs, and apples','Rice, chicken, and carrots','Butter, flour, and sugar'],ans:1},
-     {q:'Where does Sarah find the bread?',opts:['Next to the eggs','Near the apples','Next to the cereal','In the refrigerator'],ans:2},
+     {q:'According to the professor, why do cities stay warmer than rural areas at night?',opts:['Cities have more people generating body heat after dark.','Concrete and asphalt absorb heat by day and release it slowly at night.','Rural areas receive less direct sunlight during the day.','Industrial factories operate only during nighttime hours.'],ans:1},
+     {q:'Which group does the professor identify as facing the greatest health risk from urban heat?',opts:['Construction workers and outdoor athletes','University students and daily commuters','The elderly and young children','Office workers in high-rise buildings'],ans:2},
    ]},
-  {title:'After School Plans',speakers:2,speakerNames:['Jake','Emma'],
-   transcript:'Jake: Hey Emma! Do you want to study together after school today? Emma: Sure, Jake! What subject do we have a test on? Jake: We have a math test on Friday. I think we should practice multiplication. Emma: Good idea. My house or the library? Jake: The library is better. It is quiet and we can use the computers. Emma: Okay. Let\'s meet at four o\'clock. Jake: Perfect. Don\'t forget to bring your notebook. Emma: I won\'t. See you there!',
+  {title:'A Negotiation Gone Wrong',speakers:2,speakerNames:['Raj','Sophie'],
+   transcript:`Raj: Sophie, I just came out of the supplier meeting and honestly, I'm not sure we got what we needed. Sophie: What happened? I thought the terms were almost finalised. Raj: They were — until their procurement director walked in and changed everything on the table. He wants to extend the payment window from thirty to sixty days, cut our order flexibility by half, and — this is the part that really surprised me — he's asking for exclusivity across the entire European market. Sophie: Exclusivity? That would completely block us from working with any other regional suppliers. Raj: Exactly. I pushed back, but he kept insisting it was a standard clause. Sophie: It's not standard. I've closed three similar deals this year and none of them included exclusivity. Did you get anything in writing? Raj: Just the summary email from before the meeting — none of the new terms are documented yet. Sophie: Good. That gives us leverage. I'd recommend we respond in writing within forty-eight hours: reject the exclusivity clause outright, and propose a compromise on the payment window — say, forty-five days instead of sixty. That shows flexibility without giving up our core position. Raj: That makes sense. Should we loop in legal before we reply? Sophie: Absolutely. Don't send anything without running it past them first.`,
    qs:[
-     {q:'What subject do Jake and Emma need to study?',opts:['Science','History','Math','English'],ans:2},
-     {q:'Where do they decide to meet?',opts:['At Jake\'s house','At Emma\'s house','At the park','At the library'],ans:3},
+     {q:"What is Sophie's primary concern about the exclusivity clause?",opts:['It will significantly raise their production costs.','It would prevent them from working with other European suppliers.','It is an unusual clause that weakens their negotiating position.','It requires them to extend payment terms beyond sixty days.'],ans:1},
+     {q:'What compromise does Sophie propose regarding the payment window?',opts:['Accept sixty days to preserve the business relationship.','Refuse all new terms and walk away from the deal.','Propose forty-five days as a middle ground.','Insist strictly on the original thirty-day window.'],ans:2},
    ]},
-  {title:'A Trip to the Museum',speakers:3,speakerNames:['Teacher','Student 1','Student 2'],
-   transcript:'Teacher: Good morning, class! Today we are visiting the Natural History Museum. I want everyone to stay with the group. Student 1: Mrs. Torres, will we see dinosaurs? Teacher: Yes! The dinosaur exhibit is on the second floor. It has a very large T-Rex skeleton. Student 2: I heard the museum also has an ocean section with real shark teeth! Teacher: That\'s correct. After the dinosaurs, we\'ll go to the ocean hall. There you can touch some of the displays. Student 1: Can we buy things in the gift shop? Teacher: Yes, at the end of the visit. But first, let\'s focus on learning. The museum guide will meet us at the entrance in five minutes. Everyone ready? Students together: Yes!',
+  {title:'Decision Fatigue',speakers:3,speakerNames:['Host','Dr. Reyes','Caller'],
+   transcript:`Host: Welcome back to Mind Matters. Today we're talking about decision fatigue with Dr. Elena Reyes, a cognitive psychologist. Dr. Reyes, what exactly is decision fatigue? Dr. Reyes: It's the deterioration in the quality of decisions a person makes after a prolonged period of choosing. The core idea is that our capacity for careful reasoning is a limited resource. The more decisions you make throughout the day, the more depleted that resource becomes. Host: So by evening, we literally can't think as clearly? Dr. Reyes: In many cases, yes. Research has shown that judges, for example, grant significantly more favourable rulings early in the day than later — not because of bias, but simply because careful deliberation requires mental energy. When that energy is low, people default to the easiest or most familiar option — or they avoid deciding altogether. Host: We have a caller. Go ahead. Caller: Thank you. I'm a manager and I notice I make much worse decisions after back-to-back meetings. Is there anything practical I can do? Dr. Reyes: Great question. A few strategies really help. First, schedule your most important decisions for the morning, when your mental energy is at its peak. Second, reduce trivial choices wherever possible — what to wear, what to eat for lunch. Those small decisions add up. And third, take genuine breaks — not a quick scroll on your phone, but real rest. That helps restore cognitive capacity. Caller: Very helpful, thank you.`,
    qs:[
-     {q:'Where is the dinosaur exhibit?',opts:['On the first floor','In the gift shop','On the second floor','Near the entrance'],ans:2},
-     {q:'What can students do in the ocean hall?',opts:['Watch a movie','Touch some of the displays','See live fish','Buy shark teeth'],ans:1},
+     {q:'Why did judges in the research grant more favourable rulings earlier in the day?',opts:['They felt more sympathetic toward defendants in the morning.','They had more mental energy for careful deliberation early on.','Morning cases tended to be less serious in nature.','Defence lawyers argued more persuasively in early sessions.'],ans:1},
+     {q:'What is the first practical strategy Dr. Reyes recommends?',opts:['Take frequent short phone breaks between decisions.','Avoid making any decisions after noon.','Schedule your most important decisions in the morning.','Delegate all minor decisions to colleagues.'],ans:2},
    ]},
 ],
 
 writing:{
   easy:[
-    {q:'Which sentence is grammatically correct?',
-     opts:['She have been waiting for an hour.','She has been waiting for an hour.','She is waiting since an hour.','She was wait for an hour.'],
-     ans:1,explain:'Use "has been waiting" (present perfect continuous) with "for" to describe an action that started in the past and is still happening.'},
-    {q:'Choose the correct form: "Neither of the answers ___ correct."',
-     opts:['are','were','have been','is'],
-     ans:3,explain:'"Neither" is singular, so it takes a singular verb: "is correct."'},
-    {q:'Which sentence uses the past continuous correctly?',
-     opts:['I was cook dinner when she called.','I cooked dinner when she was calling.','I was cooking dinner when she called.','I were cooking dinner when she called.'],
-     ans:2,explain:'Past continuous (was/were + -ing) is used for an action in progress when another action interrupted it.'},
-    {q:'Pick the correct sentence:',
-     opts:['He suggested to go to the park.','He suggested going to the park.','He suggested go to the park.','He suggested that going to the park.'],
-     ans:1,explain:'"Suggest" is followed by a gerund (-ing form), not an infinitive: "suggest going."'},
+    {q:'Which sentence is grammatically correct?',opts:['She have been waiting for an hour.','She has been waiting for an hour.','She is waiting since an hour.','She was wait for an hour.'],ans:1,explain:'Use "has been waiting" (present perfect continuous) with "for" — the action started in the past and is still happening.'},
+    {q:'Choose the correct form: "Neither of the answers ___ correct."',opts:['are','were','have been','is'],ans:3,explain:'"Neither" takes a singular verb. The correct form is "is correct."'},
+    {q:'Which sentence uses the past continuous correctly?',opts:['I was cook dinner when she called.','I cooked dinner when she was calling.','I was cooking dinner when she called.','I were cooking dinner when she called.'],ans:2,explain:'Past continuous (was/were + -ing) describes an action in progress when another action interrupted it.'},
+    {q:'Pick the correct sentence:',opts:['He suggested to go to the park.','He suggested going to the park.','He suggested go to the park.','He suggested that going to the park.'],ans:1,explain:'"Suggest" must be followed by a gerund (-ing form), not an infinitive.'},
   ],
   medium:[
-    {q:'Which sentence is correct?',
-     opts:['The team have made their decision.','The team has made its decision.','The team has made their decisions.','The team have made its decisions.'],
-     ans:1,explain:'"Team" is a collective noun used as singular in American English — it takes "has" and "its."'},
-    {q:'Choose the correct word: "The manager, together with her assistants, ___ responsible for the delay."',
-     opts:['are','were','have been','is'],
-     ans:3,explain:'When "together with" links two subjects, the verb agrees with the main subject — "the manager" (singular), so "is."'},
-    {q:'Which option correctly completes the sentence? "By the time she arrives, we ___ for two hours."',
-     opts:['will wait','will be waiting','will have been waiting','are waiting'],
-     ans:2,explain:'Use future perfect continuous (will have been + -ing) for an action that will be in progress up to a future point.'},
-    {q:'Select the sentence with the correct use of "whose":',
-     opts:['Whose did you borrow the book from?','The author, whose novel won the prize, gave a speech.','Whose is the book that on the table?','The book whose is on the table is mine.'],
-     ans:1,explain:'"Whose" is a possessive relative pronoun used to show that something belongs to the person just mentioned.'},
+    {q:'Which sentence is correct?',opts:['The team have made their decision.','The team has made its decision.','The team has made their decisions.','The team have made its decisions.'],ans:1,explain:'In American English, "team" is singular — it takes "has" and "its."'},
+    {q:'Choose the correct word: "The manager, together with her assistants, ___ responsible for the delay."',opts:['are','were','have been','is'],ans:3,explain:'The main subject is "the manager" (singular), so the verb is "is."'},
+    {q:'Which completes the sentence correctly? "By the time she arrives, we ___ for two hours."',opts:['will wait','will be waiting','will have been waiting','are waiting'],ans:2,explain:'Future perfect continuous (will have been + -ing) describes an action in progress up to a future point.'},
+    {q:'Select the sentence with the correct use of "whose":',opts:['Whose did you borrow the book from?','The author, whose novel won the prize, gave a speech.','Whose is the book that on the table?','The book whose is on the table is mine.'],ans:1,explain:'"Whose" is a possessive relative pronoun that links the author to their novel.'},
   ],
   hard:[
-    {q:'Which sentence demonstrates correct use of the inversion after a negative adverbial?',
-     opts:['Not only she failed the exam, but also she lost her scholarship.','Not only did she fail the exam, but she also lost her scholarship.','Not only she did fail the exam, but she also lost her scholarship.','Not only had she fail the exam, but also she lost her scholarship.'],
-     ans:1,explain:'After "not only" at the start of a clause, subject and auxiliary are inverted: "Not only did she fail..."'},
-    {q:'Select the correct sentence:',
-     opts:['The data shows that less people are reading newspapers.','The data show that fewer people are reading newspapers.','The data shows that fewer people are reading newspapers.','The data are showing that less people read newspapers.'],
-     ans:1,explain:'"Data" is plural (singular: datum), so "show." Use "fewer" with countable nouns like "people," not "less."'},
-    {q:'Which sentence correctly uses a participle clause?',
-     opts:['Having finishing the report, the meeting was adjourned.','Having finished the report, the CEO adjourned the meeting.','Finished the report, the meeting was adjourned by the CEO.','Having been finish the report, the CEO adjourned the meeting.'],
-     ans:1,explain:'The subject of the participle clause must match the main clause subject. "Having finished" refers to the CEO, who then adjourned the meeting.'},
-    {q:'Pick the grammatically correct option:',
-     opts:['It is essential that every employee submits their timesheet by Friday.','It is essential that every employee submit their timesheet by Friday.','It is essential that every employee to submit their timesheet by Friday.','It is essential that every employee submitted their timesheet by Friday.'],
-     ans:1,explain:'After "essential that," use the subjunctive mood — the base form of the verb with no -s: "submit," not "submits."'},
+    {q:'Which sentence shows correct inversion after a negative adverbial?',opts:['Not only she failed the exam, but also she lost her scholarship.','Not only did she fail the exam, but she also lost her scholarship.','Not only she did fail the exam, but she also lost her scholarship.','Not only had she fail the exam, but also she lost her scholarship.'],ans:1,explain:'After "not only" opening a clause, invert the subject and auxiliary: "Not only did she fail..."'},
+    {q:'Select the correct sentence:',opts:['The data shows that less people are reading newspapers.','The data show that fewer people are reading newspapers.','The data shows that fewer people are reading newspapers.','The data are showing that less people read newspapers.'],ans:1,explain:'"Data" is plural so takes "show." Use "fewer" (not "less") with countable nouns like "people."'},
+    {q:'Which sentence correctly uses a participle clause?',opts:['Having finishing the report, the meeting was adjourned.','Having finished the report, the CEO adjourned the meeting.','Finished the report, the meeting was adjourned by the CEO.','Having been finish the report, the CEO adjourned the meeting.'],ans:1,explain:'The subject of the participle clause must match the main clause subject — both refer to the CEO.'},
+    {q:'Pick the grammatically correct option:',opts:['It is essential that every employee submits their timesheet by Friday.','It is essential that every employee submit their timesheet by Friday.','It is essential that every employee to submit their timesheet by Friday.','It is essential that every employee submitted their timesheet by Friday.'],ans:1,explain:'After "essential that," use the subjunctive — the base form with no -s: "submit," not "submits."'},
   ],
 },
 
 speaking:{
   easy:[
-    {scenario:"You are at a coffee shop. The waiter asks: 'Can I help you?'",
-     q:'What is the best response?',
-     opts:['Yes, I want coffee now!','I would like a large coffee, please.','Coffee! Give me!','I don\'t know what I want.'],
-     ans:1,explain:'Polite requests use "I would like" and end with "please" — this is natural and respectful.'},
-    {scenario:'You accidentally bump into someone on the street and knock their bag down.',
-     q:'What do you say?',
-     opts:['Watch where you\'re going!','Oh, I\'m so sorry! Let me help you pick that up.','It happens.','Sorry. Bye.'],
-     ans:1,explain:'A sincere apology followed by an offer to help is the most appropriate response in this situation.'},
-    {scenario:'Your friend just told you she passed her final exam after studying for weeks.',
-     q:'What is the most natural and warm response?',
-     opts:['Good.','Oh, that\'s nice.','That\'s amazing! You worked so hard for this — congratulations!','I knew you would pass.'],
-     ans:2,explain:'Acknowledging the effort and expressing genuine happiness makes the response warm and natural.'},
-    {scenario:'A colleague asks you to stay late, but you have an important personal commitment.',
-     q:'How do you decline politely?',
-     opts:['No, I\'m leaving.','I can\'t, sorry.','I appreciate you asking, but I have a prior commitment tonight. Can we find another time?','Not today.'],
-     ans:2,explain:'"I appreciate you asking" softens the refusal, and offering an alternative shows willingness to cooperate.'},
+    {scenario:"You are at a coffee shop. The waiter asks: 'Can I help you?'",q:'What is the best response?',opts:['Yes, I want coffee now!','I would like a large coffee, please.','Coffee! Give me!','I don\'t know what I want.'],ans:1,explain:'Polite requests use "I would like" and end with "please."'},
+    {scenario:'You accidentally bump into someone and knock their bag down.',q:'What do you say?',opts:['Watch where you\'re going!','Oh, I\'m so sorry! Let me help you pick that up.','It happens.','Sorry. Bye.'],ans:1,explain:'A sincere apology plus an offer to help is the most appropriate and natural response.'},
+    {scenario:'Your friend just told you she passed her final exam after weeks of studying.',q:'What is the most warm and natural response?',opts:['Good.','Oh, that\'s nice.','That\'s amazing! You worked so hard for this — congratulations!','I knew you would pass.'],ans:2,explain:'Acknowledging the effort and expressing genuine happiness is warm and encouraging.'},
+    {scenario:'A colleague asks you to stay late, but you have a prior commitment.',q:'How do you decline politely?',opts:['No, I\'m leaving.','I can\'t, sorry.','I appreciate you asking, but I have a prior commitment tonight. Can we find another time?','Not today.'],ans:2,explain:'"I appreciate you asking" softens the refusal; offering an alternative shows cooperation.'},
   ],
   medium:[
-    {scenario:"You are in a job interview. The interviewer asks: 'What is your greatest weakness?'",
-     q:'Which answer is most strategic and professional?',
-     opts:['I have no weaknesses.','I sometimes work too hard.','I used to struggle with delegating tasks, but I\'ve been actively working on trusting my team more.','I am very disorganized.'],
-     ans:2,explain:'Name a real weakness, then immediately show self-awareness and improvement — this demonstrates maturity.'},
-    {scenario:"A client is unhappy and says your company's service is 'the worst they've ever used.'",
-     q:'How do you respond as a professional?',
-     opts:['Well, other clients are happy.','I understand your frustration. Could you tell me more about what happened so I can make it right?','That\'s not my department.','I\'m sorry you feel that way.'],
-     ans:1,explain:'Validating the emotion and asking for specifics shows genuine care and opens the path to a solution.'},
-    {scenario:'Your manager publicly praises a project but attributes it entirely to another team member, when you did most of the work.',
-     q:'What do you do?',
-     opts:['Say nothing and feel angry.','Correct your manager loudly in the meeting.','After the meeting, speak privately to your manager and clarify your contributions calmly.','Tell your colleagues what really happened.'],
-     ans:2,explain:"Addressing it privately protects everyone's dignity and increases the chance of a fair outcome."},
-    {scenario:"You disagree with a senior colleague's approach in a team meeting.",
-     q:'How do you express your view?',
-     opts:['That approach is wrong.','I completely disagree with that.','That\'s an interesting approach. I wonder if we could also consider... what do others think?','I don\'t think that will work at all.'],
-     ans:2,explain:'Acknowledging the idea, proposing an alternative, and inviting others in keeps the conversation collaborative.'},
+    {scenario:"Job interview. The interviewer asks: 'What is your greatest weakness?'",q:'Which answer is most strategic and professional?',opts:['I have no weaknesses.','I sometimes work too hard.','I used to struggle with delegating tasks, but I\'ve been actively working on trusting my team more.','I am very disorganized.'],ans:2,explain:'Name a real weakness, then immediately demonstrate self-awareness and improvement.'},
+    {scenario:"A client says your company's service is 'the worst they've ever used.'",q:'How do you respond professionally?',opts:['Well, other clients are happy.','I understand your frustration. Could you tell me more so I can make it right?','That\'s not my department.','I\'m sorry you feel that way.'],ans:1,explain:'Validating the emotion and asking for specifics shows care and opens a path to a solution.'},
+    {scenario:'Your manager publicly credits a project entirely to a colleague, but you did most of the work.',q:'What is the best course of action?',opts:['Say nothing and feel resentful.','Correct your manager loudly in the meeting.','After the meeting, speak privately with your manager and calmly clarify your contributions.','Tell your colleagues what really happened.'],ans:2,explain:"Raising it privately protects everyone's dignity and is most likely to lead to a fair outcome."},
+    {scenario:"You disagree with a senior colleague's approach in a team meeting.",q:'How do you express your view most effectively?',opts:['That approach is wrong.','I completely disagree with that.','That\'s an interesting approach. I wonder if we could also consider... what do others think?','I don\'t think that will work at all.'],ans:2,explain:'Acknowledging the idea and inviting discussion keeps the conversation collaborative rather than confrontational.'},
   ],
   hard:[
-    {scenario:"You are negotiating a contract. The other party says their terms are non-negotiable, but you know they need this deal.",
-     q:'What is the most strategic response?',
-     opts:['Fine, we accept all terms.','Then we cannot proceed.','I respect that. Let me step back and think about which elements are most critical for both sides — perhaps we can find a way forward that works for everyone.','We have other offers on the table.'],
-     ans:2,explain:'This response avoids confrontation, buys thinking time, and reframes around mutual benefit rather than positions.'},
-    {scenario:"During a high-stakes presentation, an executive interrupts you with a challenging question you don't know the answer to.",
-     q:'What do you say?',
-     opts:["I don't know.",'That\'s a great question. I want to give you an accurate answer — let me follow up with the specifics after the session.','Can you ask that again at the end?','That\'s outside the scope of today\'s presentation.'],
-     ans:1,explain:'Acknowledging the question, committing to accuracy, and offering a follow-up demonstrates confidence and professionalism under pressure.'},
-    {scenario:"You discover a colleague has been taking credit for your written reports in emails to management.",
-     q:'How do you handle this?',
-     opts:['Send an angry email to the whole team.','Say nothing but start cc-ing your manager on everything.','Request a private conversation with the colleague, express how this affects you, and agree on how to properly credit contributions going forward.','Report them to HR immediately.'],
-     ans:2,explain:'Direct, calm communication with the person first is usually most effective — it addresses the root issue without escalating unnecessarily.'},
-    {scenario:'A key client asks for a major last-minute change that would require your team to work through the weekend.',
-     q:'What is the best response?',
-     opts:['Yes, of course! No problem.','That\'s impossible at this stage.','I appreciate you flagging this. I\'ll need to discuss the feasibility and impact with my team — can I come back to you within the hour with a clear answer?','We can try, but I can\'t promise anything.'],
-     ans:2,explain:'This response is neither a blank yes nor a flat no — it buys time to make an informed decision and sets a professional expectation.'},
+    {scenario:"Negotiating a contract. The other party says their terms are non-negotiable.",q:'What is the most strategic response?',opts:['Fine, we accept all terms.','Then we cannot proceed.','I respect that. Let me step back and think about what is most critical for both sides — perhaps we can find a path forward that works for everyone.','We have other offers on the table.'],ans:2,explain:'Avoiding confrontation, buying time, and reframing around shared interests is most strategically effective.'},
+    {scenario:"During a high-stakes presentation, an executive asks a challenging question you don't know the answer to.",q:'What do you say?',opts:["I don't know.",'That\'s a great question — I want to give you an accurate answer, so let me follow up with the specifics after this session.','Can you repeat that at the end?','That\'s outside the scope of today\'s presentation.'],ans:1,explain:'Acknowledging the question, committing to accuracy, and offering a follow-up shows professionalism and confidence.'},
+    {scenario:"You discover a colleague has been taking credit for your written reports in emails to management.",q:'How do you handle this?',opts:['Send an angry email to the whole team.','Say nothing but start cc-ing your manager on everything.','Request a private conversation, express how this affects you, and agree on how to properly attribute contributions going forward.','Report them to HR immediately.'],ans:2,explain:'Direct, calm communication first addresses the issue at its source without unnecessarily escalating the conflict.'},
+    {scenario:'A key client requests a major last-minute change requiring your team to work through the weekend.',q:'What is the best response?',opts:['Yes, of course — no problem at all!','That is simply impossible at this stage.','I appreciate you flagging this. I need to check feasibility with my team — can I come back to you within the hour with a clear answer?','We can try, but I cannot promise anything.'],ans:2,explain:'Neither a blank yes nor a flat no — it buys time to make a properly informed decision while setting a professional expectation.'},
   ],
 },
 
 images:[
-  {emoji:'🌅🏖️',scene:'A beautiful sunset at the beach',
-   options:['A bright orange and pink sky above calm ocean water, with people walking along the sandy shore.','A dark stormy night with large waves crashing against a rocky cliff.'],
-   ans:0,explain:'The first description matches the image: colorful sky, calm water, sandy beach.'},
-  {emoji:'🏫📚',scene:'Children in a classroom',
-   options:['A large empty room with broken windows and no furniture.','Students sitting at desks, looking at a teacher who is writing on a whiteboard.'],
-   ans:1,explain:'The second description correctly shows an active classroom with students and a teacher.'},
-  {emoji:'🍽️👨‍🍳',scene:'A chef cooking in a restaurant kitchen',
-   options:['A professional chef in a white uniform stirring a large pot on a stove, surrounded by cooking equipment.','A child eating a bowl of cereal alone at a kitchen table in the morning.'],
-   ans:0,explain:'The first description correctly shows a professional chef in a restaurant kitchen.'},
+  {emoji:'🌅🏖️',scene:'A beautiful sunset at the beach',options:['A bright orange and pink sky above calm ocean water, with people walking along the sandy shore.','A dark stormy night with large waves crashing against a rocky cliff.'],ans:0,explain:'The first description matches: colorful sky, calm water, sandy beach.'},
+  {emoji:'🏫📚',scene:'Children in a classroom',options:['A large empty room with broken windows and no furniture.','Students sitting at desks, watching a teacher who is writing on a whiteboard.'],ans:1,explain:'The second description correctly shows an active classroom with students and a teacher.'},
+  {emoji:'🍽️👨‍🍳',scene:'A chef cooking in a restaurant kitchen',options:['A professional chef in a white uniform stirring a large pot on a stove, surrounded by cooking equipment.','A child eating a bowl of cereal alone at a kitchen table in the morning.'],ans:0,explain:'The first description correctly shows a professional chef in a restaurant kitchen.'},
 ],
 };
 
-// ── STATE ──
+// ── STATE ─────────────────────────────────────────────────────────────────
 let ST={
   name:'Student',sec:0,
   rQ:0,rAns:Array(9).fill(null),
   lQ:0,lAns:Array(6).fill(null),lPlays:[2,2,2],
-  wLevel:'easy',wQ:0,wAns:[],wStreak:0,wMaxLevel:'easy',
-  spLevel:'easy',spQ:0,spAns:[],spStreak:0,spMaxLevel:'easy',
+  wLevel:'easy',wQ:0,wAns:[],wStreak:0,wMaxLevel:'easy',wHistory:[],
+  spLevel:'easy',spQ:0,spAns:[],spStreak:0,spMaxLevel:'easy',spHistory:[],
   imgQ:0,imgAns:Array(3).fill(null),
   scores:{reading:0,listening:0,writing:0,speaking:0,images:0},
   rCor:0,lCor:0,wCor:0,spCor:0,imgCor:0,
-  feedback:null,
+  feedback:null,secTimeLeft:0,
 };
-let wvInt=null;
+let wvInt=null,timerInt=null;
 
-// ── HELPERS ──
+// ── HELPERS ──────────────────────────────────────────────────────────────
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
 function toast(msg,cls){const t=document.getElementById('toast');t.textContent=msg;t.className='toast '+cls+' show';setTimeout(()=>t.classList.remove('show'),2200);}
-function beginTest(){ST.name=document.getElementById('sname').value.trim()||'Student';show('exam');document.getElementById('eftr').style.display='flex';renderSec();}
+function fmtTime(s){const m=Math.floor(s/60),sec=s%60;return m+':'+(sec<10?'0':'')+sec;}
 
+// ── TIMER ─────────────────────────────────────────────────────────────────
+const CIRC=100.53;
+function startTimer(totalSecs){
+  clearInterval(timerInt);
+  ST.secTimeLeft=totalSecs;
+  updateTimerUI(totalSecs,totalSecs);
+  timerInt=setInterval(()=>{
+    ST.secTimeLeft--;
+    updateTimerUI(ST.secTimeLeft,totalSecs);
+    if(ST.secTimeLeft<=0){clearInterval(timerInt);triggerTimeup();}
+  },1000);
+}
+function stopTimer(){clearInterval(timerInt);}
+function updateTimerUI(left,total){
+  const fg=document.getElementById('timerFg');
+  const num=document.getElementById('timerNum');
+  const wrap=document.getElementById('timerWrap');
+  if(!fg)return;
+  const pct=left/total;
+  fg.style.strokeDashoffset=CIRC*(1-pct);
+  fg.setAttribute('stroke',pct>0.3?'#3b82f6':pct>0.15?'#f59e0b':'#ef4444');
+  num.textContent=left<=99?left:fmtTime(left);
+  wrap.classList.toggle('timer-warn',pct<=0.15);
+  document.getElementById('timerLbl').textContent=left<=99?'SEC':'TIME';
+}
+function triggerTimeup(){
+  stopWv();
+  if(window.speechSynthesis)window.speechSynthesis.cancel();
+  autoFillSection();
+  document.getElementById('timeupOverlay').style.display='flex';
+}
+function autoFillSection(){
+  const id=SECS[ST.sec].id;
+  if(id==='reading'){for(let i=0;i<9;i++)if(ST.rAns[i]===null)ST.rAns[i]=-1;}
+  else if(id==='listening'){for(let i=0;i<6;i++)if(ST.lAns[i]===null)ST.lAns[i]=-1;}
+  else if(id==='writing'){
+    if(ST.feedback!==null){ST.wAns.push(ST.feedback.ok);ST.feedback=null;ST.wQ++;}
+    while(ST.wAns.length<8){ST.wAns.push(false);ST.wQ++;}
+  }
+  else if(id==='speaking'){
+    if(ST.feedback!==null){ST.spAns.push(ST.feedback.ok);ST.feedback=null;ST.spQ++;}
+    while(ST.spAns.length<8){ST.spAns.push(false);ST.spQ++;}
+  }
+  else{for(let i=0;i<3;i++)if(ST.imgAns[i]===null)ST.imgAns[i]=-1;}
+}
+function dismissTimeup(){document.getElementById('timeupOverlay').style.display='none';completeSection();}
+
+// ── NAV ──────────────────────────────────────────────────────────────────
+function beginTest(){
+  ST.name=document.getElementById('sname').value.trim()||'Student';
+  show('exam');
+  document.getElementById('eftr').style.display='flex';
+  startTimer(SECS[0].secs);
+  renderSec();
+}
 function renderPills(){
   document.getElementById('pillsRow').innerHTML=SECS.map((s,i)=>{
     let c=i<ST.sec?'pd':i===ST.sec?'pa':'pl';
     return '<div class="pill '+c+'">'+s.name+'</div>';
   }).join('');
 }
-
 function renderSec(){
   renderPills();updFooter();
   const a=document.getElementById('earea');
@@ -509,169 +455,113 @@ function renderSec(){
   else renderImg(a);
   a.scrollTop=0;
 }
-
 function updFooter(){
   const id=SECS[ST.sec].id;
   let label='';
-  if(id==='reading')label='Question '+(ST.rQ+1)+' of 9';
-  else if(id==='listening')label='Question '+(ST.lQ+1)+' of 6';
-  else if(id==='writing')label='Writing · Level: '+ST.wLevel.charAt(0).toUpperCase()+ST.wLevel.slice(1)+' · Q'+(ST.wAns.length+1);
-  else if(id==='speaking')label='Speaking · Level: '+ST.spLevel.charAt(0).toUpperCase()+ST.spLevel.slice(1)+' · Situation '+(ST.spAns.length+1);
-  else label='Image '+(ST.imgQ+1)+' of 3';
+  if(id==='reading')label='Q '+(ST.rQ+1)+' / 9';
+  else if(id==='listening')label='Q '+(ST.lQ+1)+' / 6';
+  else if(id==='writing')label='Writing · '+ST.wLevel+' · Q'+(ST.wAns.length+1);
+  else if(id==='speaking')label='Speaking · '+ST.spLevel+' · Sit '+(ST.spAns.length+1);
+  else label='Image '+(ST.imgQ+1)+' / 3';
   document.getElementById('fninfo').innerHTML='<strong>'+label+'</strong>';
 }
 
-// ── READING ──
-function getRQ(qi){
-  let idx=0;
-  for(let i=0;i<DATA.reading.length;i++){
-    if(qi<idx+DATA.reading[i].qs.length)return{p:DATA.reading[i],lq:qi-idx,pi:i};
-    idx+=DATA.reading[i].qs.length;
-  }
-  return{p:DATA.reading[0],lq:0,pi:0};
-}
+// ── READING ──────────────────────────────────────────────────────────────
+function getRQ(qi){let idx=0;for(let i=0;i<DATA.reading.length;i++){if(qi<idx+DATA.reading[i].qs.length)return{p:DATA.reading[i],lq:qi-idx,pi:i};idx+=DATA.reading[i].qs.length;}return{p:DATA.reading[0],lq:0,pi:0};}
 function renderR(a){
   const {p,lq,pi}=getRQ(ST.rQ),q=p.qs[lq],sv=ST.rAns[ST.rQ];
-  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">📖</div><div><h2>READING</h2><p>Story '+(pi+1)+' of 3 · <em>'+p.cat+'</em></p></div><div class="shero-r"><div class="qbadge"><div class="qbn">'+(ST.rQ+1)+'<span style="font-size:.95rem;color:#334155">/9</span></div><div class="qbl">Questions</div></div></div></div><div class="ptrack"><div class="pfill" style="width:'+((ST.rQ+1)/9*100)+'%"></div></div><div class="passage"><div class="ptitle">'+p.title+'</div><div class="ptxt">'+p.text+'</div></div><div class="qcard"><div class="qnum">Question '+(ST.rQ+1)+'</div><div class="qtxt">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<div class="opt'+(sv===i?' sel':'')+'" onclick="selR('+i+')"><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>').join('')+'</div></div></div>';
+  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">📖</div><div><h2>READING</h2><p>Passage '+(pi+1)+' of 3 · <em>'+p.cat+'</em></p></div><div class="shero-r"><div class="qbadge"><div class="qbn">'+(ST.rQ+1)+'<span style="font-size:.95rem;color:#334155">/9</span></div><div class="qbl">Questions</div></div></div></div><div class="ptrack"><div class="pfill" style="width:'+((ST.rQ+1)/9*100)+'%"></div></div><div class="passage"><div class="ptitle">'+p.title+'</div><div class="ptxt">'+p.text+'</div></div><div class="qcard"><div class="qnum">Question '+(ST.rQ+1)+'</div><div class="qtxt">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<div class="opt'+(sv===i?' sel':'')+'" onclick="selR('+i+')"><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>').join('')+'</div></div></div>';
 }
 function selR(i){ST.rAns[ST.rQ]=i;renderSec();}
 
-// ── LISTENING ──
-function getLC(qi){
-  let idx=0;
-  for(let i=0;i<DATA.listening.length;i++){
-    if(qi<idx+DATA.listening[i].qs.length)return{c:DATA.listening[i],lq:qi-idx,ci:i};
-    idx+=DATA.listening[i].qs.length;
-  }
-  return{c:DATA.listening[0],lq:0,ci:0};
+// ── LISTENING ─────────────────────────────────────────────────────────────
+if(window.speechSynthesis){window.speechSynthesis.getVoices();window.speechSynthesis.onvoiceschanged=()=>window.speechSynthesis.getVoices();}
+function getBestVoice(){
+  const voices=window.speechSynthesis.getVoices();
+  const preferred=['Google US English','Google UK English Female','Microsoft Aria Online (Natural)','Microsoft Jenny Online (Natural)','Samantha','Karen','Moira','Alex','Daniel','Google UK English Male'];
+  for(const name of preferred){const v=voices.find(v=>v.name===name);if(v)return v;}
+  return voices.find(v=>v.lang.startsWith('en-'))||null;
 }
+function getLC(qi){let idx=0;for(let i=0;i<DATA.listening.length;i++){if(qi<idx+DATA.listening[i].qs.length)return{c:DATA.listening[i],lq:qi-idx,ci:i};idx+=DATA.listening[i].qs.length;}return{c:DATA.listening[0],lq:0,ci:0};}
 function renderL(a){
   const {c,lq,ci}=getLC(ST.lQ),q=c.qs[lq],sv=ST.lAns[ST.lQ],pl=ST.lPlays[ci];
   const wvs=Array(18).fill(null).map((_,i)=>'<div class="wv" id="wv'+i+'" style="height:'+(6+Math.sin(i*.7)*7)+'px"></div>').join('');
-  const speakerInfo=c.speakers===1?'1 speaker':c.speakers===2?'2 speakers':'3 speakers';
-  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">🎧</div><div><h2>LISTENING</h2><p>Audio '+(ci+1)+' of 3</p></div><div class="shero-r"><div class="qbadge"><div class="qbn">'+(ST.lQ+1)+'<span style="font-size:.95rem;color:#334155">/6</span></div><div class="qbl">Questions</div></div></div></div><div class="ptrack"><div class="pfill" style="width:'+((ST.lQ+1)/6*100)+'%"></div></div><div class="acard"><div class="albl">'+(pl>0?'AUDIO CLIP':'NO PLAYS LEFT')+'</div><div class="speaker-badge">🎙 '+speakerInfo+': '+c.speakerNames.join(', ')+'</div><div class="atitle-audio">'+c.title+'</div><div class="wv-wrap" id="wvwrap">'+wvs+'</div><button class="aplaybtn" id="aplaybtn" onclick="playAudio('+ci+')" '+(pl===0?'disabled':'')+'>▶</button><div class="pleft">Plays remaining: '+pl+'/2</div><div style="font-size:.75rem;color:#475569;margin-top:4px">Press play, listen carefully, then answer below</div></div><div class="qcard"><div class="qnum">Question '+(ST.lQ+1)+'</div><div class="qtxt">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<div class="opt'+(sv===i?' sel':'')+'" onclick="selL('+i+')"><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>').join('')+'</div></div></div>';
+  const speakerInfo=c.speakers===1?'Speaker: '+c.speakerNames[0]:c.speakers+' Speakers: '+c.speakerNames.join(', ');
+  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">🎧</div><div><h2>LISTENING</h2><p>Audio '+(ci+1)+' of 3</p></div><div class="shero-r"><div class="qbadge"><div class="qbn">'+(ST.lQ+1)+'<span style="font-size:.95rem;color:#334155">/6</span></div><div class="qbl">Questions</div></div></div></div><div class="ptrack"><div class="pfill" style="width:'+((ST.lQ+1)/6*100)+'%"></div></div><div class="acard"><div class="albl">'+(pl>0?'AUDIO CLIP':'NO PLAYS LEFT')+'</div><div class="speaker-badge">🎙 '+speakerInfo+'</div><div class="atitle-audio">'+c.title+'</div><div class="wv-wrap">'+wvs+'</div><button class="aplaybtn" id="aplaybtn" onclick="playAudio('+ci+')" '+(pl===0?'disabled':'')+'>▶</button><div class="pleft" id="pleft">Plays remaining: '+pl+'/2</div><div class="listen-note">Audio plays at a natural speaking pace — listen carefully.</div></div><div class="qcard"><div class="qnum">Question '+(ST.lQ+1)+'</div><div class="qtxt">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<div class="opt'+(sv===i?' sel':'')+'" onclick="selL('+i+')"><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>').join('')+'</div></div></div>';
 }
 function playAudio(ci){
   if(ST.lPlays[ci]<=0)return;
+  if(window.speechSynthesis&&window.speechSynthesis.speaking){window.speechSynthesis.cancel();stopWv();const btn=document.getElementById('aplaybtn');if(btn&&!btn.disabled)btn.textContent='▶';return;}
   ST.lPlays[ci]--;
+  const btn=document.getElementById('aplaybtn');
+  const pl=document.getElementById('pleft');
+  if(btn)btn.textContent='⏸';
+  if(pl)pl.textContent='Plays remaining: '+ST.lPlays[ci]+'/2';
+  if(ST.lPlays[ci]===0&&btn)btn.disabled=true;
   if(window.speechSynthesis){
     window.speechSynthesis.cancel();
     const u=new SpeechSynthesisUtterance(DATA.listening[ci].transcript);
-    u.rate=0.82;u.pitch=1.0;u.volume=1.0;
-    const voices=window.speechSynthesis.getVoices();
-    const engVoice=voices.find(v=>v.lang.startsWith('en-')&&(v.name.includes('Google')||v.name.includes('Samantha')||v.name.includes('Alex')||v.name.includes('Natural')));
-    if(engVoice)u.voice=engVoice;
-    u.onend=()=>{stopWv();const btn=document.getElementById('aplaybtn');if(btn)btn.textContent='▶';};
-    window.speechSynthesis.speak(u);
+    u.rate=0.95;u.pitch=1.0;u.volume=1.0;
+    const v=getBestVoice();if(v)u.voice=v;
+    u.onend=()=>{stopWv();if(btn&&!btn.disabled)btn.textContent='▶';};
+    u.onerror=()=>{stopWv();if(btn&&!btn.disabled)btn.textContent='▶';};
     startWv();
+    window.speechSynthesis.speak(u);
   }
-  // BUG FIX: update button and play counter after decrement (was updating before)
-  const btn=document.getElementById('aplaybtn');
-  if(btn){btn.textContent='⏸';if(ST.lPlays[ci]===0)btn.disabled=true;}
-  const pl=document.querySelector('.pleft');
-  if(pl)pl.textContent='Plays remaining: '+ST.lPlays[ci]+'/2';
-}
-if(window.speechSynthesis){
-  window.speechSynthesis.getVoices();
-  window.speechSynthesis.onvoiceschanged=()=>{window.speechSynthesis.getVoices();};
 }
 function startWv(){clearInterval(wvInt);wvInt=setInterval(()=>{document.querySelectorAll('.wv').forEach(el=>{el.style.height=(6+Math.random()*30)+'px';el.classList.add('on');});},130);}
 function stopWv(){clearInterval(wvInt);document.querySelectorAll('.wv').forEach(el=>{el.style.height='6px';el.classList.remove('on');});}
 function selL(i){ST.lAns[ST.lQ]=i;renderSec();}
 
-// ── WRITING ──
-// BUG FIX: wQ is used as a raw counter. Modulo is applied at read-time so
-// level changes never cause an out-of-bounds crash, but to avoid replaying
-// the same question index after a level change, we track per-level offsets.
-function getWrQ(){return DATA.writing[ST.wLevel][ST.wQ % DATA.writing[ST.wLevel].length];}
+// ── WRITING ──────────────────────────────────────────────────────────────
+function getWrQ(){return DATA.writing[ST.wLevel][ST.wQ%DATA.writing[ST.wLevel].length];}
 function renderWr(a){
   const q=getWrQ();
-  const levelLabel=ST.wLevel==='easy'?'🟢 Beginner':ST.wLevel==='medium'?'🟡 Intermediate':'🔴 Advanced';
-  const levelClass='level-'+ST.wLevel;
-  const feedbackHtml=ST.feedback?'<div class="feedback-banner '+(ST.feedback.ok?'feedback-correct':'feedback-wrong')+'">'+(ST.feedback.ok?'✅ Correct! Well done!':'❌ Not quite.')+' '+ST.feedback.explain+'</div>':'';
-  const qNum=ST.wAns.length+1;
-  const optsHtml=q.opts.map((o,i)=>{
-    let cls='';
-    if(ST.feedback!==null){if(i===q.ans)cls=' cor';else if(ST.feedback.chosen===i&&i!==q.ans)cls=' wrn';}
-    return '<div class="opt'+cls+'" onclick="'+(ST.feedback!==null?'':'selWr('+i+')')+'" style="'+(ST.feedback!==null?'cursor:default':'')+'"><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>';
-  }).join('');
-  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">✍️</div><div><h2>WRITING</h2><p>Grammar &amp; Structure · Multiple Choice</p></div></div><div class="ptrack"><div class="pfill" style="width:'+Math.min(ST.wAns.length/8*100,100)+'%"></div></div><div class="level-indicator"><span class="'+levelClass+'" style="padding:3px 10px;border-radius:12px;">'+levelLabel+'</span> — Question '+qNum+'</div>'+(ST.wStreak>=2?'<div class="streak-box">🔥 '+ST.wStreak+' in a row correct! Level going up!</div>':'')+feedbackHtml+'<div class="writing-q"><h4>✏️ Choose the correct answer</h4><p>'+q.q+'</p></div><div class="opts">'+optsHtml+'</div></div>';
+  const ll=ST.wLevel==='easy'?'🟢 Beginner':ST.wLevel==='medium'?'🟡 Intermediate':'🔴 Advanced';
+  const lc='level-'+ST.wLevel;
+  const fb=ST.feedback!==null?'<div class="feedback-banner '+(ST.feedback.ok?'feedback-correct':'feedback-wrong')+'">'+(ST.feedback.ok?'✅ Correct!':'❌ Not quite.')+' '+ST.feedback.explain+'</div>':'';
+  const optsHtml=q.opts.map((o,i)=>{let cls='';if(ST.feedback!==null){if(i===q.ans)cls=' cor';else if(ST.feedback.chosen===i)cls=' wrn';}return '<div class="opt'+cls+'" onclick="'+(ST.feedback!==null?'':'selWr('+i+')')+'" style="'+(ST.feedback!==null?'cursor:default':'')+'"><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>';}).join('');
+  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">✍️</div><div><h2>WRITING</h2><p>Grammar & Structure · Adaptive Difficulty</p></div></div><div class="ptrack"><div class="pfill" style="width:'+Math.min(ST.wAns.length/8*100,100)+'%"></div></div><div class="level-indicator"><span class="'+lc+'" style="padding:3px 10px;border-radius:12px;">'+ll+'</span> — Question '+(ST.wAns.length+1)+'</div>'+(ST.wStreak>=2?'<div class="streak-box">🔥 '+ST.wStreak+' correct in a row!</div>':'')+fb+'<div class="writing-q"><h4>✏️ Choose the correct answer</h4><p>'+q.q+'</p></div><div class="opts">'+optsHtml+'</div></div>';
 }
 function selWr(i){
   if(ST.feedback!==null)return;
-  const q=getWrQ();
-  const ok=i===q.ans;
+  const q=getWrQ();const ok=i===q.ans;
+  ST.wHistory.push({q:q.q,opts:q.opts,chosen:i,ans:q.ans,ok,explain:q.explain});
   ST.feedback={ok,chosen:i,explain:q.explain};
-  if(ok){
-    ST.wStreak++;ST.wCor++;
-    if(ST.wStreak>=2){
-      if(ST.wLevel==='easy'){ST.wLevel='medium';if(ST.wMaxLevel==='easy')ST.wMaxLevel='medium';}
-      else if(ST.wLevel==='medium'){ST.wLevel='hard';ST.wMaxLevel='hard';}
-      ST.wStreak=0;
-    }
-  } else {
-    ST.wStreak=0;
-    if(ST.wLevel==='hard')ST.wLevel='medium';
-    else if(ST.wLevel==='medium')ST.wLevel='easy';
-  }
+  if(ok){ST.wStreak++;ST.wCor++;if(ST.wStreak>=2){if(ST.wLevel==='easy'){ST.wLevel='medium';if(ST.wMaxLevel==='easy')ST.wMaxLevel='medium';}else if(ST.wLevel==='medium'){ST.wLevel='hard';ST.wMaxLevel='hard';}ST.wStreak=0;}}
+  else{ST.wStreak=0;if(ST.wLevel==='hard')ST.wLevel='medium';else if(ST.wLevel==='medium')ST.wLevel='easy';}
   renderSec();
 }
 
-// ── SPEAKING ──
-function getSpQ(){return DATA.speaking[ST.spLevel][ST.spQ % DATA.speaking[ST.spLevel].length];}
+// ── SPEAKING ──────────────────────────────────────────────────────────────
+function getSpQ(){return DATA.speaking[ST.spLevel][ST.spQ%DATA.speaking[ST.spLevel].length];}
 function renderSp(a){
   const q=getSpQ();
-  const levelLabel=ST.spLevel==='easy'?'🟢 Basic':ST.spLevel==='medium'?'🟡 Intermediate':'🔴 Advanced';
-  const levelClass='level-'+ST.spLevel;
-  const feedbackHtml=ST.feedback?'<div class="feedback-banner '+(ST.feedback.ok?'feedback-correct':'feedback-wrong')+'">'+(ST.feedback.ok?'✅ Great response! That\'s natural English!':'❌ Not the best choice.')+' '+ST.feedback.explain+'</div>':'';
-  const qNum=ST.spAns.length+1;
-  const optsHtml=q.opts.map((o,i)=>{
-    let cls='';
-    if(ST.feedback!==null){if(i===q.ans)cls=' cor';else if(ST.feedback.chosen===i&&i!==q.ans)cls=' wrn';}
-    return '<div class="opt'+cls+'" onclick="'+(ST.feedback!==null?'':'selSp('+i+')')+'" style="'+(ST.feedback!==null?'cursor:default':'')+'"><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>';
-  }).join('');
-  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">💬</div><div><h2>SPEAKING</h2><p>Real-Life Situations · Best Response</p></div></div><div class="ptrack"><div class="pfill" style="width:'+Math.min(ST.spAns.length/8*100,100)+'%"></div></div><div class="level-indicator"><span class="'+levelClass+'" style="padding:3px 10px;border-radius:12px;">'+levelLabel+'</span> — Situation '+qNum+'</div>'+(ST.spStreak>=2?'<div class="streak-box">🔥 '+ST.spStreak+' correct in a row! Getting harder!</div>':'')+feedbackHtml+'<div class="sp-scenario"><h4>📍 Real-Life Situation</h4><p>'+q.scenario+'</p><p class="sp-question">'+q.q+'</p></div><div class="opts">'+optsHtml+'</div></div>';
+  const ll=ST.spLevel==='easy'?'🟢 Basic':ST.spLevel==='medium'?'🟡 Intermediate':'🔴 Advanced';
+  const lc='level-'+ST.spLevel;
+  const fb=ST.feedback!==null?'<div class="feedback-banner '+(ST.feedback.ok?'feedback-correct':'feedback-wrong')+'">'+(ST.feedback.ok?'✅ Great response!':'❌ Not the best choice.')+' '+ST.feedback.explain+'</div>':'';
+  const optsHtml=q.opts.map((o,i)=>{let cls='';if(ST.feedback!==null){if(i===q.ans)cls=' cor';else if(ST.feedback.chosen===i)cls=' wrn';}return '<div class="opt'+cls+'" onclick="'+(ST.feedback!==null?'':'selSp('+i+')')+'" style="'+(ST.feedback!==null?'cursor:default':'')+'"><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>';}).join('');
+  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">💬</div><div><h2>SPEAKING</h2><p>Real-Life Situations · Best Response</p></div></div><div class="ptrack"><div class="pfill" style="width:'+Math.min(ST.spAns.length/8*100,100)+'%"></div></div><div class="level-indicator"><span class="'+lc+'" style="padding:3px 10px;border-radius:12px;">'+ll+'</span> — Situation '+(ST.spAns.length+1)+'</div>'+(ST.spStreak>=2?'<div class="streak-box">🔥 '+ST.spStreak+' correct in a row!</div>':'')+fb+'<div class="sp-scenario"><h4>📍 Situation</h4><p>'+q.scenario+'</p><p class="sp-question">'+q.q+'</p></div><div class="opts">'+optsHtml+'</div></div>';
 }
 function selSp(i){
   if(ST.feedback!==null)return;
-  const q=getSpQ();
-  const ok=i===q.ans;
+  const q=getSpQ();const ok=i===q.ans;
+  ST.spHistory.push({scenario:q.scenario,q:q.q,opts:q.opts,chosen:i,ans:q.ans,ok,explain:q.explain});
   ST.feedback={ok,chosen:i,explain:q.explain};
-  if(ok){
-    ST.spStreak++;ST.spCor++;
-    if(ST.spStreak>=2){
-      if(ST.spLevel==='easy'){ST.spLevel='medium';if(ST.spMaxLevel==='easy')ST.spMaxLevel='medium';}
-      else if(ST.spLevel==='medium'){ST.spLevel='hard';ST.spMaxLevel='hard';}
-      ST.spStreak=0;
-    }
-  } else {
-    ST.spStreak=0;
-    if(ST.spLevel==='hard')ST.spLevel='medium';
-    else if(ST.spLevel==='medium')ST.spLevel='easy';
-  }
+  if(ok){ST.spStreak++;ST.spCor++;if(ST.spStreak>=2){if(ST.spLevel==='easy'){ST.spLevel='medium';if(ST.spMaxLevel==='easy')ST.spMaxLevel='medium';}else if(ST.spLevel==='medium'){ST.spLevel='hard';ST.spMaxLevel='hard';}ST.spStreak=0;}}
+  else{ST.spStreak=0;if(ST.spLevel==='hard')ST.spLevel='medium';else if(ST.spLevel==='medium')ST.spLevel='easy';}
   renderSec();
 }
 
-// ── IMAGES ──
+// ── IMAGES ────────────────────────────────────────────────────────────────
 function renderImg(a){
-  const img=DATA.images[ST.imgQ];
-  const sv=ST.imgAns[ST.imgQ];
-  const optsHtml=img.options.map((o,i)=>{
-    let cls='';
-    if(sv!==null){if(i===img.ans)cls=' cor';else if(sv===i&&i!==img.ans)cls=' wrn';}
-    return '<div class="opt'+cls+'" onclick="'+(sv!==null?'':'selImg('+i+')')+'" style="'+(sv!==null?'cursor:default':'')+'"><div class="oltr">'+'AB'[i]+'</div><div>'+o+'</div></div>';
-  }).join('');
-  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">🖼️</div><div><h2>IMAGES</h2><p>Choose the best description</p></div><div class="shero-r"><div class="qbadge"><div class="qbn">'+(ST.imgQ+1)+'<span style="font-size:.95rem;color:#334155">/3</span></div><div class="qbl">Images</div></div></div></div><div class="ptrack"><div class="pfill" style="width:'+((ST.imgQ+1)/3*100)+'%"></div></div><div class="img-card"><div class="img-emoji">'+img.emoji+'</div><div class="img-label">🔍 What do you see?</div><div class="img-desc-prompt">Read both descriptions carefully and choose which one best matches the image above.</div></div><div class="qcard"><div class="qnum">Choose the best description</div><div class="qtxt">Which description fits this image the most?</div><div class="opts">'+optsHtml+'</div>'+(sv!==null?'<div style="margin-top:1rem;padding:.8rem 1rem;background:rgba(255,255,255,.03);border-radius:8px;font-size:.83rem;color:#94a3b8">💡 '+img.explain+'</div>':'')+'</div></div>';
+  const img=DATA.images[ST.imgQ];const sv=ST.imgAns[ST.imgQ];
+  const optsHtml=img.options.map((o,i)=>{let cls='';if(sv!==null){if(i===img.ans)cls=' cor';else if(sv===i)cls=' wrn';}return '<div class="opt'+cls+'" onclick="'+(sv!==null?'':'selImg('+i+')')+'" style="'+(sv!==null?'cursor:default':'')+'"><div class="oltr">'+'AB'[i]+'</div><div>'+o+'</div></div>';}).join('');
+  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">🖼️</div><div><h2>IMAGES</h2><p>Choose the best description</p></div><div class="shero-r"><div class="qbadge"><div class="qbn">'+(ST.imgQ+1)+'<span style="font-size:.95rem;color:#334155">/3</span></div><div class="qbl">Images</div></div></div></div><div class="ptrack"><div class="pfill" style="width:'+((ST.imgQ+1)/3*100)+'%"></div></div><div class="img-card"><div class="img-emoji">'+img.emoji+'</div><div class="img-label">🔍 What do you see?</div><div class="img-desc-prompt">Read both descriptions and choose which one best matches the image above.</div></div><div class="qcard"><div class="qnum">Choose the best description</div><div class="qtxt">Which description fits this image?</div><div class="opts">'+optsHtml+'</div>'+(sv!==null?'<div style="margin-top:1rem;padding:.8rem 1rem;background:rgba(255,255,255,.03);border-radius:8px;font-size:.83rem;color:#94a3b8">💡 '+img.explain+'</div>':'')+'</div></div>';
 }
-function selImg(i){
-  if(ST.imgAns[ST.imgQ]!==null)return;
-  ST.imgAns[ST.imgQ]=i;
-  // BUG FIX: removed inline imgCor increment here — scoreSection recalculates it
-  // cleanly from scratch, so incrementing here caused double-counting on retry.
-  renderSec();
-}
+function selImg(i){if(ST.imgAns[ST.imgQ]!==null)return;ST.imgAns[ST.imgQ]=i;renderSec();}
 
-// ── NAVIGATION ──
+// ── NAVIGATION ────────────────────────────────────────────────────────────
 function goFwd(){
   const id=SECS[ST.sec].id;
   if(id==='reading'){
@@ -682,18 +572,12 @@ function goFwd(){
     if(ST.lQ<5){ST.lQ++;renderSec();}else completeSection();
   } else if(id==='writing'){
     if(ST.feedback===null){toast('Please choose an answer first!','tr');return;}
-    ST.wAns.push(ST.feedback.ok);
-    ST.feedback=null;
-    ST.wQ++;
-    if(ST.wAns.length>=8)completeSection();
-    else renderSec();
+    ST.wAns.push(ST.feedback.ok);ST.feedback=null;ST.wQ++;
+    if(ST.wAns.length>=8)completeSection();else renderSec();
   } else if(id==='speaking'){
     if(ST.feedback===null){toast('Please pick a response first!','tr');return;}
-    ST.spAns.push(ST.feedback.ok);
-    ST.feedback=null;
-    ST.spQ++;
-    if(ST.spAns.length>=8)completeSection();
-    else renderSec();
+    ST.spAns.push(ST.feedback.ok);ST.feedback=null;ST.spQ++;
+    if(ST.spAns.length>=8)completeSection();else renderSec();
   } else {
     if(ST.imgAns[ST.imgQ]===null){toast('Please choose a description first!','tr');return;}
     if(ST.imgQ<2){ST.imgQ++;renderSec();}else completeSection();
@@ -701,32 +585,23 @@ function goFwd(){
 }
 
 function scoreSection(){
-  if(ST.sec===0){
-    let c=0,qi=0;
-    DATA.reading.forEach(p=>p.qs.forEach(q=>{if(ST.rAns[qi]===q.ans)c++;qi++;}));
-    ST.rCor=c;ST.scores.reading=Math.round(c/9*100);
-  } else if(ST.sec===1){
-    let c=0,qi=0;
-    DATA.listening.forEach(cl=>{cl.qs.forEach(q=>{if(ST.lAns[qi]===q.ans)c++;qi++;});});
-    ST.lCor=c;ST.scores.listening=Math.round(c/6*100);
-  } else if(ST.sec===2){
-    ST.scores.writing=Math.round(ST.wCor/Math.max(ST.wAns.length,1)*100);
-  } else if(ST.sec===3){
-    ST.scores.speaking=Math.round(ST.spCor/Math.max(ST.spAns.length,1)*100);
-  } else {
-    // BUG FIX: always recalculate imgCor here from source of truth
-    ST.imgCor=ST.imgAns.filter((a,i)=>a===DATA.images[i].ans).length;
-    ST.scores.images=Math.round(ST.imgCor/3*100);
-  }
+  if(ST.sec===0){let c=0,qi=0;DATA.reading.forEach(p=>p.qs.forEach(q=>{if(ST.rAns[qi]===q.ans)c++;qi++;}));ST.rCor=c;ST.scores.reading=Math.round(c/9*100);}
+  else if(ST.sec===1){let c=0,qi=0;DATA.listening.forEach(cl=>{cl.qs.forEach(q=>{if(ST.lAns[qi]===q.ans)c++;qi++;});});ST.lCor=c;ST.scores.listening=Math.round(c/6*100);}
+  else if(ST.sec===2){ST.scores.writing=Math.round(ST.wCor/Math.max(ST.wAns.length,1)*100);}
+  else if(ST.sec===3){ST.scores.speaking=Math.round(ST.spCor/Math.max(ST.spAns.length,1)*100);}
+  else{ST.imgCor=ST.imgAns.filter((a,i)=>a===DATA.images[i].ans).length;ST.scores.images=Math.round(ST.imgCor/3*100);}
 }
 
 function completeSection(){
+  stopTimer();
+  if(window.speechSynthesis)window.speechSynthesis.cancel();
+  stopWv();
   scoreSection();
   const id=SECS[ST.sec].id;
   const sc=ST.scores[id];
   const col=['#3b82f6','#8b5cf6','#10b981','#ef4444','#f59e0b'][ST.sec];
   const emoji=sc>=70?'🎉':sc>=50?'👍':'💪';
-  document.getElementById('earea').innerHTML='<div class="sc-complete"><div class="sc-ico">'+SECS[ST.sec].icon+'</div><div class="sc-title">'+SECS[ST.sec].name+' DONE!</div><div class="sc-sub">'+(ST.sec<SECS.length-1?'Great job! Ready for the next part?':'All done! Your report is ready!')+'</div><div class="sc-score"><div class="sc-slbl">YOUR SCORE</div><div class="sc-snum" style="color:'+col+'">'+emoji+' '+sc+'%</div></div><button class="btn-continue" onclick="advanceSection()">'+(ST.sec<SECS.length-1?'Next: '+SECS[ST.sec+1].name+' →':'See My Report →')+'</button></div>';
+  document.getElementById('earea').innerHTML='<div class="sc-complete"><div class="sc-ico">'+SECS[ST.sec].icon+'</div><div class="sc-title">'+SECS[ST.sec].name+' DONE!</div><div class="sc-sub">'+(ST.sec<SECS.length-1?'Great job! Ready for the next section?':'All sections complete! Your full report is ready.')+'</div><div class="sc-score"><div class="sc-slbl">SECTION SCORE</div><div class="sc-snum" style="color:'+col+'">'+emoji+' '+sc+'%</div></div><button class="btn-continue" onclick="advanceSection()">'+(ST.sec<SECS.length-1?'Next: '+SECS[ST.sec+1].name+' →':'See Full Report →')+'</button></div>';
   document.getElementById('eftr').style.display='none';
 }
 
@@ -734,65 +609,148 @@ function advanceSection(){
   if(ST.sec<SECS.length-1){
     ST.sec++;
     document.getElementById('eftr').style.display='flex';
+    startTimer(SECS[ST.sec].secs);
     renderSec();
   } else {
     buildReport();
   }
 }
 
+// ── REPORT ────────────────────────────────────────────────────────────────
 function buildReport(){
   show('report');
   const total=Math.round(Object.values(ST.scores).reduce((a,b)=>a+b,0)/5);
   const lv=getLevel(total);
   const date=new Date().toLocaleDateString('en-US',{year:'numeric',month:'long',day:'numeric'});
-  const rResult=ST.rCor>=7?'✅ Excellent':ST.rCor>=5?'👍 Good':ST.rCor>=3?'🟡 Okay':'❌ Needs Work';
-  const lResult=ST.lCor>=5?'✅ Excellent':ST.lCor>=4?'👍 Good':ST.lCor>=2?'🟡 Okay':'❌ Needs Work';
+  const rResult=ST.rCor>=7?'✅ Excellent':ST.rCor>=5?'👍 Good':ST.rCor>=3?'🟡 Fair':'❌ Needs Work';
+  const lResult=ST.lCor>=5?'✅ Excellent':ST.lCor>=4?'👍 Good':ST.lCor>=2?'🟡 Fair':'❌ Needs Work';
   const wLevel=ST.wMaxLevel==='hard'?'✅ Advanced':ST.wMaxLevel==='medium'?'👍 Intermediate':'🟡 Basic';
   const spLevel=ST.spMaxLevel==='hard'?'✅ Advanced':ST.spMaxLevel==='medium'?'👍 Intermediate':'🟡 Basic';
-  const imgResult=ST.imgCor===3?'✅ Perfect':ST.imgCor===2?'👍 Good':'🟡 Keep Practicing';
+  const imgResult=ST.imgCor===3?'✅ Perfect':ST.imgCor===2?'👍 Good':'🟡 Keep Going';
   const C=2*Math.PI*78;
-  document.getElementById('report').innerHTML='<div class="rinner"><div class="rhero"><div class="rgreet">English Practice · Score Report</div><div class="rname">'+ST.name+'</div><div class="rdate">'+date+'</div><div class="ring-wrap"><svg class="ring-svg" width="190" height="190" viewBox="0 0 190 190"><circle class="ring-bg" cx="95" cy="95" r="78"/><circle class="ring-fg" id="ringfg" cx="95" cy="95" r="78" stroke="'+lv.color+'" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'"/></svg><div class="ring-txt"><div class="ring-num" id="rnum">0</div><div class="ring-max">/ 100</div></div></div><div class="lvl-pill" style="background:'+lv.color+'1e;color:'+lv.color+';border:1px solid '+lv.color+'44">'+lv.cefr+' · '+lv.name+'</div><div style="font-size:.85rem;color:var(--muted);max-width:400px;margin:.5rem auto;line-height:1.7">'+lv.desc+'</div><div class="cefr-row">'+['A1','A2','B1','B2','C1','C2'].map(l=>'<div class="cdot'+(l===lv.cefr?' act':'')+'" style="'+(l===lv.cefr?'background:'+lv.color+';border-color:'+lv.color:'')+'">' +l+'</div>').join('')+'</div></div><div class="atitle-r">YOUR RESULTS</div><div class="scores-4">'+[{ico:'📖',lbl:'Reading',res:rResult},{ico:'🎧',lbl:'Listening',res:lResult},{ico:'✍️',lbl:'Writing',res:wLevel},{ico:'💬',lbl:'Speaking',res:spLevel},{ico:'🖼️',lbl:'Images',res:imgResult}].map(s=>'<div class="sc4"><div class="sc4-ico">'+s.ico+'</div><div class="sc4-lbl">'+s.lbl+'</div><div class="sc4-result">'+s.res+'</div></div>').join('')+'</div><div class="atitle-r">AI COACH FEEDBACK</div><div class="aicard" id="aicard"><div class="aihdr"><div class="aidot"></div><div class="ailbl">Getting your personalized feedback...</div></div><div class="aitxt"><div class="ld-wrap"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div></div></div><button class="btn-again" onclick="restart()">🔄 Practice Again</button></div>';
+  const wrongReview=buildWrongReview();
+  document.getElementById('report').innerHTML=`<div class="rinner">
+<div class="rhero">
+  <div class="rgreet">TOEFL-Style Practice · Full Report</div>
+  <div class="rname">${ST.name}</div>
+  <div class="rdate">${date}</div>
+  <div class="ring-wrap">
+    <svg class="ring-svg" width="190" height="190" viewBox="0 0 190 190">
+      <circle class="ring-bg" cx="95" cy="95" r="78"/>
+      <circle class="ring-fg" id="ringfg" cx="95" cy="95" r="78" stroke="${lv.color}" stroke-dasharray="${C}" stroke-dashoffset="${C}"/>
+    </svg>
+    <div class="ring-txt"><div class="ring-num" id="rnum">0</div><div class="ring-max">/ 100</div></div>
+  </div>
+  <div class="lvl-pill" style="background:${lv.color}1e;color:${lv.color};border:1px solid ${lv.color}44">${lv.cefr} · ${lv.name}</div>
+  <div style="font-size:.85rem;color:var(--muted);max-width:400px;margin:.5rem auto;line-height:1.7">${lv.desc}</div>
+  <div class="cefr-row">${['A1','A2','B1','B2','C1','C2'].map(l=>'<div class="cdot'+(l===lv.cefr?' act':'')+'" style="'+(l===lv.cefr?'background:'+lv.color+';border-color:'+lv.color:'')+'">' +l+'</div>').join('')}</div>
+</div>
+<div class="atitle-r">SECTION SCORES</div>
+<div class="scores-4">${[{ico:'📖',lbl:'Reading',res:rResult},{ico:'🎧',lbl:'Listening',res:lResult},{ico:'✍️',lbl:'Writing',res:wLevel},{ico:'💬',lbl:'Speaking',res:spLevel},{ico:'🖼️',lbl:'Images',res:imgResult}].map(s=>'<div class="sc4"><div class="sc4-ico">'+s.ico+'</div><div class="sc4-lbl">'+s.lbl+'</div><div class="sc4-result">'+s.res+'</div></div>').join('')}</div>
+<div class="atitle-r">WRONG ANSWER REVIEW</div>
+${wrongReview}
+<div class="atitle-r">AI COACH FEEDBACK</div>
+<div class="aicard" id="aicard">
+  <div class="aihdr"><div class="aidot"></div><div class="ailbl">Generating your personalised feedback...</div></div>
+  <div class="aitxt"><div class="ld-wrap"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div></div>
+</div>
+<button class="btn-again" onclick="restart()">🔄 Practice Again</button>
+</div>`;
   setTimeout(()=>{
-    const off=C-(total/100)*C;
-    document.getElementById('ringfg').style.strokeDashoffset=off;
+    document.getElementById('ringfg').style.strokeDashoffset=C-(total/100)*C;
     animN('rnum',0,total,1500);
   },300);
   fetchAI(total,lv);
 }
 
-function animN(id,from,to,dur){
-  const el=document.getElementById(id),t0=performance.now();
-  function s(now){const p=Math.min((now-t0)/dur,1);el.textContent=Math.round(from+(to-from)*p);if(p<1)requestAnimationFrame(s);}
-  requestAnimationFrame(s);
+function buildWrongReview(){
+  const sections=[];
+  // Reading
+  const rWrong=[];let rqi=0;
+  DATA.reading.forEach(p=>p.qs.forEach(q=>{
+    const chosen=ST.rAns[rqi];
+    if(chosen!==q.ans)rWrong.push({q:q.q,opts:q.opts,chosen,ans:q.ans,explain:'The correct answer is: "'+q.opts[q.ans]+'".'});
+    rqi++;
+  }));
+  if(rWrong.length)sections.push({title:'📖 Reading',items:rWrong});
+  // Listening
+  const lWrong=[];let lqi=0;
+  DATA.listening.forEach(cl=>cl.qs.forEach(q=>{
+    const chosen=ST.lAns[lqi];
+    if(chosen!==q.ans)lWrong.push({q:q.q,opts:q.opts,chosen,ans:q.ans,explain:'The correct answer is: "'+q.opts[q.ans]+'".'});
+    lqi++;
+  }));
+  if(lWrong.length)sections.push({title:'🎧 Listening',items:lWrong});
+  // Writing
+  const wWrong=ST.wHistory.filter(h=>!h.ok).map(h=>({q:h.q,opts:h.opts,chosen:h.chosen,ans:h.ans,explain:h.explain}));
+  if(wWrong.length)sections.push({title:'✍️ Writing',items:wWrong});
+  // Speaking
+  const spWrong=ST.spHistory.filter(h=>!h.ok).map(h=>({q:'<em style="color:#64748b;font-size:.82rem">'+h.scenario+'</em><br>'+h.q,opts:h.opts,chosen:h.chosen,ans:h.ans,explain:h.explain}));
+  if(spWrong.length)sections.push({title:'💬 Speaking',items:spWrong});
+  // Images
+  const imgWrong=[];
+  ST.imgAns.forEach((chosen,i)=>{if(chosen!==DATA.images[i].ans)imgWrong.push({q:'Image description ('+DATA.images[i].scene+')',opts:DATA.images[i].options,chosen,ans:DATA.images[i].ans,explain:DATA.images[i].explain});});
+  if(imgWrong.length)sections.push({title:'🖼️ Images',items:imgWrong});
+
+  if(!sections.length)return '<div class="no-wrong">🌟 No mistakes — outstanding work, '+ST.name+'!</div>';
+
+  return sections.map(sec=>'<div class="wrong-section"><div class="wrong-sec-title">'+sec.title+'</div>'+sec.items.map(item=>{
+    const yourChoice=(item.chosen===-1||item.chosen===null)?'⚠️ No answer (time ran out)':item.opts[item.chosen]||'—';
+    const correct=item.opts[item.ans];
+    return `<div class="wrong-card">
+      <div class="wrong-q">${item.q}</div>
+      <div class="wrong-row"><span class="wrong-lbl yours">Your answer</span><span class="wrong-ans">${yourChoice}</span></div>
+      <div class="wrong-row"><span class="wrong-lbl correct">Correct</span><span class="wrong-ans correct-ans">${correct}</span></div>
+      <div class="wrong-explain">💡 ${item.explain}</div>
+    </div>`;
+  }).join('')+'</div>').join('');
 }
 
+function animN(id,from,to,dur){const el=document.getElementById(id),t0=performance.now();function s(now){const p=Math.min((now-t0)/dur,1);el.textContent=Math.round(from+(to-from)*p);if(p<1)requestAnimationFrame(s);}requestAnimationFrame(s);}
+
 function getLevel(t){
-  if(t>=90)return{name:'Advanced',cefr:'C2',color:'#10b981',desc:'Excellent English skills! You are nearly fluent. Keep practicing to maintain your level.'};
-  if(t>=75)return{name:'Upper-Intermediate',cefr:'C1',color:'#3b82f6',desc:'Very good! You understand most English and can communicate well in many situations.'};
-  if(t>=60)return{name:'Intermediate',cefr:'B2',color:'#f59e0b',desc:'Good progress! You can handle everyday situations. Keep practicing grammar and vocabulary.'};
-  if(t>=45)return{name:'Lower-Intermediate',cefr:'B1',color:'#f97316',desc:'You are improving! Focus on listening more and reading simple stories every day.'};
-  return{name:'Beginner',cefr:'A2',color:'#ef4444',desc:'Great start! Practice a little every day — reading simple stories and listening to English will help a lot!'};
+  if(t>=90)return{name:'Advanced',cefr:'C2',color:'#10b981',desc:'Excellent English! You are nearly fluent. Keep practicing to maintain your level.'};
+  if(t>=75)return{name:'Upper-Intermediate',cefr:'C1',color:'#3b82f6',desc:'Very good! You understand most English and communicate well in many situations.'};
+  if(t>=60)return{name:'Intermediate',cefr:'B2',color:'#f59e0b',desc:'Good progress! You handle everyday situations well. Keep practicing grammar and vocabulary.'};
+  if(t>=45)return{name:'Lower-Intermediate',cefr:'B1',color:'#f97316',desc:'You are improving! Focus on listening more and reading English texts every day.'};
+  return{name:'Beginner',cefr:'A2',color:'#ef4444',desc:'Great start! A little practice every day — reading simple texts and listening to English will help a lot!'};
 }
 
 async function fetchAI(total,lv){
   const wLevelTxt=ST.wMaxLevel==='hard'?'advanced grammar':ST.wMaxLevel==='medium'?'intermediate grammar':'basic grammar';
   const spLevelTxt=ST.spMaxLevel==='hard'?'advanced conversations':ST.spMaxLevel==='medium'?'intermediate conversations':'basic conversations';
-  const prompt='You are a friendly and encouraging English teacher. Your student is '+ST.name+' and they just finished an English practice session. Here are their results:\n- Overall average: '+total+'/100 → Level: '+lv.cefr+' ('+lv.name+')\n- Reading: '+ST.rCor+'/9 questions correct\n- Listening: '+ST.lCor+'/6 questions correct\n- Writing (grammar): reached '+wLevelTxt+' level\n- Speaking (best responses): reached '+spLevelTxt+' level\n- Image descriptions: '+ST.imgCor+'/3 correct\n\nWrite a warm, simple, and encouraging message in 3 short paragraphs (2-3 sentences each):\nParagraph 1: Greet '+ST.name+' by name and say something genuinely positive about their overall result.\nParagraph 2: Point out their strongest area and one area to improve, with one simple tip.\nParagraph 3: Give them one fun activity they can do this week to practice English.\nUse simple language. Be like a friendly teacher, not a robot. No bullet points, no headers.';
+  const totalWrong=(9-ST.rCor)+(6-ST.lCor)+ST.wHistory.filter(h=>!h.ok).length+ST.spHistory.filter(h=>!h.ok).length+(3-ST.imgCor);
+  const prompt=`You are a friendly, encouraging English teacher. Your student is ${ST.name} and they just finished a TOEFL-style English practice test. Results:
+- Overall: ${total}/100 → ${lv.cefr} (${lv.name})
+- Reading: ${ST.rCor}/9 correct
+- Listening: ${ST.lCor}/6 correct
+- Writing grammar: reached ${wLevelTxt} level
+- Speaking situations: reached ${spLevelTxt} level
+- Image descriptions: ${ST.imgCor}/3 correct
+- Total wrong answers: ${totalWrong}
+
+Write a warm, encouraging message in 3 short paragraphs (2-3 sentences each):
+1. Greet ${ST.name} by name and say something genuinely positive about their result.
+2. Name their strongest area and one area to improve, with one simple, concrete tip.
+3. Suggest one fun, realistic activity for this week to practice English.
+Use simple, friendly language — like a supportive teacher, not a robot. No headers or bullet points.`;
   try{
     const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,messages:[{role:'user',content:prompt}]})});
-    const d=await r.json(),txt=d.content?.find(b=>b.type==='text')?.text||'';
+    const d=await r.json();
+    const txt=d.content?.find(b=>b.type==='text')?.text||'';
     const card=document.getElementById('aicard');
     if(card&&txt)card.innerHTML='<div class="aihdr"><div class="aidot"></div><div class="ailbl">Your Teacher\'s Feedback</div></div><div class="aitxt">'+txt.split(/\n\n+/).map(p=>'<p>'+p+'</p>').join('')+'</div>';
-  } catch(e){
+  }catch(e){
     const card=document.getElementById('aicard');
-    if(card)card.innerHTML='<div class="aihdr"><div class="aidot"></div><div class="ailbl">Teacher\'s Note</div></div><div class="aitxt"><p>Great work, '+ST.name+'! You completed all five sections — that already shows dedication. Your score of '+total+'% puts you at the '+lv.name+' level.</p><p>To improve, try to practice a little every day. Reading short stories in English and listening to simple podcasts are two great habits to start with.</p><p>This week\'s challenge: watch one short video in English (even 5 minutes!), and try to write 3 sentences about what you watched. You\'ve got this! 🌟</p></div>';
+    if(card)card.innerHTML='<div class="aihdr"><div class="aidot"></div><div class="ailbl">Teacher\'s Note</div></div><div class="aitxt"><p>Great work, '+ST.name+'! Completing all five timed sections takes real focus and determination. Your score of '+total+'% puts you at the '+lv.name+' level.</p><p>To improve, try to practice every day — reading English articles and listening to podcasts or short talks are two of the most effective habits you can build.</p><p>This week\'s challenge: watch one short English video (five to ten minutes) and write three sentences summarising what you learned. You\'ve got this! 🌟</p></div>';
   }
 }
 
 function restart(){
-  ST={name:'Student',sec:0,rQ:0,rAns:Array(9).fill(null),lQ:0,lAns:Array(6).fill(null),lPlays:[2,2,2],wLevel:'easy',wQ:0,wAns:[],wStreak:0,wMaxLevel:'easy',spLevel:'easy',spQ:0,spAns:[],spStreak:0,spMaxLevel:'easy',imgQ:0,imgAns:Array(3).fill(null),scores:{reading:0,listening:0,writing:0,speaking:0,images:0},rCor:0,lCor:0,wCor:0,spCor:0,imgCor:0,feedback:null};
+  stopTimer();
   if(window.speechSynthesis)window.speechSynthesis.cancel();
   stopWv();
+  ST={name:'Student',sec:0,rQ:0,rAns:Array(9).fill(null),lQ:0,lAns:Array(6).fill(null),lPlays:[2,2,2],wLevel:'easy',wQ:0,wAns:[],wStreak:0,wMaxLevel:'easy',wHistory:[],spLevel:'easy',spQ:0,spAns:[],spStreak:0,spMaxLevel:'easy',spHistory:[],imgQ:0,imgAns:Array(3).fill(null),scores:{reading:0,listening:0,writing:0,speaking:0,images:0},rCor:0,lCor:0,wCor:0,spCor:0,imgCor:0,feedback:null,secTimeLeft:0};
   document.getElementById('eftr').style.display='flex';
   document.getElementById('sname').value='';
   show('splash');
