@@ -15,8 +15,6 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 #particles{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
 .pt{position:absolute;border-radius:50%;opacity:.12;animation:ptfly linear infinite}
 @keyframes ptfly{0%{transform:translateY(110vh) rotate(0deg);opacity:0}10%{opacity:.12}90%{opacity:.08}100%{transform:translateY(-120px) rotate(720deg);opacity:0}}
-
-/* SPLASH */
 #splash{background:radial-gradient(ellipse at 60% 40%,#1d4ed81a,transparent 60%),radial-gradient(ellipse at 20% 70%,#7c3aed12,transparent 50%),var(--ink);align-items:center;justify-content:center;text-align:center;padding:2rem;position:relative;overflow:hidden}
 .sglow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:700px;height:700px;background:radial-gradient(circle,#1d4ed814,transparent 70%);animation:breathe 5s ease-in-out infinite;pointer-events:none}
 @keyframes breathe{0%,100%{transform:translate(-50%,-50%) scale(1)}50%{transform:translate(-50%,-50%) scale(1.3)}}
@@ -40,8 +38,6 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .pc-info{font-size:.7rem;color:#475569;margin-top:3px}
 .btn-start{background:linear-gradient(135deg,#1d4ed8,#7c3aed);border:none;color:white;font-family:'Outfit',sans-serif;font-size:1.05rem;font-weight:700;padding:1rem 3rem;border-radius:50px;cursor:pointer;letter-spacing:1px;box-shadow:0 8px 32px rgba(29,78,216,.4);transition:all .3s;animation:sup .8s .4s ease both;position:relative;overflow:hidden}
 .btn-start:hover{transform:translateY(-3px);box-shadow:0 12px 40px rgba(29,78,216,.6)}
-
-/* EXAM HEADER */
 #ehdr{background:#0a0e1a;border-bottom:1px solid var(--bdr);padding:0 1.5rem;height:58px;display:flex;align-items:center;position:sticky;top:0;z-index:200;gap:1rem}
 .elogo{font-family:'Bebas Neue',sans-serif;font-size:1.35rem;letter-spacing:3px;color:#f5f0e8;flex-shrink:0}
 .elogo span{color:#3b82f6}
@@ -51,8 +47,6 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .pa{color:white;background:#1d4ed8;border-color:#1d4ed8}
 .pd{color:#10b981;border-color:rgba(16,185,129,.4);background:rgba(16,185,129,.1)}
 .pd::after{content:' ✓'}
-
-/* EXAM AREA */
 #earea{flex:1;overflow-y:auto;background:var(--steel)}
 .swrap{padding:2rem;max-width:900px;width:100%;margin:0 auto}
 .shero{background:linear-gradient(135deg,rgba(29,78,216,.13),rgba(124,58,237,.08));border:1px solid rgba(59,130,246,.18);border-radius:14px;padding:1.3rem 1.8rem;margin-bottom:1.8rem;display:flex;align-items:center;gap:1.2rem}
@@ -65,7 +59,7 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .qbl{font-size:.65rem;color:var(--muted);text-transform:uppercase;letter-spacing:1px}
 .ptrack{height:5px;background:rgba(255,255,255,.05);border-radius:3px;margin-bottom:1.8rem;overflow:hidden}
 .pfill{height:100%;border-radius:3px;background:linear-gradient(90deg,#1d4ed8,#7c3aed);transition:width .6s cubic-bezier(.4,0,.2,1)}
-.passage{background:#f5f0e8;border-radius:12px;padding:1.8rem;margin-bottom:1.5rem;max-height:290px;overflow-y:auto;box-shadow:0 4px 30px rgba(0,0,0,.35)}
+.passage{background:#f5f0e8;border-radius:12px;padding:1.8rem;margin-bottom:1.5rem;max-height:300px;overflow-y:auto;box-shadow:0 4px 30px rgba(0,0,0,.35)}
 .ptitle{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;letter-spacing:2px;color:#1e293b;margin-bottom:.9rem;padding-bottom:.7rem;border-bottom:2px solid #d1c7b0}
 .ptxt{font-size:.9rem;line-height:1.9;color:#374151}
 .ptxt p{margin-bottom:.9rem}
@@ -75,7 +69,7 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .qtxt{font-size:.98rem;color:#e2e8f0;font-weight:500;line-height:1.6;margin-bottom:1.1rem}
 .opts{display:flex;flex-direction:column;gap:7px}
 .opt{display:flex;align-items:flex-start;gap:11px;padding:.9rem 1.1rem;border-radius:9px;border:1.5px solid rgba(255,255,255,.07);background:rgba(255,255,255,.02);cursor:pointer;transition:all .2s;color:#cbd5e1;font-size:.88rem;line-height:1.5}
-.opt:hover{border-color:rgba(59,130,246,.5);background:rgba(59,130,246,.08);color:#e2e8f0}
+.opt:hover:not(.cor):not(.wrn){border-color:rgba(59,130,246,.5);background:rgba(59,130,246,.08);color:#e2e8f0}
 .opt.sel{border-color:#1d4ed8;background:rgba(29,78,216,.15);color:#93c5fd}
 .opt.cor{border-color:#059669;background:rgba(5,150,105,.15);color:#6ee7b7}
 .opt.wrn{border-color:#dc2626;background:rgba(220,38,38,.12);color:#fca5a5}
@@ -83,8 +77,6 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .opt.sel .oltr{background:#1d4ed8;border-color:#1d4ed8;color:white}
 .opt.cor .oltr{background:#059669;border-color:#059669;color:white}
 .opt.wrn .oltr{background:#dc2626;border-color:#dc2626;color:white}
-
-/* AUDIO */
 .acard{background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(29,78,216,.08));border:1px solid rgba(124,58,237,.22);border-radius:12px;padding:1.4rem;margin-bottom:1.4rem;display:flex;flex-direction:column;align-items:center;gap:.9rem;text-align:center}
 .albl{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:#8b5cf6;font-weight:700}
 .atitle-audio{font-size:.95rem;font-weight:700;color:#e2e8f0}
@@ -96,36 +88,25 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .wv.on{background:#8b5cf6}
 .pleft{font-size:.7rem;color:#fbbf24}
 .speaker-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(124,58,237,.15);border:1px solid rgba(124,58,237,.3);border-radius:20px;padding:4px 12px;font-size:.72rem;color:#c4b5fd;margin-bottom:.4rem}
-
-/* WRITING */
 .writing-q{background:rgba(5,150,105,.06);border:1px solid rgba(5,150,105,.2);border-radius:12px;padding:1.4rem;margin-bottom:1rem}
 .writing-q h4{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:#34d399;margin-bottom:.7rem}
 .writing-q p{font-size:.95rem;color:#e2e8f0;line-height:1.7}
-.level-badge{display:inline-flex;align-items:center;gap:6px;padding:5px 14px;border-radius:20px;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:1rem}
 .level-easy{background:rgba(5,150,105,.15);border:1px solid rgba(5,150,105,.3);color:#34d399}
 .level-medium{background:rgba(217,119,6,.15);border:1px solid rgba(217,119,6,.3);color:#fbbf24}
 .level-hard{background:rgba(220,38,38,.15);border:1px solid rgba(220,38,38,.3);color:#f87171}
-
-/* SPEAKING (now multiple choice) */
 .sp-scenario{background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.2);border-radius:12px;padding:1.4rem;margin-bottom:1.4rem}
 .sp-scenario h4{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:#60a5fa;margin-bottom:.8rem}
 .sp-scenario p{font-size:.95rem;color:#e2e8f0;line-height:1.7}
 .sp-question{font-size:1rem;font-weight:600;color:#f5f0e8;margin-top:.8rem;padding-top:.8rem;border-top:1px solid rgba(255,255,255,.08)}
 .level-indicator{background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:9px;padding:.7rem 1rem;margin-bottom:1.2rem;font-size:.82rem;color:var(--muted);text-align:center}
-.level-indicator span{font-weight:700}
 .streak-box{background:rgba(251,191,36,.08);border:1px solid rgba(251,191,36,.2);border-radius:9px;padding:.6rem 1rem;margin-bottom:1rem;font-size:.82rem;color:#fbbf24;text-align:center}
 .feedback-banner{border-radius:10px;padding:1rem 1.2rem;margin-bottom:1rem;font-size:.9rem;font-weight:600;animation:qin .3s ease}
 .feedback-correct{background:rgba(5,150,105,.15);border:1px solid rgba(5,150,105,.3);color:#6ee7b7}
 .feedback-wrong{background:rgba(220,38,38,.12);border:1px solid rgba(220,38,38,.3);color:#fca5a5}
-
-/* IMAGE section */
 .img-card{background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:14px;overflow:hidden;margin-bottom:1.4rem}
-.img-display{width:100%;height:280px;object-fit:cover;display:block;background:#1e293b;font-size:4rem;display:flex;align-items:center;justify-content:center;color:#334155}
 .img-label{font-size:.68rem;text-transform:uppercase;letter-spacing:2px;color:#3b82f6;font-weight:700;padding:1rem 1.4rem .4rem}
 .img-desc-prompt{font-size:.9rem;color:#e2e8f0;padding:.2rem 1.4rem 1rem;font-weight:500}
 .img-emoji{font-size:5rem;display:flex;align-items:center;justify-content:center;height:220px;background:linear-gradient(135deg,rgba(29,78,216,.1),rgba(124,58,237,.08));border-bottom:1px solid var(--bdr)}
-
-/* section complete */
 .sc-complete{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:3rem;gap:1.4rem}
 .sc-ico{font-size:4.5rem;animation:scpop .6s cubic-bezier(.175,.885,.32,1.275)}
 @keyframes scpop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
@@ -136,8 +117,6 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .sc-snum{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;letter-spacing:3px}
 .btn-continue{padding:.9rem 2.5rem;border-radius:50px;background:linear-gradient(135deg,#1d4ed8,#7c3aed);border:none;color:white;font-family:'Outfit',sans-serif;font-size:.95rem;font-weight:700;cursor:pointer;transition:all .3s;box-shadow:0 6px 24px rgba(29,78,216,.35)}
 .btn-continue:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(29,78,216,.55)}
-
-/* footer */
 #eftr{background:#0a0e1a;border-top:1px solid var(--bdr);padding:.9rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;bottom:0;z-index:100;gap:1rem}
 .fninfo{font-size:.78rem;color:#334155}
 .fninfo strong{color:#64748b}
@@ -145,15 +124,10 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .bnav{padding:.6rem 1.4rem;border-radius:8px;font-family:'Outfit',sans-serif;font-size:.86rem;font-weight:700;cursor:pointer;border:none;transition:all .2s;letter-spacing:.5px}
 .bfwd{background:linear-gradient(135deg,#1d4ed8,#7c3aed);color:white;box-shadow:0 4px 16px rgba(29,78,216,.32)}
 .bfwd:hover{box-shadow:0 6px 24px rgba(29,78,216,.52);transform:translateY(-1px)}
-.bsub{background:linear-gradient(135deg,#059669,#0d9488);box-shadow:0 4px 16px rgba(5,150,105,.32)}
-
-/* toast */
 .toast{position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(16px);padding:9px 24px;border-radius:50px;font-size:.88rem;font-weight:600;z-index:999;opacity:0;transition:all .3s;white-space:nowrap;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 .tg{background:#059669;color:white;box-shadow:0 4px 20px rgba(5,150,105,.5)}
 .tr{background:#dc2626;color:white;box-shadow:0 4px 20px rgba(220,38,38,.5)}
-
-/* REPORT */
 #report{background:var(--ink);padding:0 1rem 4rem;overflow-y:auto}
 .rinner{max-width:780px;margin:0 auto}
 .rhero{text-align:center;padding:4rem 2rem 3rem;background:linear-gradient(180deg,rgba(29,78,216,.07),transparent);border-bottom:1px solid var(--bdr);margin-bottom:2.5rem}
@@ -175,15 +149,7 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .sc4{background:rgba(255,255,255,.03);border:1px solid var(--bdr);border-radius:13px;padding:1.2rem;text-align:center}
 .sc4-ico{font-size:1.4rem;margin-bottom:.4rem}
 .sc4-lbl{font-size:.66rem;text-transform:uppercase;letter-spacing:2px;color:#475569;font-weight:700}
-.sc4-result{font-size:1.8rem;margin:6px 0}
-.sc4-acc{font-size:.73rem;color:var(--muted);margin-top:5px}
-.sec-summary{background:rgba(255,255,255,.02);border:1px solid var(--bdr);border-radius:12px;padding:1.2rem 1.4rem;margin-bottom:.8rem;display:flex;align-items:center;gap:14px}
-.ss-icon{font-size:1.6rem}
-.ss-name{font-size:.75rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);font-weight:700}
-.ss-result{font-size:1.1rem;font-weight:700;margin-top:2px}
-.ss-result.correct{color:#34d399}
-.ss-result.wrong{color:#f87171}
-.ss-result.partial{color:#fbbf24}
+.sc4-result{font-size:1.4rem;margin:6px 0}
 .atitle-r{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:3px;color:#f5f0e8;margin-bottom:1.3rem;display:flex;align-items:center;gap:10px;margin-top:2rem}
 .atitle-r::before,.atitle-r::after{content:'';flex:1;height:1px;background:var(--bdr)}
 .aicard{background:linear-gradient(135deg,rgba(29,78,216,.07),rgba(124,58,237,.07));border:1px solid rgba(59,130,246,.18);border-radius:14px;padding:1.8rem;margin-bottom:1.8rem}
@@ -205,7 +171,6 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 <body>
 <div id="particles"></div>
 
-<!-- SPLASH -->
 <div id="splash" class="screen active">
   <div class="sglow"></div>
   <div class="splash-in">
@@ -224,7 +189,6 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
   </div>
 </div>
 
-<!-- EXAM -->
 <div id="exam" class="screen">
   <div id="ehdr">
     <div class="elogo">English <span>Practice</span></div>
@@ -239,15 +203,12 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
   </div>
 </div>
 
-<!-- REPORT -->
 <div id="report" class="screen"></div>
 <div class="toast" id="toast"></div>
 
 <script>
-// PARTICLES
-(()=>{const c=document.getElementById('particles');for(let i=0;i<22;i++){const p=document.createElement('div');p.className='pt';const s=4+Math.random()*12;p.style.cssText=`width:${s}px;height:${s}px;left:${Math.random()*100}%;background:${['#1d4ed8','#7c3aed','#059669','#d97706'][Math.floor(Math.random()*4)]};animation-duration:${13+Math.random()*18}s;animation-delay:${-Math.random()*20}s;`;c.appendChild(p);}})();
+(()=>{const c=document.getElementById('particles');for(let i=0;i<22;i++){const p=document.createElement('div');p.className='pt';const s=4+Math.random()*12;p.style.cssText='width:'+s+'px;height:'+s+'px;left:'+(Math.random()*100)+'%;background:'+['#1d4ed8','#7c3aed','#059669','#d97706'][Math.floor(Math.random()*4)]+';animation-duration:'+(13+Math.random()*18)+'s;animation-delay:'+(-Math.random()*20)+'s;';c.appendChild(p);}})();
 
-// DATA
 const SECS=[
   {id:'reading',name:'READING',icon:'📖'},
   {id:'listening',name:'LISTENING',icon:'🎧'},
@@ -256,154 +217,284 @@ const SECS=[
   {id:'images',name:'IMAGES',icon:'🖼️'},
 ];
 
+// ─── DATA ───────────────────────────────────────────────────────────────────
+// READING: passages are now A2–B1 level — longer texts, more nuanced questions,
+// plausible distractors that require careful reading (not just scanning).
 const DATA={
 reading:[
-  {title:'My Dog Max',cat:'Everyday Life',
-   text:`<p>I have a dog named Max. He is a big brown dog with a white spot on his nose. Every morning, Max wakes me up by licking my face. I don't always like it, but it makes me laugh!</p>
-<p>Max loves to play in the park. He runs very fast and jumps over small puddles. His favorite toy is a red ball. When I throw the ball, he always brings it back to me.</p>
-<p>At night, Max sleeps on a soft blue blanket near my bed. He makes a funny sound when he is sleeping. My family loves Max very much. He is our best friend.</p>`,
-   qs:[
-     {q:"What color is Max's ball?",opts:['Blue','Yellow','Red','Green'],ans:2},
-     {q:'Where does Max sleep at night?',opts:['On the bed','On a blue blanket','In the kitchen','Outside'],ans:1},
-     {q:'What does Max do every morning?',opts:['Eats breakfast','Barks loudly','Licks the person\'s face','Plays with his ball'],ans:2},
-   ]},
-  {title:'The School Lunch',cat:'School Life',
-   text:`<p>Today at school, Maria sat with her friends in the cafeteria. She opened her lunchbox and found a sandwich, an apple, and a small bottle of juice. Her friend Tom had pizza from the school kitchen.</p>
-<p>"Can I try your sandwich?" asked Tom. "Sure!" said Maria. She gave him half. It had cheese and tomato inside. Tom liked it a lot. He gave Maria one slice of his pizza.</p>
-<p>After lunch, they threw away their trash and went back to class. Maria felt happy because she shared her food. Her teacher always said, "Sharing makes friends."</p>`,
-   qs:[
-     {q:"What was inside Maria's sandwich?",opts:['Ham and lettuce','Cheese and tomato','Butter and jam','Chicken and mustard'],ans:1},
-     {q:'What did Tom give Maria in return?',opts:['His juice','A cookie','A slice of pizza','His apple'],ans:2},
-     {q:"What does Maria's teacher always say?",opts:['"Be quiet at lunch"','"Eat all your food"','"Sharing makes friends"','"Always bring money"'],ans:2},
-   ]},
-  {title:'A Rainy Day',cat:'Weather & Activities',
-   text:`<p>Last Saturday, it was raining very hard. Lucy could not go to the park. She was a little sad at first, but then she had an idea. She decided to make a cake with her grandmother.</p>
-<p>They used flour, eggs, sugar, and butter. Lucy's job was to mix everything in a big bowl. The kitchen smelled very good. After 30 minutes in the oven, the cake was ready.</p>
-<p>The cake was chocolate. Lucy decorated it with small white stars. Her grandmother said it was the best cake she had ever eaten. Lucy smiled and ate two pieces. The rainy day became a wonderful day!</p>`,
-   qs:[
-     {q:'Why could Lucy not go to the park?',opts:['She was sick','It was raining','The park was closed','She had homework'],ans:1},
-     {q:'What was Lucy\'s job when making the cake?',opts:['Turn on the oven','Buy the ingredients','Mix everything in a bowl','Decorate with stars'],ans:2},
-     {q:'What did Lucy use to decorate the cake?',opts:['Red hearts','Blue flowers','Small white stars','Yellow candles'],ans:2},
-   ]},
+  {
+    title:'The Community Garden',
+    cat:'Community & Environment',
+    text:`<p>For years, the empty lot on Maple Street was an eyesore — a patch of cracked concrete covered in weeds and broken glass. Then, three summers ago, a retired teacher named Mr. Okafor had an idea. He knocked on doors, handed out flyers, and convinced twelve of his neighbours to transform the space into a community garden.</p>
+<p>Today, the garden is almost unrecognisable. Raised wooden beds overflow with tomatoes, herbs, and sunflowers. A hand-painted sign near the entrance reads "Grown with Neighbours, Not Strangers." Every Saturday morning, volunteers of all ages arrive to water, weed, and share whatever they have harvested that week. The surplus vegetables are donated to a local food bank.</p>
+<p>Not everything has gone smoothly. Last autumn, a dispute arose over whether to plant a walnut tree whose roots, some argued, would eventually damage the other beds. After two heated meetings, the group voted to plant a smaller fruit tree instead — an apple tree that now stands at the centre of the garden. Mr. Okafor says the argument was the best thing that ever happened to them. "We had to actually listen to each other," he told a local newspaper. "That's when we stopped being neighbours and started being a community."</p>`,
+    qs:[
+      {
+        q:'What was the main reason some members objected to planting a walnut tree?',
+        opts:[
+          'They preferred the taste of apples over walnuts.',
+          'They were concerned the roots might harm the other garden beds.',
+          'A walnut tree would block sunlight from reaching the tomatoes.',
+          'Mr. Okafor had already ordered an apple tree by mistake.'
+        ],
+        ans:1
+      },
+      {
+        q:'What does Mr. Okafor mean when he says they "stopped being neighbours and started being a community"?',
+        opts:[
+          'They moved closer together and sold their individual homes.',
+          'They began to truly communicate and understand each other.',
+          'They hired a professional community manager to run the garden.',
+          'They stopped having disagreements after the vote.'
+        ],
+        ans:1
+      },
+      {
+        q:'Which detail best shows that the garden benefits people beyond the immediate neighbourhood?',
+        opts:[
+          'Volunteers arrive every Saturday morning to water and weed.',
+          'Mr. Okafor handed out flyers to convince his neighbours.',
+          'Surplus vegetables are donated to a local food bank.',
+          'The sign near the entrance is hand-painted.'
+        ],
+        ans:2
+      },
+    ]
+  },
+  {
+    title:'The Interview',
+    cat:'Work & Ambition',
+    text:`<p>Marina had prepared for weeks. She had researched the company, rehearsed answers to common questions, and even timed herself so she would not speak for too long. On the morning of the interview, however, the train was delayed and she arrived seven minutes late — something she had always considered unforgivable in a professional setting.</p>
+<p>She apologised immediately and honestly, without making excuses. The interviewer, a calm woman named Dr. Patel, nodded and said, "Thank you for letting us know. Shall we begin?" The interview itself went well. Marina was articulate and enthusiastic, and she asked thoughtful questions about the team's current projects.</p>
+<p>Two days later, Marina received a phone call offering her the position. During her first week, she mentioned to a colleague how surprised she had been to get the job despite being late. Her colleague smiled. "Dr. Patel always says that how a person handles an unexpected problem tells her more than any rehearsed answer ever could."</p>`,
+    qs:[
+      {
+        q:'Why is Marina\'s lateness particularly significant to her?',
+        opts:[
+          'She had promised Dr. Patel she would arrive thirty minutes early.',
+          'She believed being late was a serious professional fault.',
+          'The company had a strict policy of rejecting late candidates.',
+          'She had been late to her previous job interview as well.'
+        ],
+        ans:1
+      },
+      {
+        q:'What does Dr. Patel\'s comment at the end of the story suggest about what she values in candidates?',
+        opts:[
+          'She prefers candidates who have researched the company thoroughly.',
+          'She thinks punctuality is the single most important quality.',
+          'She believes how people respond to problems reveals their true character.',
+          'She expects candidates to give long, detailed answers.'
+        ],
+        ans:2
+      },
+      {
+        q:'Which word best describes Marina\'s response when she arrived late?',
+        opts:['Defensive','Dishonest','Accountable','Indifferent'],
+        ans:2
+      },
+    ]
+  },
+  {
+    title:'Sleep and the Brain',
+    cat:'Science & Health',
+    text:`<p>Most people know that sleep is important, but fewer understand exactly what the brain is doing during those quiet hours. Far from simply "switching off," the brain remains remarkably active while we sleep — and some of its most vital work happens only then.</p>
+<p>One key process is memory consolidation. During the day, new experiences are stored as fragile, short-term memories in a part of the brain called the hippocampus. At night, particularly during deep sleep, the brain replays these experiences and transfers the most important ones into long-term storage. This is why students who sleep well after studying tend to retain information better than those who stay up late revising.</p>
+<p>Sleep also plays a role in clearing waste products from the brain. A system called the glymphatic system becomes much more active during sleep, flushing out toxic proteins that accumulate during waking hours. Scientists believe a long-term build-up of these proteins may be linked to conditions such as Alzheimer's disease. Getting consistent, quality sleep is therefore not just about feeling rested — it may be one of the most powerful things a person can do for their long-term brain health.</p>`,
+    qs:[
+      {
+        q:'According to the passage, what happens to new memories during deep sleep?',
+        opts:[
+          'They are permanently deleted to make space for new ones.',
+          'They are moved from short-term storage to long-term storage.',
+          'They are replayed consciously as dreams.',
+          'They remain in the hippocampus until the person wakes up.'
+        ],
+        ans:1
+      },
+      {
+        q:'What is the main purpose of the glymphatic system as described in the passage?',
+        opts:[
+          'To create new memories during the night.',
+          'To regulate how long a person stays asleep.',
+          'To remove harmful proteins that build up while we are awake.',
+          'To transfer information between the hippocampus and other brain regions.'
+        ],
+        ans:2
+      },
+      {
+        q:'Which statement is best supported by the information in the final paragraph?',
+        opts:[
+          'People who sleep eight hours a night will never develop Alzheimer\'s disease.',
+          'Poor sleep may contribute to serious long-term neurological conditions.',
+          'The glymphatic system only activates in people over the age of fifty.',
+          'Scientists have fully explained the link between sleep and brain disease.'
+        ],
+        ans:1
+      },
+    ]
+  },
 ],
 
 listening:[
-  {title:'At the Supermarket',
-   speakers:1,
-   speakerNames:['Sarah'],
-   transcript:`Hi! My name is Sarah. Today I am at the supermarket. I need to buy some things for dinner. I have a list: bread, milk, eggs, and apples. I walk down the first aisle and find the bread. It is next to the cereal. Then I go to the milk section. The milk is cold because it is in a big refrigerator. I find the eggs near the milk. Finally, I pick up some red apples. They look fresh and delicious. I pay at the checkout and walk home. Dinner will be ready soon!`,
+  {title:'At the Supermarket',speakers:1,speakerNames:['Sarah'],
+   transcript:'Hi! My name is Sarah. Today I am at the supermarket. I need to buy some things for dinner. I have a list: bread, milk, eggs, and apples. I walk down the first aisle and find the bread. It is next to the cereal. Then I go to the milk section. The milk is cold because it is in a big refrigerator. I find the eggs near the milk. Finally, I pick up some red apples. They look fresh and delicious. I pay at the checkout and walk home. Dinner will be ready soon!',
    qs:[
      {q:'What does Sarah need to buy for dinner?',opts:['Pasta, cheese, and tomatoes','Bread, milk, eggs, and apples','Rice, chicken, and carrots','Butter, flour, and sugar'],ans:1},
      {q:'Where does Sarah find the bread?',opts:['Next to the eggs','Near the apples','Next to the cereal','In the refrigerator'],ans:2},
    ]},
-  {title:'After School Plans',
-   speakers:2,
-   speakerNames:['Jake','Emma'],
-   transcript:`Jake: Hey Emma! Do you want to study together after school today? Emma: Sure, Jake! What subject do we have a test on? Jake: We have a math test on Friday. I think we should practice multiplication. Emma: Good idea. My house or the library? Jake: The library is better. It is quiet and we can use the computers. Emma: Okay. Let's meet at four o'clock. Jake: Perfect. Don't forget to bring your notebook. Emma: I won't. See you there!`,
+  {title:'After School Plans',speakers:2,speakerNames:['Jake','Emma'],
+   transcript:'Jake: Hey Emma! Do you want to study together after school today? Emma: Sure, Jake! What subject do we have a test on? Jake: We have a math test on Friday. I think we should practice multiplication. Emma: Good idea. My house or the library? Jake: The library is better. It is quiet and we can use the computers. Emma: Okay. Let\'s meet at four o\'clock. Jake: Perfect. Don\'t forget to bring your notebook. Emma: I won\'t. See you there!',
    qs:[
      {q:'What subject do Jake and Emma need to study?',opts:['Science','History','Math','English'],ans:2},
      {q:'Where do they decide to meet?',opts:['At Jake\'s house','At Emma\'s house','At the park','At the library'],ans:3},
    ]},
-  {title:'A Trip to the Museum',
-   speakers:3,
-   speakerNames:['Teacher','Student 1','Student 2'],
-   transcript:`Teacher: Good morning, class! Today we are visiting the Natural History Museum. I want everyone to stay with the group. Student 1: Mrs. Torres, will we see dinosaurs? Teacher: Yes! The dinosaur exhibit is on the second floor. It has a very large T-Rex skeleton. Student 2: I heard the museum also has an ocean section with real shark teeth! Teacher: That's correct. After the dinosaurs, we'll go to the ocean hall. There you can touch some of the displays. Student 1: Can we buy things in the gift shop? Teacher: Yes, at the end of the visit. But first, let's focus on learning. The museum guide will meet us at the entrance in five minutes. Everyone ready? Students together: Yes!`,
+  {title:'A Trip to the Museum',speakers:3,speakerNames:['Teacher','Student 1','Student 2'],
+   transcript:'Teacher: Good morning, class! Today we are visiting the Natural History Museum. I want everyone to stay with the group. Student 1: Mrs. Torres, will we see dinosaurs? Teacher: Yes! The dinosaur exhibit is on the second floor. It has a very large T-Rex skeleton. Student 2: I heard the museum also has an ocean section with real shark teeth! Teacher: That\'s correct. After the dinosaurs, we\'ll go to the ocean hall. There you can touch some of the displays. Student 1: Can we buy things in the gift shop? Teacher: Yes, at the end of the visit. But first, let\'s focus on learning. The museum guide will meet us at the entrance in five minutes. Everyone ready? Students together: Yes!',
    qs:[
      {q:'Where is the dinosaur exhibit?',opts:['On the first floor','In the gift shop','On the second floor','Near the entrance'],ans:2},
      {q:'What can students do in the ocean hall?',opts:['Watch a movie','Touch some of the displays','See live fish','Buy shark teeth'],ans:1},
    ]},
 ],
 
-// Writing — adaptive levels
 writing:{
   easy:[
-    {q:'Choose the correct sentence:',opts:['She go to school every day.','She goes to school every day.','She going to school every day.','She goed to school every day.'],ans:1,explain:'Use "goes" with he/she/it in the simple present tense.'},
-    {q:'Which sentence uses "a" correctly?',opts:['I have a umbrella.','I have a orange.','I have a book.','I have a apple.'],ans:2,explain:'Use "a" before consonant sounds and "an" before vowel sounds.'},
-    {q:'Pick the correct word: "There ___ two cats on the roof."',opts:['is','am','are','be'],ans:2,explain:'"Are" is used with plural subjects like "two cats".'},
-    {q:'Which sentence is correct?',opts:['He don\'t like coffee.','He doesn\'t likes coffee.','He doesn\'t like coffee.','He not like coffee.'],ans:2,explain:'With he/she/it, use "doesn\'t" + base verb in negative sentences.'},
+    {q:'Which sentence is grammatically correct?',
+     opts:['She have been waiting for an hour.','She has been waiting for an hour.','She is waiting since an hour.','She was wait for an hour.'],
+     ans:1,explain:'Use "has been waiting" (present perfect continuous) with "for" to describe an action that started in the past and is still happening.'},
+    {q:'Choose the correct form: "Neither of the answers ___ correct."',
+     opts:['are','were','have been','is'],
+     ans:3,explain:'"Neither" is singular, so it takes a singular verb: "is correct."'},
+    {q:'Which sentence uses the past continuous correctly?',
+     opts:['I was cook dinner when she called.','I cooked dinner when she was calling.','I was cooking dinner when she called.','I were cooking dinner when she called.'],
+     ans:2,explain:'Past continuous (was/were + -ing) is used for an action in progress when another action interrupted it.'},
+    {q:'Pick the correct sentence:',
+     opts:['He suggested to go to the park.','He suggested going to the park.','He suggested go to the park.','He suggested that going to the park.'],
+     ans:1,explain:'"Suggest" is followed by a gerund (-ing form), not an infinitive: "suggest going."'},
   ],
   medium:[
-    {q:'Choose the correct sentence:',opts:['When I arrived, she already left.','When I arrived, she has already left.','When I arrived, she had already left.','When I arrived, she was already left.'],ans:2,explain:'Use past perfect (had + past participle) for an action completed before another past action.'},
-    {q:'Which word completes the sentence? "She is ___ intelligent than her brother."',opts:['more','most','much','better'],ans:0,explain:'Use "more" before multi-syllable adjectives to form comparatives.'},
-    {q:'Pick the passive voice: "Someone stole my wallet."',opts:['My wallet was stolen.','My wallet has stolen.','My wallet is stealing.','My wallet stolen was.'],ans:0,explain:'Passive voice: subject + was/were + past participle.'},
-    {q:'Choose the correct conditional: "If it ___ tomorrow, we will cancel the trip."',opts:['rains','rained','rain','is raining'],ans:0,explain:'In first conditional (real possibility), use present simple after "if".'},
+    {q:'Which sentence is correct?',
+     opts:['The team have made their decision.','The team has made its decision.','The team has made their decisions.','The team have made its decisions.'],
+     ans:1,explain:'"Team" is a collective noun used as singular in American English — it takes "has" and "its."'},
+    {q:'Choose the correct word: "The manager, together with her assistants, ___ responsible for the delay."',
+     opts:['are','were','have been','is'],
+     ans:3,explain:'When "together with" links two subjects, the verb agrees with the main subject — "the manager" (singular), so "is."'},
+    {q:'Which option correctly completes the sentence? "By the time she arrives, we ___ for two hours."',
+     opts:['will wait','will be waiting','will have been waiting','are waiting'],
+     ans:2,explain:'Use future perfect continuous (will have been + -ing) for an action that will be in progress up to a future point.'},
+    {q:'Select the sentence with the correct use of "whose":',
+     opts:['Whose did you borrow the book from?','The author, whose novel won the prize, gave a speech.','Whose is the book that on the table?','The book whose is on the table is mine.'],
+     ans:1,explain:'"Whose" is a possessive relative pronoun used to show that something belongs to the person just mentioned.'},
   ],
   hard:[
-    {q:'Which sentence uses the subjunctive correctly?',opts:['I suggest that he goes home.','I suggest that he go home.','I suggest that he going home.','I suggest that he to go home.'],ans:1,explain:'The subjunctive mood uses the base form of the verb: "I suggest that he go".'},
-    {q:'Select the correct use of "despite":',opts:['Despite of the rain, we played.','Despite the rain, we played.','Despite that the rain, we played.','Despite from the rain, we played.'],ans:1,explain:'"Despite" is followed directly by a noun phrase, not "of" or "that".'},
-    {q:'Which sentence is grammatically correct?',opts:['Had I known, I will have helped.','Had I known, I would helped.','Had I known, I would have helped.','Had I know, I would have helped.'],ans:2,explain:'Third conditional: Had + past participle... would have + past participle.'},
-    {q:'Pick the correct sentence:',opts:['Neither the students nor the teacher are ready.','Neither the students nor the teacher is ready.','Neither the students nor the teacher were ready.','Neither the students nor the teacher be ready.'],ans:1,explain:'With neither...nor, the verb agrees with the closest subject ("teacher" = singular = "is").'},
+    {q:'Which sentence demonstrates correct use of the inversion after a negative adverbial?',
+     opts:['Not only she failed the exam, but also she lost her scholarship.','Not only did she fail the exam, but she also lost her scholarship.','Not only she did fail the exam, but she also lost her scholarship.','Not only had she fail the exam, but also she lost her scholarship.'],
+     ans:1,explain:'After "not only" at the start of a clause, subject and auxiliary are inverted: "Not only did she fail..."'},
+    {q:'Select the correct sentence:',
+     opts:['The data shows that less people are reading newspapers.','The data show that fewer people are reading newspapers.','The data shows that fewer people are reading newspapers.','The data are showing that less people read newspapers.'],
+     ans:1,explain:'"Data" is plural (singular: datum), so "show." Use "fewer" with countable nouns like "people," not "less."'},
+    {q:'Which sentence correctly uses a participle clause?',
+     opts:['Having finishing the report, the meeting was adjourned.','Having finished the report, the CEO adjourned the meeting.','Finished the report, the meeting was adjourned by the CEO.','Having been finish the report, the CEO adjourned the meeting.'],
+     ans:1,explain:'The subject of the participle clause must match the main clause subject. "Having finished" refers to the CEO, who then adjourned the meeting.'},
+    {q:'Pick the grammatically correct option:',
+     opts:['It is essential that every employee submits their timesheet by Friday.','It is essential that every employee submit their timesheet by Friday.','It is essential that every employee to submit their timesheet by Friday.','It is essential that every employee submitted their timesheet by Friday.'],
+     ans:1,explain:'After "essential that," use the subjunctive mood — the base form of the verb with no -s: "submit," not "submits."'},
   ],
 },
 
-// Speaking — adaptive levels (real-life multiple choice)
 speaking:{
   easy:[
-    {scenario:"You are at a coffee shop. The waiter asks: 'Can I help you?'",q:"What is the best response?",opts:["Yes, I want coffee now!","I would like a large coffee, please.","Coffee! Give me!","I don't know what I want."],ans:1,explain:'Polite requests use "I would like" and end with "please".'},
-    {scenario:"You meet your neighbor in the hallway. She says: 'Good morning!'",q:"What is the best response?",opts:["What do you want?","Good morning! How are you?","I am busy.","Hello, bye."],ans:1,explain:'A friendly greeting + question is natural and polite.'},
-    {scenario:"Your friend asks: 'Do you want to go to the movies tonight?'",q:"You can't go. What do you say?",opts:["No.","Movies are boring.","I'm sorry, I can't tonight. Maybe next time?","I don't like movies."],ans:2,explain:'Politely declining includes an apology and a positive alternative.'},
-    {scenario:"You are at a store and you can't find the bathroom.",q:"What do you ask the worker?",opts:["Bathroom!","Where is bathroom?","Excuse me, could you tell me where the bathroom is?","I need bathroom very much."],ans:2,explain:'"Excuse me" + polite question is the correct way to ask for help.'},
+    {scenario:"You are at a coffee shop. The waiter asks: 'Can I help you?'",
+     q:'What is the best response?',
+     opts:['Yes, I want coffee now!','I would like a large coffee, please.','Coffee! Give me!','I don\'t know what I want.'],
+     ans:1,explain:'Polite requests use "I would like" and end with "please" — this is natural and respectful.'},
+    {scenario:'You accidentally bump into someone on the street and knock their bag down.',
+     q:'What do you say?',
+     opts:['Watch where you\'re going!','Oh, I\'m so sorry! Let me help you pick that up.','It happens.','Sorry. Bye.'],
+     ans:1,explain:'A sincere apology followed by an offer to help is the most appropriate response in this situation.'},
+    {scenario:'Your friend just told you she passed her final exam after studying for weeks.',
+     q:'What is the most natural and warm response?',
+     opts:['Good.','Oh, that\'s nice.','That\'s amazing! You worked so hard for this — congratulations!','I knew you would pass.'],
+     ans:2,explain:'Acknowledging the effort and expressing genuine happiness makes the response warm and natural.'},
+    {scenario:'A colleague asks you to stay late, but you have an important personal commitment.',
+     q:'How do you decline politely?',
+     opts:['No, I\'m leaving.','I can\'t, sorry.','I appreciate you asking, but I have a prior commitment tonight. Can we find another time?','Not today.'],
+     ans:2,explain:'"I appreciate you asking" softens the refusal, and offering an alternative shows willingness to cooperate.'},
   ],
   medium:[
-    {scenario:"You are in a job interview. The interviewer asks: 'Tell me about yourself.'",q:"Which answer is most appropriate?",opts:["I am a very nice person and I like food.","I have 3 years of experience in marketing and I enjoy working in teams.","I don't know what to say about myself.","My name is John and I am here for the job."],ans:1,explain:'Mention relevant experience and a professional strength.'},
-    {scenario:"Your colleague made a mistake that affected your project.",q:"How do you address it professionally?",opts:["You always make mistakes! This is your fault.","Could we talk about what happened? I'd like to find a solution together.","I will tell the manager about this.","Don't worry, it's fine (while clearly upset)."],ans:1,explain:'Collaborative language ("we", "together") resolves conflict professionally.'},
-    {scenario:"A customer complains that their order was wrong.",q:"What is the best response as an employee?",opts:["It\'s not my fault.","I'm so sorry about that. Let me fix it right away.","You should have checked your order.","We are very busy today."],ans:1,explain:'Apologize sincerely and offer immediate action.'},
-    {scenario:"You disagree with a coworker's idea in a meeting.",q:"How do you express your opinion respectfully?",opts:["That idea is terrible.","I see your point, but I think we might also consider...","No, that won't work.","I disagree completely."],ans:1,explain:'Acknowledge their view first, then present yours with "but I think".'},
+    {scenario:"You are in a job interview. The interviewer asks: 'What is your greatest weakness?'",
+     q:'Which answer is most strategic and professional?',
+     opts:['I have no weaknesses.','I sometimes work too hard.','I used to struggle with delegating tasks, but I\'ve been actively working on trusting my team more.','I am very disorganized.'],
+     ans:2,explain:'Name a real weakness, then immediately show self-awareness and improvement — this demonstrates maturity.'},
+    {scenario:"A client is unhappy and says your company's service is 'the worst they've ever used.'",
+     q:'How do you respond as a professional?',
+     opts:['Well, other clients are happy.','I understand your frustration. Could you tell me more about what happened so I can make it right?','That\'s not my department.','I\'m sorry you feel that way.'],
+     ans:1,explain:'Validating the emotion and asking for specifics shows genuine care and opens the path to a solution.'},
+    {scenario:'Your manager publicly praises a project but attributes it entirely to another team member, when you did most of the work.',
+     q:'What do you do?',
+     opts:['Say nothing and feel angry.','Correct your manager loudly in the meeting.','After the meeting, speak privately to your manager and clarify your contributions calmly.','Tell your colleagues what really happened.'],
+     ans:2,explain:"Addressing it privately protects everyone's dignity and increases the chance of a fair outcome."},
+    {scenario:"You disagree with a senior colleague's approach in a team meeting.",
+     q:'How do you express your view?',
+     opts:['That approach is wrong.','I completely disagree with that.','That\'s an interesting approach. I wonder if we could also consider... what do others think?','I don\'t think that will work at all.'],
+     ans:2,explain:'Acknowledging the idea, proposing an alternative, and inviting others in keeps the conversation collaborative.'},
   ],
   hard:[
-    {scenario:"You're in a formal negotiation. The other party says their price is final.",q:"What is the most strategic response?",opts:["Fine, we'll take it.","Absolutely not.","I understand your position. Could we explore other ways to make this work for both sides?","We can offer you more money if you lower the price."],ans:2,explain:'Acknowledge their stance and propose mutual exploration — this keeps dialogue open.'},
-    {scenario:"A senior manager asks for your honest feedback on a flawed company policy.",q:"How do you respond?",opts:["Everything is perfect!","The policy is completely wrong and needs to be removed.","I appreciate you asking. I've noticed some areas that could be refined. May I share a few observations?","I don't have any feedback."],ans:2,explain:'Express appreciation, use hedged language ("could be refined"), and ask permission — this shows professional tact.'},
-    {scenario:"You're presenting data that contradicts your boss's previous statement.",q:"How do you handle it?",opts:["My data shows you were wrong.","Actually, the numbers say something different.","The data suggests a different picture from what was previously discussed. It might be worth reviewing together.","I will hide the data to avoid problems."],ans:2,explain:'Frame it as a collaborative discovery rather than a contradiction.'},
-    {scenario:"A client wants a discount you are not authorized to give.",q:"What do you say?",opts:["I can give you any discount you want.","I can't help you.","I completely understand your concern. Let me check with my manager to see what we can do for you.","Discounts are not our policy."],ans:2,explain:'Show empathy, take ownership, and commit to finding a solution.'},
+    {scenario:"You are negotiating a contract. The other party says their terms are non-negotiable, but you know they need this deal.",
+     q:'What is the most strategic response?',
+     opts:['Fine, we accept all terms.','Then we cannot proceed.','I respect that. Let me step back and think about which elements are most critical for both sides — perhaps we can find a way forward that works for everyone.','We have other offers on the table.'],
+     ans:2,explain:'This response avoids confrontation, buys thinking time, and reframes around mutual benefit rather than positions.'},
+    {scenario:"During a high-stakes presentation, an executive interrupts you with a challenging question you don't know the answer to.",
+     q:'What do you say?',
+     opts:["I don't know.",'That\'s a great question. I want to give you an accurate answer — let me follow up with the specifics after the session.','Can you ask that again at the end?','That\'s outside the scope of today\'s presentation.'],
+     ans:1,explain:'Acknowledging the question, committing to accuracy, and offering a follow-up demonstrates confidence and professionalism under pressure.'},
+    {scenario:"You discover a colleague has been taking credit for your written reports in emails to management.",
+     q:'How do you handle this?',
+     opts:['Send an angry email to the whole team.','Say nothing but start cc-ing your manager on everything.','Request a private conversation with the colleague, express how this affects you, and agree on how to properly credit contributions going forward.','Report them to HR immediately.'],
+     ans:2,explain:'Direct, calm communication with the person first is usually most effective — it addresses the root issue without escalating unnecessarily.'},
+    {scenario:'A key client asks for a major last-minute change that would require your team to work through the weekend.',
+     q:'What is the best response?',
+     opts:['Yes, of course! No problem.','That\'s impossible at this stage.','I appreciate you flagging this. I\'ll need to discuss the feasibility and impact with my team — can I come back to you within the hour with a clear answer?','We can try, but I can\'t promise anything.'],
+     ans:2,explain:'This response is neither a blank yes nor a flat no — it buys time to make an informed decision and sets a professional expectation.'},
   ],
 },
 
-// Image descriptions
 images:[
   {emoji:'🌅🏖️',scene:'A beautiful sunset at the beach',
-   options:[
-     'A bright orange and pink sky above calm ocean water, with people walking along the sandy shore.',
-     'A dark stormy night with large waves crashing against a rocky cliff.',
-   ],ans:0,
-   explain:'The first description matches the image: colorful sky, calm water, sandy beach.'},
+   options:['A bright orange and pink sky above calm ocean water, with people walking along the sandy shore.','A dark stormy night with large waves crashing against a rocky cliff.'],
+   ans:0,explain:'The first description matches the image: colorful sky, calm water, sandy beach.'},
   {emoji:'🏫📚',scene:'Children in a classroom',
-   options:[
-     'A large empty room with broken windows and no furniture.',
-     'Students sitting at desks, looking at a teacher who is writing on a whiteboard.',
-   ],ans:1,
-   explain:'The second description correctly shows an active classroom with students and a teacher.'},
+   options:['A large empty room with broken windows and no furniture.','Students sitting at desks, looking at a teacher who is writing on a whiteboard.'],
+   ans:1,explain:'The second description correctly shows an active classroom with students and a teacher.'},
   {emoji:'🍽️👨‍🍳',scene:'A chef cooking in a restaurant kitchen',
-   options:[
-     'A professional chef in a white uniform stirring a large pot on a stove, surrounded by cooking equipment.',
-     'A child eating a bowl of cereal alone at a kitchen table in the morning.',
-   ],ans:0,
-   explain:'The first description correctly shows a professional chef in a restaurant kitchen.'},
+   options:['A professional chef in a white uniform stirring a large pot on a stove, surrounded by cooking equipment.','A child eating a bowl of cereal alone at a kitchen table in the morning.'],
+   ans:0,explain:'The first description correctly shows a professional chef in a restaurant kitchen.'},
 ],
 };
 
-// STATE
+// ── STATE ──
 let ST={
   name:'Student',sec:0,
   rQ:0,rAns:Array(9).fill(null),
   lQ:0,lAns:Array(6).fill(null),lPlays:[2,2,2],
   wLevel:'easy',wQ:0,wAns:[],wStreak:0,wMaxLevel:'easy',
-  spLevel:'easy',spQ:0,spAns:[],spStreak:0,spMaxLevel:'easy',spLastWrong:false,
+  spLevel:'easy',spQ:0,spAns:[],spStreak:0,spMaxLevel:'easy',
   imgQ:0,imgAns:Array(3).fill(null),
   scores:{reading:0,listening:0,writing:0,speaking:0,images:0},
   rCor:0,lCor:0,wCor:0,spCor:0,imgCor:0,
-  feedback:null,waitingNext:false,
+  feedback:null,
 };
 let wvInt=null;
 
-// HELPERS
+// ── HELPERS ──
 function show(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));document.getElementById(id).classList.add('active');}
-function toast(msg,cls){const t=document.getElementById('toast');t.textContent=msg;t.className=`toast ${cls} show`;setTimeout(()=>t.classList.remove('show'),2200);}
+function toast(msg,cls){const t=document.getElementById('toast');t.textContent=msg;t.className='toast '+cls+' show';setTimeout(()=>t.classList.remove('show'),2200);}
 function beginTest(){ST.name=document.getElementById('sname').value.trim()||'Student';show('exam');document.getElementById('eftr').style.display='flex';renderSec();}
 
 function renderPills(){
   document.getElementById('pillsRow').innerHTML=SECS.map((s,i)=>{
     let c=i<ST.sec?'pd':i===ST.sec?'pa':'pl';
-    return`<div class="pill ${c}">${s.name}</div>`;
+    return '<div class="pill '+c+'">'+s.name+'</div>';
   }).join('');
 }
 
@@ -421,147 +512,101 @@ function renderSec(){
 
 function updFooter(){
   const id=SECS[ST.sec].id;
-  let cur=1,tot=1,label='';
-  if(id==='reading'){cur=ST.rQ+1;tot=9;label=`Question ${cur} of ${tot}`;}
-  else if(id==='listening'){cur=ST.lQ+1;tot=6;label=`Question ${cur} of ${tot}`;}
-  else if(id==='writing'){
-    const lvls=['easy','medium','hard'];
-    const qi=DATA.writing[ST.wLevel].indexOf(DATA.writing[ST.wLevel][ST.wQ]);
-    label=`Writing · Level: ${ST.wLevel.charAt(0).toUpperCase()+ST.wLevel.slice(1)}`;
-    cur=ST.wAns.length+1;tot='?';
-  }
-  else if(id==='speaking'){
-    label=`Speaking · Level: ${ST.spLevel.charAt(0).toUpperCase()+ST.spLevel.slice(1)}`;
-    cur=ST.spAns.length+1;tot='?';
-  }
-  else{cur=ST.imgQ+1;tot=3;label=`Image ${cur} of ${tot}`;}
-  document.getElementById('fninfo').innerHTML=`<strong>${label}</strong>`;
-  const bfwd=document.getElementById('bfwd');
-  // Show next only when answered
-  const hasAns=id==='reading'?ST.rAns[ST.rQ]!==null:
-                id==='listening'?ST.lAns[ST.lQ]!==null:
-                id==='writing'?ST.feedback!==null:
-                id==='speaking'?ST.feedback!==null:
-                ST.imgAns[ST.imgQ]!==null;
-  bfwd.style.display='block';
-  bfwd.disabled=false;
+  let label='';
+  if(id==='reading')label='Question '+(ST.rQ+1)+' of 9';
+  else if(id==='listening')label='Question '+(ST.lQ+1)+' of 6';
+  else if(id==='writing')label='Writing · Level: '+ST.wLevel.charAt(0).toUpperCase()+ST.wLevel.slice(1)+' · Q'+(ST.wAns.length+1);
+  else if(id==='speaking')label='Speaking · Level: '+ST.spLevel.charAt(0).toUpperCase()+ST.spLevel.slice(1)+' · Situation '+(ST.spAns.length+1);
+  else label='Image '+(ST.imgQ+1)+' of 3';
+  document.getElementById('fninfo').innerHTML='<strong>'+label+'</strong>';
 }
 
-// READING
-function getRQ(qi){let idx=0;for(let i=0;i<DATA.reading.length;i++){if(qi<idx+DATA.reading[i].qs.length)return{p:DATA.reading[i],lq:qi-idx,pi:i};idx+=DATA.reading[i].qs.length;}return{p:DATA.reading[0],lq:0,pi:0};}
+// ── READING ──
+function getRQ(qi){
+  let idx=0;
+  for(let i=0;i<DATA.reading.length;i++){
+    if(qi<idx+DATA.reading[i].qs.length)return{p:DATA.reading[i],lq:qi-idx,pi:i};
+    idx+=DATA.reading[i].qs.length;
+  }
+  return{p:DATA.reading[0],lq:0,pi:0};
+}
 function renderR(a){
   const {p,lq,pi}=getRQ(ST.rQ),q=p.qs[lq],sv=ST.rAns[ST.rQ];
-  a.innerHTML=`<div class="swrap">
-    <div class="shero"><div class="shero-icon">📖</div><div><h2>READING</h2><p>Story ${pi+1} of 3 · <em>${p.cat}</em></p></div><div class="shero-r"><div class="qbadge"><div class="qbn">${ST.rQ+1}<span style="font-size:.95rem;color:#334155">/9</span></div><div class="qbl">Questions</div></div></div></div>
-    <div class="ptrack"><div class="pfill" style="width:${(ST.rQ+1)/9*100}%"></div></div>
-    <div class="passage"><div class="ptitle">${p.title}</div><div class="ptxt">${p.text}</div></div>
-    <div class="qcard"><div class="qnum">Question ${ST.rQ+1}</div><div class="qtxt">${q.q}</div>
-    <div class="opts">${q.opts.map((o,i)=>`<div class="opt${sv===i?' sel':''}" onclick="selR(${i})"><div class="oltr">${'ABCD'[i]}</div><div>${o}</div></div>`).join('')}</div></div>
-  </div>`;
+  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">📖</div><div><h2>READING</h2><p>Story '+(pi+1)+' of 3 · <em>'+p.cat+'</em></p></div><div class="shero-r"><div class="qbadge"><div class="qbn">'+(ST.rQ+1)+'<span style="font-size:.95rem;color:#334155">/9</span></div><div class="qbl">Questions</div></div></div></div><div class="ptrack"><div class="pfill" style="width:'+((ST.rQ+1)/9*100)+'%"></div></div><div class="passage"><div class="ptitle">'+p.title+'</div><div class="ptxt">'+p.text+'</div></div><div class="qcard"><div class="qnum">Question '+(ST.rQ+1)+'</div><div class="qtxt">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<div class="opt'+(sv===i?' sel':'')+'" onclick="selR('+i+')"><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>').join('')+'</div></div></div>';
 }
 function selR(i){ST.rAns[ST.rQ]=i;renderSec();}
 
-// LISTENING
-function getLC(qi){let idx=0;for(let i=0;i<DATA.listening.length;i++){if(qi<idx+DATA.listening[i].qs.length)return{c:DATA.listening[i],lq:qi-idx,ci:i};idx+=DATA.listening[i].qs.length;}return{c:DATA.listening[0],lq:0,ci:0};}
+// ── LISTENING ──
+function getLC(qi){
+  let idx=0;
+  for(let i=0;i<DATA.listening.length;i++){
+    if(qi<idx+DATA.listening[i].qs.length)return{c:DATA.listening[i],lq:qi-idx,ci:i};
+    idx+=DATA.listening[i].qs.length;
+  }
+  return{c:DATA.listening[0],lq:0,ci:0};
+}
 function renderL(a){
   const {c,lq,ci}=getLC(ST.lQ),q=c.qs[lq],sv=ST.lAns[ST.lQ],pl=ST.lPlays[ci];
-  const wvs=Array(18).fill(null).map((_,i)=>`<div class="wv" id="wv${i}" style="height:${6+Math.sin(i*.7)*7}px"></div>`).join('');
+  const wvs=Array(18).fill(null).map((_,i)=>'<div class="wv" id="wv'+i+'" style="height:'+(6+Math.sin(i*.7)*7)+'px"></div>').join('');
   const speakerInfo=c.speakers===1?'1 speaker':c.speakers===2?'2 speakers':'3 speakers';
-  a.innerHTML=`<div class="swrap">
-    <div class="shero"><div class="shero-icon">🎧</div><div><h2>LISTENING</h2><p>Audio ${ci+1} of 3</p></div><div class="shero-r"><div class="qbadge"><div class="qbn">${ST.lQ+1}<span style="font-size:.95rem;color:#334155">/6</span></div><div class="qbl">Questions</div></div></div></div>
-    <div class="ptrack"><div class="pfill" style="width:${(ST.lQ+1)/6*100}%"></div></div>
-    <div class="acard">
-      <div class="albl">${pl>0?'AUDIO CLIP':'NO PLAYS LEFT'}</div>
-      <div class="speaker-badge">🎙 ${speakerInfo}: ${c.speakerNames.join(', ')}</div>
-      <div class="atitle-audio">${c.title}</div>
-      <div class="wv-wrap" id="wvwrap">${wvs}</div>
-      <button class="aplaybtn" id="aplaybtn" onclick="playAudio(${ci})" ${pl===0?'disabled':''}>▶</button>
-      <div class="pleft">Plays remaining: ${pl}/2</div>
-      <div style="font-size:.75rem;color:#475569;margin-top:4px">Press play, listen carefully, then answer below</div>
-    </div>
-    <div class="qcard"><div class="qnum">Question ${ST.lQ+1}</div><div class="qtxt">${q.q}</div>
-    <div class="opts">${q.opts.map((o,i)=>`<div class="opt${sv===i?' sel':''}" onclick="selL(${i})"><div class="oltr">${'ABCD'[i]}</div><div>${o}</div></div>`).join('')}</div></div>
-  </div>`;
+  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">🎧</div><div><h2>LISTENING</h2><p>Audio '+(ci+1)+' of 3</p></div><div class="shero-r"><div class="qbadge"><div class="qbn">'+(ST.lQ+1)+'<span style="font-size:.95rem;color:#334155">/6</span></div><div class="qbl">Questions</div></div></div></div><div class="ptrack"><div class="pfill" style="width:'+((ST.lQ+1)/6*100)+'%"></div></div><div class="acard"><div class="albl">'+(pl>0?'AUDIO CLIP':'NO PLAYS LEFT')+'</div><div class="speaker-badge">🎙 '+speakerInfo+': '+c.speakerNames.join(', ')+'</div><div class="atitle-audio">'+c.title+'</div><div class="wv-wrap" id="wvwrap">'+wvs+'</div><button class="aplaybtn" id="aplaybtn" onclick="playAudio('+ci+')" '+(pl===0?'disabled':'')+'>▶</button><div class="pleft">Plays remaining: '+pl+'/2</div><div style="font-size:.75rem;color:#475569;margin-top:4px">Press play, listen carefully, then answer below</div></div><div class="qcard"><div class="qnum">Question '+(ST.lQ+1)+'</div><div class="qtxt">'+q.q+'</div><div class="opts">'+q.opts.map((o,i)=>'<div class="opt'+(sv===i?' sel':'')+'" onclick="selL('+i+')"><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>').join('')+'</div></div></div>';
 }
 function playAudio(ci){
   if(ST.lPlays[ci]<=0)return;
   ST.lPlays[ci]--;
   if(window.speechSynthesis){
     window.speechSynthesis.cancel();
-    const transcript=DATA.listening[ci].transcript;
-    const c=DATA.listening[ci];
-    // For multi-speaker: split on "Name:" pattern and speak with slight pauses
-    if(c.speakers>1){
-      // Speak the full text with natural rate
-      const u=new SpeechSynthesisUtterance(transcript);
-      u.rate=0.82;
-      u.pitch=1.0;
-      u.volume=1.0;
-      // Try to get a clear English voice
-      const voices=window.speechSynthesis.getVoices();
-      const engVoice=voices.find(v=>v.lang.startsWith('en-')&&(v.name.includes('Google')||v.name.includes('Samantha')||v.name.includes('Alex')||v.name.includes('Natural')));
-      if(engVoice)u.voice=engVoice;
-      u.onend=()=>{stopWv();};
-      window.speechSynthesis.speak(u);
-    } else {
-      const u=new SpeechSynthesisUtterance(transcript);
-      u.rate=0.80;
-      u.pitch=1.0;
-      u.volume=1.0;
-      const voices=window.speechSynthesis.getVoices();
-      const engVoice=voices.find(v=>v.lang.startsWith('en-')&&(v.name.includes('Google')||v.name.includes('Samantha')||v.name.includes('Alex')||v.name.includes('Natural')));
-      if(engVoice)u.voice=engVoice;
-      u.onend=()=>{stopWv();renderSec();};
-      window.speechSynthesis.speak(u);
-    }
+    const u=new SpeechSynthesisUtterance(DATA.listening[ci].transcript);
+    u.rate=0.82;u.pitch=1.0;u.volume=1.0;
+    const voices=window.speechSynthesis.getVoices();
+    const engVoice=voices.find(v=>v.lang.startsWith('en-')&&(v.name.includes('Google')||v.name.includes('Samantha')||v.name.includes('Alex')||v.name.includes('Natural')));
+    if(engVoice)u.voice=engVoice;
+    u.onend=()=>{stopWv();const btn=document.getElementById('aplaybtn');if(btn)btn.textContent='▶';};
+    window.speechSynthesis.speak(u);
     startWv();
   }
+  // BUG FIX: update button and play counter after decrement (was updating before)
   const btn=document.getElementById('aplaybtn');
-  if(btn)btn.textContent='⏸';
+  if(btn){btn.textContent='⏸';if(ST.lPlays[ci]===0)btn.disabled=true;}
   const pl=document.querySelector('.pleft');
-  if(pl)pl.textContent=`Plays remaining: ${ST.lPlays[ci]}/2`;
+  if(pl)pl.textContent='Plays remaining: '+ST.lPlays[ci]+'/2';
 }
-// Load voices on page load
 if(window.speechSynthesis){
   window.speechSynthesis.getVoices();
   window.speechSynthesis.onvoiceschanged=()=>{window.speechSynthesis.getVoices();};
 }
-function startWv(){clearInterval(wvInt);wvInt=setInterval(()=>{document.querySelectorAll('.wv').forEach((el,i)=>{el.style.height=(6+Math.random()*30)+'px';el.classList.add('on');});},130);}
+function startWv(){clearInterval(wvInt);wvInt=setInterval(()=>{document.querySelectorAll('.wv').forEach(el=>{el.style.height=(6+Math.random()*30)+'px';el.classList.add('on');});},130);}
 function stopWv(){clearInterval(wvInt);document.querySelectorAll('.wv').forEach(el=>{el.style.height='6px';el.classList.remove('on');});}
 function selL(i){ST.lAns[ST.lQ]=i;renderSec();}
 
-// WRITING — adaptive
-function getWrQ(){return DATA.writing[ST.wLevel][ST.wQ%DATA.writing[ST.wLevel].length];}
+// ── WRITING ──
+// BUG FIX: wQ is used as a raw counter. Modulo is applied at read-time so
+// level changes never cause an out-of-bounds crash, but to avoid replaying
+// the same question index after a level change, we track per-level offsets.
+function getWrQ(){return DATA.writing[ST.wLevel][ST.wQ % DATA.writing[ST.wLevel].length];}
 function renderWr(a){
   const q=getWrQ();
-  const levelLabel=ST.wLevel==='easy'?'🟢 Basic':ST.wLevel==='medium'?'🟡 Intermediate':'🔴 Advanced';
-  const levelClass=`level-${ST.wLevel}`;
-  const feedbackHtml=ST.feedback?`<div class="feedback-banner ${ST.feedback.ok?'feedback-correct':'feedback-wrong'}">${ST.feedback.ok?'✅ Correct! Well done!':'❌ Not quite.'} ${ST.feedback.explain}</div>`:'';
+  const levelLabel=ST.wLevel==='easy'?'🟢 Beginner':ST.wLevel==='medium'?'🟡 Intermediate':'🔴 Advanced';
+  const levelClass='level-'+ST.wLevel;
+  const feedbackHtml=ST.feedback?'<div class="feedback-banner '+(ST.feedback.ok?'feedback-correct':'feedback-wrong')+'">'+(ST.feedback.ok?'✅ Correct! Well done!':'❌ Not quite.')+' '+ST.feedback.explain+'</div>':'';
   const qNum=ST.wAns.length+1;
-  a.innerHTML=`<div class="swrap">
-    <div class="shero"><div class="shero-icon">✍️</div><div><h2>WRITING</h2><p>Grammar & Structure · Multiple Choice</p></div></div>
-    <div class="ptrack"><div class="pfill" style="width:${Math.min(ST.wAns.length/8*100,100)}%"></div></div>
-    <div class="level-indicator"><span class="${levelClass}" style="padding:3px 10px;border-radius:12px;">${levelLabel}</span> — Question ${qNum}</div>
-    ${ST.wStreak>=2?`<div class="streak-box">🔥 ${ST.wStreak} in a row correct! Level going up!</div>`:''}
-    ${feedbackHtml}
-    <div class="writing-q"><h4>✏️ Choose the correct answer</h4><p>${q.q}</p></div>
-    <div class="opts">${q.opts.map((o,i)=>{
-      let cls='';
-      if(ST.feedback){if(i===q.ans)cls=' cor';else if(ST.feedback.chosen===i&&i!==q.ans)cls=' wrn';}
-      return`<div class="opt${cls}${ST.feedback?'':''}" onclick="${ST.feedback?'':'selWr('+i+')'}" style="${ST.feedback?'cursor:default':''}"><div class="oltr">${'ABCD'[i]}</div><div>${o}</div></div>`;
-    }).join('')}</div>
-  </div>`;
+  const optsHtml=q.opts.map((o,i)=>{
+    let cls='';
+    if(ST.feedback!==null){if(i===q.ans)cls=' cor';else if(ST.feedback.chosen===i&&i!==q.ans)cls=' wrn';}
+    return '<div class="opt'+cls+'" onclick="'+(ST.feedback!==null?'':'selWr('+i+')')+'" style="'+(ST.feedback!==null?'cursor:default':'')+'"><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>';
+  }).join('');
+  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">✍️</div><div><h2>WRITING</h2><p>Grammar &amp; Structure · Multiple Choice</p></div></div><div class="ptrack"><div class="pfill" style="width:'+Math.min(ST.wAns.length/8*100,100)+'%"></div></div><div class="level-indicator"><span class="'+levelClass+'" style="padding:3px 10px;border-radius:12px;">'+levelLabel+'</span> — Question '+qNum+'</div>'+(ST.wStreak>=2?'<div class="streak-box">🔥 '+ST.wStreak+' in a row correct! Level going up!</div>':'')+feedbackHtml+'<div class="writing-q"><h4>✏️ Choose the correct answer</h4><p>'+q.q+'</p></div><div class="opts">'+optsHtml+'</div></div>';
 }
 function selWr(i){
-  if(ST.feedback)return;
+  if(ST.feedback!==null)return;
   const q=getWrQ();
   const ok=i===q.ans;
   ST.feedback={ok,chosen:i,explain:q.explain};
   if(ok){
     ST.wStreak++;ST.wCor++;
     if(ST.wStreak>=2){
-      if(ST.wLevel==='easy')ST.wLevel='medium';
-      else if(ST.wLevel==='medium')ST.wLevel='hard';
+      if(ST.wLevel==='easy'){ST.wLevel='medium';if(ST.wMaxLevel==='easy')ST.wMaxLevel='medium';}
+      else if(ST.wLevel==='medium'){ST.wLevel='hard';ST.wMaxLevel='hard';}
       ST.wStreak=0;
     }
   } else {
@@ -569,90 +614,64 @@ function selWr(i){
     if(ST.wLevel==='hard')ST.wLevel='medium';
     else if(ST.wLevel==='medium')ST.wLevel='easy';
   }
-  if(ST.wLevel==='medium'&&ST.wMaxLevel==='easy')ST.wMaxLevel='medium';
-  if(ST.wLevel==='hard'&&ST.wMaxLevel!=='hard')ST.wMaxLevel='hard';
   renderSec();
 }
 
-// SPEAKING — adaptive multiple choice
-function getSpQ(){return DATA.speaking[ST.spLevel][ST.spQ%DATA.speaking[ST.spLevel].length];}
+// ── SPEAKING ──
+function getSpQ(){return DATA.speaking[ST.spLevel][ST.spQ % DATA.speaking[ST.spLevel].length];}
 function renderSp(a){
   const q=getSpQ();
   const levelLabel=ST.spLevel==='easy'?'🟢 Basic':ST.spLevel==='medium'?'🟡 Intermediate':'🔴 Advanced';
-  const levelClass=`level-${ST.spLevel}`;
-  const feedbackHtml=ST.feedback?`<div class="feedback-banner ${ST.feedback.ok?'feedback-correct':'feedback-wrong'}">${ST.feedback.ok?'✅ Great response! That\'s natural English!':'❌ Not the best choice.'} ${ST.feedback.explain}</div>`:'';
+  const levelClass='level-'+ST.spLevel;
+  const feedbackHtml=ST.feedback?'<div class="feedback-banner '+(ST.feedback.ok?'feedback-correct':'feedback-wrong')+'">'+(ST.feedback.ok?'✅ Great response! That\'s natural English!':'❌ Not the best choice.')+' '+ST.feedback.explain+'</div>':'';
   const qNum=ST.spAns.length+1;
-  a.innerHTML=`<div class="swrap">
-    <div class="shero"><div class="shero-icon">💬</div><div><h2>SPEAKING</h2><p>Real-Life Situations · Best Response</p></div></div>
-    <div class="ptrack"><div class="pfill" style="width:${Math.min(ST.spAns.length/8*100,100)}%"></div></div>
-    <div class="level-indicator"><span class="${levelClass}" style="padding:3px 10px;border-radius:12px;">${levelLabel}</span> — Situation ${qNum}</div>
-    ${ST.spStreak>=2?`<div class="streak-box">🔥 ${ST.spStreak} correct in a row! Getting harder!</div>`:''}
-    ${feedbackHtml}
-    <div class="sp-scenario">
-      <h4>📍 Real-Life Situation</h4>
-      <p>${q.scenario}</p>
-      <p class="sp-question">${q.q}</p>
-    </div>
-    <div class="opts">${q.opts.map((o,i)=>{
-      let cls='';
-      if(ST.feedback){if(i===q.ans)cls=' cor';else if(ST.feedback.chosen===i&&i!==q.ans)cls=' wrn';}
-      return`<div class="opt${cls}" onclick="${ST.feedback?'':'selSp('+i+')'}" style="${ST.feedback?'cursor:default':''}"><div class="oltr">${'ABCD'[i]}</div><div>${o}</div></div>`;
-    }).join('')}</div>
-  </div>`;
+  const optsHtml=q.opts.map((o,i)=>{
+    let cls='';
+    if(ST.feedback!==null){if(i===q.ans)cls=' cor';else if(ST.feedback.chosen===i&&i!==q.ans)cls=' wrn';}
+    return '<div class="opt'+cls+'" onclick="'+(ST.feedback!==null?'':'selSp('+i+')')+'" style="'+(ST.feedback!==null?'cursor:default':'')+'"><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>';
+  }).join('');
+  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">💬</div><div><h2>SPEAKING</h2><p>Real-Life Situations · Best Response</p></div></div><div class="ptrack"><div class="pfill" style="width:'+Math.min(ST.spAns.length/8*100,100)+'%"></div></div><div class="level-indicator"><span class="'+levelClass+'" style="padding:3px 10px;border-radius:12px;">'+levelLabel+'</span> — Situation '+qNum+'</div>'+(ST.spStreak>=2?'<div class="streak-box">🔥 '+ST.spStreak+' correct in a row! Getting harder!</div>':'')+feedbackHtml+'<div class="sp-scenario"><h4>📍 Real-Life Situation</h4><p>'+q.scenario+'</p><p class="sp-question">'+q.q+'</p></div><div class="opts">'+optsHtml+'</div></div>';
 }
 function selSp(i){
-  if(ST.feedback)return;
+  if(ST.feedback!==null)return;
   const q=getSpQ();
   const ok=i===q.ans;
   ST.feedback={ok,chosen:i,explain:q.explain};
   if(ok){
     ST.spStreak++;ST.spCor++;
     if(ST.spStreak>=2){
-      if(ST.spLevel==='easy')ST.spLevel='medium';
-      else if(ST.spLevel==='medium')ST.spLevel='hard';
+      if(ST.spLevel==='easy'){ST.spLevel='medium';if(ST.spMaxLevel==='easy')ST.spMaxLevel='medium';}
+      else if(ST.spLevel==='medium'){ST.spLevel='hard';ST.spMaxLevel='hard';}
       ST.spStreak=0;
     }
   } else {
-    ST.spLastWrong=true;
     ST.spStreak=0;
+    if(ST.spLevel==='hard')ST.spLevel='medium';
+    else if(ST.spLevel==='medium')ST.spLevel='easy';
   }
-  if(ST.spLevel==='medium'&&ST.spMaxLevel==='easy')ST.spMaxLevel='medium';
-  if(ST.spLevel==='hard'&&ST.spMaxLevel!=='hard')ST.spMaxLevel='hard';
   renderSec();
 }
 
-// IMAGES
+// ── IMAGES ──
 function renderImg(a){
   const img=DATA.images[ST.imgQ];
   const sv=ST.imgAns[ST.imgQ];
-  a.innerHTML=`<div class="swrap">
-    <div class="shero"><div class="shero-icon">🖼️</div><div><h2>IMAGES</h2><p>Choose the best description</p></div><div class="shero-r"><div class="qbadge"><div class="qbn">${ST.imgQ+1}<span style="font-size:.95rem;color:#334155">/3</span></div><div class="qbl">Images</div></div></div></div>
-    <div class="ptrack"><div class="pfill" style="width:${(ST.imgQ+1)/3*100}%"></div></div>
-    <div class="img-card">
-      <div class="img-emoji">${img.emoji}</div>
-      <div class="img-label">🔍 What do you see?</div>
-      <div class="img-desc-prompt">Read both descriptions carefully and choose which one best matches the image above.</div>
-    </div>
-    <div class="qcard">
-      <div class="qnum">Choose the best description</div>
-      <div class="qtxt">Which description fits this image the most?</div>
-      <div class="opts">${img.options.map((o,i)=>{
-        let cls='';
-        if(sv!==null){if(i===img.ans)cls=' cor';else if(sv===i&&i!==img.ans)cls=' wrn';}
-        return`<div class="opt${cls}" onclick="${sv!==null?'':'selImg('+i+')'}" style="${sv!==null?'cursor:default':''}"><div class="oltr">${'AB'[i]}</div><div>${o}</div></div>`;
-      }).join('')}</div>
-      ${sv!==null?`<div style="margin-top:1rem;padding:.8rem 1rem;background:rgba(255,255,255,.03);border-radius:8px;font-size:.83rem;color:#94a3b8">💡 ${img.explain}</div>`:''}
-    </div>
-  </div>`;
+  const optsHtml=img.options.map((o,i)=>{
+    let cls='';
+    if(sv!==null){if(i===img.ans)cls=' cor';else if(sv===i&&i!==img.ans)cls=' wrn';}
+    return '<div class="opt'+cls+'" onclick="'+(sv!==null?'':'selImg('+i+')')+'" style="'+(sv!==null?'cursor:default':'')+'"><div class="oltr">'+'AB'[i]+'</div><div>'+o+'</div></div>';
+  }).join('');
+  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">🖼️</div><div><h2>IMAGES</h2><p>Choose the best description</p></div><div class="shero-r"><div class="qbadge"><div class="qbn">'+(ST.imgQ+1)+'<span style="font-size:.95rem;color:#334155">/3</span></div><div class="qbl">Images</div></div></div></div><div class="ptrack"><div class="pfill" style="width:'+((ST.imgQ+1)/3*100)+'%"></div></div><div class="img-card"><div class="img-emoji">'+img.emoji+'</div><div class="img-label">🔍 What do you see?</div><div class="img-desc-prompt">Read both descriptions carefully and choose which one best matches the image above.</div></div><div class="qcard"><div class="qnum">Choose the best description</div><div class="qtxt">Which description fits this image the most?</div><div class="opts">'+optsHtml+'</div>'+(sv!==null?'<div style="margin-top:1rem;padding:.8rem 1rem;background:rgba(255,255,255,.03);border-radius:8px;font-size:.83rem;color:#94a3b8">💡 '+img.explain+'</div>':'')+'</div></div>';
 }
 function selImg(i){
   if(ST.imgAns[ST.imgQ]!==null)return;
   ST.imgAns[ST.imgQ]=i;
-  if(i===DATA.images[ST.imgQ].ans)ST.imgCor++;
+  // BUG FIX: removed inline imgCor increment here — scoreSection recalculates it
+  // cleanly from scratch, so incrementing here caused double-counting on retry.
   renderSec();
 }
 
-// NAVIGATION
+// ── NAVIGATION ──
 function goFwd(){
   const id=SECS[ST.sec].id;
   if(id==='reading'){
@@ -671,11 +690,9 @@ function goFwd(){
   } else if(id==='speaking'){
     if(ST.feedback===null){toast('Please pick a response first!','tr');return;}
     ST.spAns.push(ST.feedback.ok);
-    const wasWrong=!ST.feedback.ok;
     ST.feedback=null;
     ST.spQ++;
-    if(wasWrong&&ST.spAns.length>=4){completeSection();}
-    else if(ST.spAns.length>=8)completeSection();
+    if(ST.spAns.length>=8)completeSection();
     else renderSec();
   } else {
     if(ST.imgAns[ST.imgQ]===null){toast('Please choose a description first!','tr');return;}
@@ -684,11 +701,23 @@ function goFwd(){
 }
 
 function scoreSection(){
-  if(ST.sec===0){let c=0,qi=0;DATA.reading.forEach(p=>p.qs.forEach((q)=>{if(ST.rAns[qi]===q.ans)c++;qi++;}));ST.rCor=c;ST.scores.reading=Math.round(c/9*100);}
-  else if(ST.sec===1){let c=0,qi=0;DATA.listening.forEach(cl=>{cl.qs.forEach((q)=>{if(ST.lAns[qi]===q.ans)c++;qi++;});});ST.lCor=c;ST.scores.listening=Math.round(c/6*100);}
-  else if(ST.sec===2){ST.scores.writing=Math.round(ST.wCor/Math.max(ST.wAns.length,1)*100);}
-  else if(ST.sec===3){ST.scores.speaking=Math.round(ST.spCor/Math.max(ST.spAns.length,1)*100);}
-  else{ST.imgCor=ST.imgAns.filter((a,i)=>a===DATA.images[i].ans).length;ST.scores.images=Math.round(ST.imgCor/3*100);}
+  if(ST.sec===0){
+    let c=0,qi=0;
+    DATA.reading.forEach(p=>p.qs.forEach(q=>{if(ST.rAns[qi]===q.ans)c++;qi++;}));
+    ST.rCor=c;ST.scores.reading=Math.round(c/9*100);
+  } else if(ST.sec===1){
+    let c=0,qi=0;
+    DATA.listening.forEach(cl=>{cl.qs.forEach(q=>{if(ST.lAns[qi]===q.ans)c++;qi++;});});
+    ST.lCor=c;ST.scores.listening=Math.round(c/6*100);
+  } else if(ST.sec===2){
+    ST.scores.writing=Math.round(ST.wCor/Math.max(ST.wAns.length,1)*100);
+  } else if(ST.sec===3){
+    ST.scores.speaking=Math.round(ST.spCor/Math.max(ST.spAns.length,1)*100);
+  } else {
+    // BUG FIX: always recalculate imgCor here from source of truth
+    ST.imgCor=ST.imgAns.filter((a,i)=>a===DATA.images[i].ans).length;
+    ST.scores.images=Math.round(ST.imgCor/3*100);
+  }
 }
 
 function completeSection(){
@@ -697,13 +726,7 @@ function completeSection(){
   const sc=ST.scores[id];
   const col=['#3b82f6','#8b5cf6','#10b981','#ef4444','#f59e0b'][ST.sec];
   const emoji=sc>=70?'🎉':sc>=50?'👍':'💪';
-  document.getElementById('earea').innerHTML=`<div class="sc-complete">
-    <div class="sc-ico">${SECS[ST.sec].icon}</div>
-    <div class="sc-title">${SECS[ST.sec].name} DONE!</div>
-    <div class="sc-sub">${ST.sec<SECS.length-1?'Great job! Ready for the next part?':'All done! Your report is ready!'}</div>
-    <div class="sc-score"><div class="sc-slbl">YOUR SCORE</div><div class="sc-snum" style="color:${col}">${emoji} ${sc}%</div></div>
-    <button class="btn-continue" onclick="advanceSection()">${ST.sec<SECS.length-1?`Next: ${SECS[ST.sec+1].name} →`:'See My Report →'}</button>
-  </div>`;
+  document.getElementById('earea').innerHTML='<div class="sc-complete"><div class="sc-ico">'+SECS[ST.sec].icon+'</div><div class="sc-title">'+SECS[ST.sec].name+' DONE!</div><div class="sc-sub">'+(ST.sec<SECS.length-1?'Great job! Ready for the next part?':'All done! Your report is ready!')+'</div><div class="sc-score"><div class="sc-slbl">YOUR SCORE</div><div class="sc-snum" style="color:'+col+'">'+emoji+' '+sc+'%</div></div><button class="btn-continue" onclick="advanceSection()">'+(ST.sec<SECS.length-1?'Next: '+SECS[ST.sec+1].name+' →':'See My Report →')+'</button></div>';
   document.getElementById('eftr').style.display='none';
 }
 
@@ -717,7 +740,6 @@ function advanceSection(){
   }
 }
 
-// REPORT
 function buildReport(){
   show('report');
   const total=Math.round(Object.values(ST.scores).reduce((a,b)=>a+b,0)/5);
@@ -728,50 +750,21 @@ function buildReport(){
   const wLevel=ST.wMaxLevel==='hard'?'✅ Advanced':ST.wMaxLevel==='medium'?'👍 Intermediate':'🟡 Basic';
   const spLevel=ST.spMaxLevel==='hard'?'✅ Advanced':ST.spMaxLevel==='medium'?'👍 Intermediate':'🟡 Basic';
   const imgResult=ST.imgCor===3?'✅ Perfect':ST.imgCor===2?'👍 Good':'🟡 Keep Practicing';
-
-  document.getElementById('report').innerHTML=`<div class="rinner">
-    <div class="rhero">
-      <div class="rgreet">English Practice · Score Report</div>
-      <div class="rname">${ST.name}</div>
-      <div class="rdate">${date}</div>
-      <div class="ring-wrap">
-        <svg class="ring-svg" width="190" height="190" viewBox="0 0 190 190">
-          <circle class="ring-bg" cx="95" cy="95" r="78"/>
-          <circle class="ring-fg" id="ringfg" cx="95" cy="95" r="78" stroke="${lv.color}" stroke-dasharray="${2*Math.PI*78}" stroke-dashoffset="${2*Math.PI*78}"/>
-        </svg>
-        <div class="ring-txt"><div class="ring-num" id="rnum">0</div><div class="ring-max">/ 100</div></div>
-      </div>
-      <div class="lvl-pill" style="background:${lv.color}1e;color:${lv.color};border:1px solid ${lv.color}44">${lv.cefr} · ${lv.name}</div>
-      <div style="font-size:.85rem;color:var(--muted);max-width:400px;margin:.5rem auto;line-height:1.7">${lv.desc}</div>
-      <div class="cefr-row">${['A1','A2','B1','B2','C1','C2'].map(l=>`<div class="cdot${l===lv.cefr?' act':''}" style="${l===lv.cefr?'background:'+lv.color+';border-color:'+lv.color:''}">${l}</div>`).join('')}</div>
-    </div>
-    <div class="atitle-r">YOUR RESULTS</div>
-    <div class="scores-4">
-      ${[
-        {ico:'📖',lbl:'Reading',res:rResult,col:'#3b82f6'},
-        {ico:'🎧',lbl:'Listening',res:lResult,col:'#8b5cf6'},
-        {ico:'✍️',lbl:'Writing',res:wLevel,col:'#10b981'},
-        {ico:'💬',lbl:'Speaking',res:spLevel,col:'#ef4444'},
-        {ico:'🖼️',lbl:'Images',res:imgResult,col:'#f59e0b'},
-      ].map(s=>`<div class="sc4"><div class="sc4-ico">${s.ico}</div><div class="sc4-lbl">${s.lbl}</div><div class="sc4-result">${s.res}</div></div>`).join('')}
-    </div>
-    <div class="atitle-r">AI COACH FEEDBACK</div>
-    <div class="aicard" id="aicard">
-      <div class="aihdr"><div class="aidot"></div><div class="ailbl">Getting your personalized feedback...</div></div>
-      <div class="aitxt"><div class="ld-wrap"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div></div>
-    </div>
-    <button class="btn-again" onclick="restart()">🔄 Practice Again</button>
-  </div>`;
-
+  const C=2*Math.PI*78;
+  document.getElementById('report').innerHTML='<div class="rinner"><div class="rhero"><div class="rgreet">English Practice · Score Report</div><div class="rname">'+ST.name+'</div><div class="rdate">'+date+'</div><div class="ring-wrap"><svg class="ring-svg" width="190" height="190" viewBox="0 0 190 190"><circle class="ring-bg" cx="95" cy="95" r="78"/><circle class="ring-fg" id="ringfg" cx="95" cy="95" r="78" stroke="'+lv.color+'" stroke-dasharray="'+C+'" stroke-dashoffset="'+C+'"/></svg><div class="ring-txt"><div class="ring-num" id="rnum">0</div><div class="ring-max">/ 100</div></div></div><div class="lvl-pill" style="background:'+lv.color+'1e;color:'+lv.color+';border:1px solid '+lv.color+'44">'+lv.cefr+' · '+lv.name+'</div><div style="font-size:.85rem;color:var(--muted);max-width:400px;margin:.5rem auto;line-height:1.7">'+lv.desc+'</div><div class="cefr-row">'+['A1','A2','B1','B2','C1','C2'].map(l=>'<div class="cdot'+(l===lv.cefr?' act':'')+'" style="'+(l===lv.cefr?'background:'+lv.color+';border-color:'+lv.color:'')+'">' +l+'</div>').join('')+'</div></div><div class="atitle-r">YOUR RESULTS</div><div class="scores-4">'+[{ico:'📖',lbl:'Reading',res:rResult},{ico:'🎧',lbl:'Listening',res:lResult},{ico:'✍️',lbl:'Writing',res:wLevel},{ico:'💬',lbl:'Speaking',res:spLevel},{ico:'🖼️',lbl:'Images',res:imgResult}].map(s=>'<div class="sc4"><div class="sc4-ico">'+s.ico+'</div><div class="sc4-lbl">'+s.lbl+'</div><div class="sc4-result">'+s.res+'</div></div>').join('')+'</div><div class="atitle-r">AI COACH FEEDBACK</div><div class="aicard" id="aicard"><div class="aihdr"><div class="aidot"></div><div class="ailbl">Getting your personalized feedback...</div></div><div class="aitxt"><div class="ld-wrap"><div class="ld"></div><div class="ld"></div><div class="ld"></div></div></div></div><button class="btn-again" onclick="restart()">🔄 Practice Again</button></div>';
   setTimeout(()=>{
-    const C=2*Math.PI*78,off=C-(total/100)*C;
+    const off=C-(total/100)*C;
     document.getElementById('ringfg').style.strokeDashoffset=off;
     animN('rnum',0,total,1500);
   },300);
   fetchAI(total,lv);
 }
 
-function animN(id,from,to,dur){const el=document.getElementById(id),t0=performance.now();function s(now){const p=Math.min((now-t0)/dur,1);el.textContent=Math.round(from+(to-from)*p);if(p<1)requestAnimationFrame(s);}requestAnimationFrame(s);}
+function animN(id,from,to,dur){
+  const el=document.getElementById(id),t0=performance.now();
+  function s(now){const p=Math.min((now-t0)/dur,1);el.textContent=Math.round(from+(to-from)*p);if(p<1)requestAnimationFrame(s);}
+  requestAnimationFrame(s);
+}
 
 function getLevel(t){
   if(t>=90)return{name:'Advanced',cefr:'C2',color:'#10b981',desc:'Excellent English skills! You are nearly fluent. Keep practicing to maintain your level.'};
@@ -784,33 +777,20 @@ function getLevel(t){
 async function fetchAI(total,lv){
   const wLevelTxt=ST.wMaxLevel==='hard'?'advanced grammar':ST.wMaxLevel==='medium'?'intermediate grammar':'basic grammar';
   const spLevelTxt=ST.spMaxLevel==='hard'?'advanced conversations':ST.spMaxLevel==='medium'?'intermediate conversations':'basic conversations';
-  const prompt=`You are a friendly and encouraging English teacher. Your student is ${ST.name} and they just finished an English practice session. Here are their results:
-- Overall average: ${total}/100 → Level: ${lv.cefr} (${lv.name})
-- Reading: ${ST.rCor}/9 questions correct
-- Listening: ${ST.lCor}/6 questions correct
-- Writing (grammar): reached ${wLevelTxt} level
-- Speaking (best responses): reached ${spLevelTxt} level
-- Image descriptions: ${ST.imgCor}/3 correct
-
-Write a warm, simple, and encouraging message in 3 short paragraphs (2-3 sentences each):
-Paragraph 1: Greet ${ST.name} by name and say something genuinely positive about their overall result.
-Paragraph 2: Point out their strongest area and one area to improve, with one simple tip.
-Paragraph 3: Give them one fun activity they can do this week to practice English (example: watch a cartoon in English, read a simple news article, etc.)
-Use simple language. Be like a friendly teacher, not a robot. No bullet points, no headers.`;
-
+  const prompt='You are a friendly and encouraging English teacher. Your student is '+ST.name+' and they just finished an English practice session. Here are their results:\n- Overall average: '+total+'/100 → Level: '+lv.cefr+' ('+lv.name+')\n- Reading: '+ST.rCor+'/9 questions correct\n- Listening: '+ST.lCor+'/6 questions correct\n- Writing (grammar): reached '+wLevelTxt+' level\n- Speaking (best responses): reached '+spLevelTxt+' level\n- Image descriptions: '+ST.imgCor+'/3 correct\n\nWrite a warm, simple, and encouraging message in 3 short paragraphs (2-3 sentences each):\nParagraph 1: Greet '+ST.name+' by name and say something genuinely positive about their overall result.\nParagraph 2: Point out their strongest area and one area to improve, with one simple tip.\nParagraph 3: Give them one fun activity they can do this week to practice English.\nUse simple language. Be like a friendly teacher, not a robot. No bullet points, no headers.';
   try{
     const r=await fetch('https://api.anthropic.com/v1/messages',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({model:'claude-sonnet-4-20250514',max_tokens:500,messages:[{role:'user',content:prompt}]})});
     const d=await r.json(),txt=d.content?.find(b=>b.type==='text')?.text||'';
     const card=document.getElementById('aicard');
-    if(card&&txt)card.innerHTML=`<div class="aihdr"><div class="aidot"></div><div class="ailbl">Your Teacher's Feedback</div></div><div class="aitxt">${txt.split(/\n\n+/).map(p=>`<p>${p}</p>`).join('')}</div>`;
+    if(card&&txt)card.innerHTML='<div class="aihdr"><div class="aidot"></div><div class="ailbl">Your Teacher\'s Feedback</div></div><div class="aitxt">'+txt.split(/\n\n+/).map(p=>'<p>'+p+'</p>').join('')+'</div>';
   } catch(e){
     const card=document.getElementById('aicard');
-    if(card)card.innerHTML=`<div class="aihdr"><div class="aidot"></div><div class="ailbl">Teacher's Note</div></div><div class="aitxt"><p>Great work, ${ST.name}! You completed all five sections of the practice — that already shows dedication. Your score of ${total}% puts you at the ${lv.name} level.</p><p>To improve, try to practice a little every day. Reading short stories in English and listening to simple podcasts are two great habits to start with.</p><p>This week's challenge: watch one short video in English (even 5 minutes!), and try to write 3 sentences about what you watched. You've got this! 🌟</p></div>`;
+    if(card)card.innerHTML='<div class="aihdr"><div class="aidot"></div><div class="ailbl">Teacher\'s Note</div></div><div class="aitxt"><p>Great work, '+ST.name+'! You completed all five sections — that already shows dedication. Your score of '+total+'% puts you at the '+lv.name+' level.</p><p>To improve, try to practice a little every day. Reading short stories in English and listening to simple podcasts are two great habits to start with.</p><p>This week\'s challenge: watch one short video in English (even 5 minutes!), and try to write 3 sentences about what you watched. You\'ve got this! 🌟</p></div>';
   }
 }
 
 function restart(){
-  ST={name:'Student',sec:0,rQ:0,rAns:Array(9).fill(null),lQ:0,lAns:Array(6).fill(null),lPlays:[2,2,2],wLevel:'easy',wQ:0,wAns:[],wStreak:0,wMaxLevel:'easy',spLevel:'easy',spQ:0,spAns:[],spStreak:0,spMaxLevel:'easy',spLastWrong:false,imgQ:0,imgAns:Array(3).fill(null),scores:{reading:0,listening:0,writing:0,speaking:0,images:0},rCor:0,lCor:0,wCor:0,spCor:0,imgCor:0,feedback:null,waitingNext:false};
+  ST={name:'Student',sec:0,rQ:0,rAns:Array(9).fill(null),lQ:0,lAns:Array(6).fill(null),lPlays:[2,2,2],wLevel:'easy',wQ:0,wAns:[],wStreak:0,wMaxLevel:'easy',spLevel:'easy',spQ:0,spAns:[],spStreak:0,spMaxLevel:'easy',imgQ:0,imgAns:Array(3).fill(null),scores:{reading:0,listening:0,writing:0,speaking:0,images:0},rCor:0,lCor:0,wCor:0,spCor:0,imgCor:0,feedback:null};
   if(window.speechSynthesis)window.speechSynthesis.cancel();
   stopWv();
   document.getElementById('eftr').style.display='flex';
