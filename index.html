@@ -169,7 +169,6 @@ body{font-family:'Outfit',sans-serif;background:var(--ink);color:var(--text);min
 .sc4-result{font-size:1.4rem;margin:6px 0}
 .atitle-r{font-family:'Bebas Neue',sans-serif;font-size:1.7rem;letter-spacing:3px;color:#f5f0e8;margin-bottom:1.3rem;display:flex;align-items:center;gap:10px;margin-top:2rem}
 .atitle-r::before,.atitle-r::after{content:'';flex:1;height:1px;background:var(--bdr)}
-/* WRONG REVIEW */
 .wrong-section{margin-bottom:2rem}
 .wrong-sec-title{font-size:.72rem;text-transform:uppercase;letter-spacing:2px;color:#60a5fa;font-weight:700;margin-bottom:.8rem;padding-bottom:.5rem;border-bottom:1px solid var(--bdr)}
 .wrong-card{background:rgba(220,38,38,.05);border:1px solid rgba(220,38,38,.16);border-radius:12px;padding:1.3rem;margin-bottom:.9rem}
@@ -369,12 +368,14 @@ let ST={
   name:'Student',sec:0,
   rQ:0,rAns:Array(9).fill(null),
   lQ:0,lAns:Array(6).fill(null),lPlays:[2,2,2],
-  wLevel:'easy',wQ:0,wAns:[],wStreak:0,wMaxLevel:'easy',wHistory:[],
-  spLevel:'easy',spQ:0,spAns:[],spStreak:0,spMaxLevel:'easy',spHistory:[],
+  // Writing — wFeedback replaces the old shared "feedback" prop
+  wLevel:'easy',wQ:0,wAns:[],wStreak:0,wMaxLevel:'easy',wHistory:[],wFeedback:null,
+  // Speaking — spFeedback replaces the old shared "feedback" prop
+  spLevel:'easy',spQ:0,spAns:[],spStreak:0,spMaxLevel:'easy',spHistory:[],spFeedback:null,
   imgQ:0,imgAns:Array(3).fill(null),
   scores:{reading:0,listening:0,writing:0,speaking:0,images:0},
   rCor:0,lCor:0,wCor:0,spCor:0,imgCor:0,
-  feedback:null,secTimeLeft:0,
+  secTimeLeft:0,
 };
 let wvInt=null,timerInt=null;
 
@@ -419,11 +420,11 @@ function autoFillSection(){
   if(id==='reading'){for(let i=0;i<9;i++)if(ST.rAns[i]===null)ST.rAns[i]=-1;}
   else if(id==='listening'){for(let i=0;i<6;i++)if(ST.lAns[i]===null)ST.lAns[i]=-1;}
   else if(id==='writing'){
-    if(ST.feedback!==null){ST.wAns.push(ST.feedback.ok);ST.feedback=null;ST.wQ++;}
+    if(ST.wFeedback!==null){ST.wAns.push(ST.wFeedback.ok);ST.wFeedback=null;ST.wQ++;}
     while(ST.wAns.length<8){ST.wAns.push(false);ST.wQ++;}
   }
   else if(id==='speaking'){
-    if(ST.feedback!==null){ST.spAns.push(ST.feedback.ok);ST.feedback=null;ST.spQ++;}
+    if(ST.spFeedback!==null){ST.spAns.push(ST.spFeedback.ok);ST.spFeedback=null;ST.spQ++;}
     while(ST.spAns.length<8){ST.spAns.push(false);ST.spQ++;}
   }
   else{for(let i=0;i<3;i++)if(ST.imgAns[i]===null)ST.imgAns[i]=-1;}
@@ -513,50 +514,88 @@ function startWv(){clearInterval(wvInt);wvInt=setInterval(()=>{document.querySel
 function stopWv(){clearInterval(wvInt);document.querySelectorAll('.wv').forEach(el=>{el.style.height='6px';el.classList.remove('on');});}
 function selL(i){ST.lAns[ST.lQ]=i;renderSec();}
 
-// ── WRITING ──────────────────────────────────────────────────────────────
+// ── WRITING ───────────────────────────────────────────────────────────────
+// FIX: wFeedback is set when user picks an answer, cleared when Next is pressed.
+// renderWr() reads wFeedback at call time — it always belongs to the current question.
 function getWrQ(){return DATA.writing[ST.wLevel][ST.wQ%DATA.writing[ST.wLevel].length];}
+
 function renderWr(a){
+  const fb=ST.wFeedback;           // snapshot: null = unanswered, object = answered
   const q=getWrQ();
   const ll=ST.wLevel==='easy'?'🟢 Beginner':ST.wLevel==='medium'?'🟡 Intermediate':'🔴 Advanced';
   const lc='level-'+ST.wLevel;
-  const fb=ST.feedback!==null?'<div class="feedback-banner '+(ST.feedback.ok?'feedback-correct':'feedback-wrong')+'">'+(ST.feedback.ok?'✅ Correct!':'❌ Not quite.')+' '+ST.feedback.explain+'</div>':'';
-  const optsHtml=q.opts.map((o,i)=>{let cls='';if(ST.feedback!==null){if(i===q.ans)cls=' cor';else if(ST.feedback.chosen===i)cls=' wrn';}return '<div class="opt'+cls+'" onclick="'+(ST.feedback!==null?'':'selWr('+i+')')+'" style="'+(ST.feedback!==null?'cursor:default':'')+'"><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>';}).join('');
-  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">✍️</div><div><h2>WRITING</h2><p>Grammar & Structure · Adaptive Difficulty</p></div></div><div class="ptrack"><div class="pfill" style="width:'+Math.min(ST.wAns.length/8*100,100)+'%"></div></div><div class="level-indicator"><span class="'+lc+'" style="padding:3px 10px;border-radius:12px;">'+ll+'</span> — Question '+(ST.wAns.length+1)+'</div>'+(ST.wStreak>=2?'<div class="streak-box">🔥 '+ST.wStreak+' correct in a row!</div>':'')+fb+'<div class="writing-q"><h4>✏️ Choose the correct answer</h4><p>'+q.q+'</p></div><div class="opts">'+optsHtml+'</div></div>';
+  const fbHtml=fb?'<div class="feedback-banner '+(fb.ok?'feedback-correct':'feedback-wrong')+'">'+(fb.ok?'✅ Correct!':'❌ Not quite.')+' '+fb.explain+'</div>':'';
+  const optsHtml=q.opts.map((o,i)=>{
+    let cls='';
+    if(fb){if(i===q.ans)cls=' cor';else if(fb.chosen===i)cls=' wrn';}
+    return '<div class="opt'+cls+'" '+(fb?'style="cursor:default"':'onclick="selWr('+i+')"')+'><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>';
+  }).join('');
+  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">✍️</div><div><h2>WRITING</h2><p>Grammar & Structure · Adaptive Difficulty</p></div></div><div class="ptrack"><div class="pfill" style="width:'+Math.min(ST.wAns.length/8*100,100)+'%"></div></div><div class="level-indicator"><span class="'+lc+'" style="padding:3px 10px;border-radius:12px;">'+ll+'</span> — Question '+(ST.wAns.length+1)+'</div>'+(ST.wStreak>=2?'<div class="streak-box">🔥 '+ST.wStreak+' correct in a row!</div>':'')+fbHtml+'<div class="writing-q"><h4>✏️ Choose the correct answer</h4><p>'+q.q+'</p></div><div class="opts">'+optsHtml+'</div></div>';
 }
+
 function selWr(i){
-  if(ST.feedback!==null)return;
-  const q=getWrQ();const ok=i===q.ans;
+  if(ST.wFeedback!==null)return;   // already answered — block double-click
+  const q=getWrQ();
+  const ok=i===q.ans;
   ST.wHistory.push({q:q.q,opts:q.opts,chosen:i,ans:q.ans,ok,explain:q.explain});
-  ST.feedback={ok,chosen:i,explain:q.explain};
-  if(ok){ST.wStreak++;ST.wCor++;if(ST.wStreak>=2){if(ST.wLevel==='easy'){ST.wLevel='medium';if(ST.wMaxLevel==='easy')ST.wMaxLevel='medium';}else if(ST.wLevel==='medium'){ST.wLevel='hard';ST.wMaxLevel='hard';}ST.wStreak=0;}}
-  else{ST.wStreak=0;if(ST.wLevel==='hard')ST.wLevel='medium';else if(ST.wLevel==='medium')ST.wLevel='easy';}
-  renderSec();
+  ST.wFeedback={ok,chosen:i,explain:q.explain};
+  if(ok){
+    ST.wStreak++; ST.wCor++;
+    if(ST.wStreak>=2){
+      if(ST.wLevel==='easy'){ST.wLevel='medium';if(ST.wMaxLevel==='easy')ST.wMaxLevel='medium';}
+      else if(ST.wLevel==='medium'){ST.wLevel='hard';ST.wMaxLevel='hard';}
+      ST.wStreak=0;
+    }
+  } else {
+    ST.wStreak=0;
+    if(ST.wLevel==='hard')ST.wLevel='medium';
+    else if(ST.wLevel==='medium')ST.wLevel='easy';
+  }
+  renderSec(); // re-render SAME question with feedback shown
 }
 
 // ── SPEAKING ──────────────────────────────────────────────────────────────
 function getSpQ(){return DATA.speaking[ST.spLevel][ST.spQ%DATA.speaking[ST.spLevel].length];}
+
 function renderSp(a){
+  const fb=ST.spFeedback;
   const q=getSpQ();
   const ll=ST.spLevel==='easy'?'🟢 Basic':ST.spLevel==='medium'?'🟡 Intermediate':'🔴 Advanced';
   const lc='level-'+ST.spLevel;
-  const fb=ST.feedback!==null?'<div class="feedback-banner '+(ST.feedback.ok?'feedback-correct':'feedback-wrong')+'">'+(ST.feedback.ok?'✅ Great response!':'❌ Not the best choice.')+' '+ST.feedback.explain+'</div>':'';
-  const optsHtml=q.opts.map((o,i)=>{let cls='';if(ST.feedback!==null){if(i===q.ans)cls=' cor';else if(ST.feedback.chosen===i)cls=' wrn';}return '<div class="opt'+cls+'" onclick="'+(ST.feedback!==null?'':'selSp('+i+')')+'" style="'+(ST.feedback!==null?'cursor:default':'')+'"><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>';}).join('');
-  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">💬</div><div><h2>SPEAKING</h2><p>Real-Life Situations · Best Response</p></div></div><div class="ptrack"><div class="pfill" style="width:'+Math.min(ST.spAns.length/8*100,100)+'%"></div></div><div class="level-indicator"><span class="'+lc+'" style="padding:3px 10px;border-radius:12px;">'+ll+'</span> — Situation '+(ST.spAns.length+1)+'</div>'+(ST.spStreak>=2?'<div class="streak-box">🔥 '+ST.spStreak+' correct in a row!</div>':'')+fb+'<div class="sp-scenario"><h4>📍 Situation</h4><p>'+q.scenario+'</p><p class="sp-question">'+q.q+'</p></div><div class="opts">'+optsHtml+'</div></div>';
+  const fbHtml=fb?'<div class="feedback-banner '+(fb.ok?'feedback-correct':'feedback-wrong')+'">'+(fb.ok?'✅ Great response!':'❌ Not the best choice.')+' '+fb.explain+'</div>':'';
+  const optsHtml=q.opts.map((o,i)=>{
+    let cls='';
+    if(fb){if(i===q.ans)cls=' cor';else if(fb.chosen===i)cls=' wrn';}
+    return '<div class="opt'+cls+'" '+(fb?'style="cursor:default"':'onclick="selSp('+i+')"')+'><div class="oltr">'+'ABCD'[i]+'</div><div>'+o+'</div></div>';
+  }).join('');
+  a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">💬</div><div><h2>SPEAKING</h2><p>Real-Life Situations · Best Response</p></div></div><div class="ptrack"><div class="pfill" style="width:'+Math.min(ST.spAns.length/8*100,100)+'%"></div></div><div class="level-indicator"><span class="'+lc+'" style="padding:3px 10px;border-radius:12px;">'+ll+'</span> — Situation '+(ST.spAns.length+1)+'</div>'+(ST.spStreak>=2?'<div class="streak-box">🔥 '+ST.spStreak+' correct in a row!</div>':'')+fbHtml+'<div class="sp-scenario"><h4>📍 Situation</h4><p>'+q.scenario+'</p><p class="sp-question">'+q.q+'</p></div><div class="opts">'+optsHtml+'</div></div>';
 }
+
 function selSp(i){
-  if(ST.feedback!==null)return;
-  const q=getSpQ();const ok=i===q.ans;
+  if(ST.spFeedback!==null)return;
+  const q=getSpQ();
+  const ok=i===q.ans;
   ST.spHistory.push({scenario:q.scenario,q:q.q,opts:q.opts,chosen:i,ans:q.ans,ok,explain:q.explain});
-  ST.feedback={ok,chosen:i,explain:q.explain};
-  if(ok){ST.spStreak++;ST.spCor++;if(ST.spStreak>=2){if(ST.spLevel==='easy'){ST.spLevel='medium';if(ST.spMaxLevel==='easy')ST.spMaxLevel='medium';}else if(ST.spLevel==='medium'){ST.spLevel='hard';ST.spMaxLevel='hard';}ST.spStreak=0;}}
-  else{ST.spStreak=0;if(ST.spLevel==='hard')ST.spLevel='medium';else if(ST.spLevel==='medium')ST.spLevel='easy';}
-  renderSec();
+  ST.spFeedback={ok,chosen:i,explain:q.explain};
+  if(ok){
+    ST.spStreak++; ST.spCor++;
+    if(ST.spStreak>=2){
+      if(ST.spLevel==='easy'){ST.spLevel='medium';if(ST.spMaxLevel==='easy')ST.spMaxLevel='medium';}
+      else if(ST.spLevel==='medium'){ST.spLevel='hard';ST.spMaxLevel='hard';}
+      ST.spStreak=0;
+    }
+  } else {
+    ST.spStreak=0;
+    if(ST.spLevel==='hard')ST.spLevel='medium';
+    else if(ST.spLevel==='medium')ST.spLevel='easy';
+  }
+  renderSec(); // re-render SAME question with feedback shown
 }
 
 // ── IMAGES ────────────────────────────────────────────────────────────────
 function renderImg(a){
   const img=DATA.images[ST.imgQ];const sv=ST.imgAns[ST.imgQ];
-  const optsHtml=img.options.map((o,i)=>{let cls='';if(sv!==null){if(i===img.ans)cls=' cor';else if(sv===i)cls=' wrn';}return '<div class="opt'+cls+'" onclick="'+(sv!==null?'':'selImg('+i+')')+'" style="'+(sv!==null?'cursor:default':'')+'"><div class="oltr">'+'AB'[i]+'</div><div>'+o+'</div></div>';}).join('');
+  const optsHtml=img.options.map((o,i)=>{let cls='';if(sv!==null){if(i===img.ans)cls=' cor';else if(sv===i)cls=' wrn';}return '<div class="opt'+cls+'" '+(sv!==null?'style="cursor:default"':'onclick="selImg('+i+')"')+'><div class="oltr">'+'AB'[i]+'</div><div>'+o+'</div></div>';}).join('');
   a.innerHTML='<div class="swrap"><div class="shero"><div class="shero-icon">🖼️</div><div><h2>IMAGES</h2><p>Choose the best description</p></div><div class="shero-r"><div class="qbadge"><div class="qbn">'+(ST.imgQ+1)+'<span style="font-size:.95rem;color:#334155">/3</span></div><div class="qbl">Images</div></div></div></div><div class="ptrack"><div class="pfill" style="width:'+((ST.imgQ+1)/3*100)+'%"></div></div><div class="img-card"><div class="img-emoji">'+img.emoji+'</div><div class="img-label">🔍 What do you see?</div><div class="img-desc-prompt">Read both descriptions and choose which one best matches the image above.</div></div><div class="qcard"><div class="qnum">Choose the best description</div><div class="qtxt">Which description fits this image?</div><div class="opts">'+optsHtml+'</div>'+(sv!==null?'<div style="margin-top:1rem;padding:.8rem 1rem;background:rgba(255,255,255,.03);border-radius:8px;font-size:.83rem;color:#94a3b8">💡 '+img.explain+'</div>':'')+'</div></div>';
 }
 function selImg(i){if(ST.imgAns[ST.imgQ]!==null)return;ST.imgAns[ST.imgQ]=i;renderSec();}
@@ -564,21 +603,32 @@ function selImg(i){if(ST.imgAns[ST.imgQ]!==null)return;ST.imgAns[ST.imgQ]=i;rend
 // ── NAVIGATION ────────────────────────────────────────────────────────────
 function goFwd(){
   const id=SECS[ST.sec].id;
+
   if(id==='reading'){
     if(ST.rAns[ST.rQ]===null){toast('Please choose an answer first!','tr');return;}
     if(ST.rQ<8){ST.rQ++;renderSec();}else completeSection();
-  } else if(id==='listening'){
+
+  }else if(id==='listening'){
     if(ST.lAns[ST.lQ]===null){toast('Please choose an answer first!','tr');return;}
     if(ST.lQ<5){ST.lQ++;renderSec();}else completeSection();
-  } else if(id==='writing'){
-    if(ST.feedback===null){toast('Please choose an answer first!','tr');return;}
-    ST.wAns.push(ST.feedback.ok);ST.feedback=null;ST.wQ++;
+
+  }else if(id==='writing'){
+    // Must answer before Next is valid
+    if(ST.wFeedback===null){toast('Please choose an answer first!','tr');return;}
+    // Commit result, clear feedback, advance question index
+    ST.wAns.push(ST.wFeedback.ok);
+    ST.wFeedback=null;   // ← MUST clear BEFORE renderSec so next question shows clean
+    ST.wQ++;
     if(ST.wAns.length>=8)completeSection();else renderSec();
-  } else if(id==='speaking'){
-    if(ST.feedback===null){toast('Please pick a response first!','tr');return;}
-    ST.spAns.push(ST.feedback.ok);ST.feedback=null;ST.spQ++;
+
+  }else if(id==='speaking'){
+    if(ST.spFeedback===null){toast('Please pick a response first!','tr');return;}
+    ST.spAns.push(ST.spFeedback.ok);
+    ST.spFeedback=null;  // ← MUST clear BEFORE renderSec
+    ST.spQ++;
     if(ST.spAns.length>=8)completeSection();else renderSec();
-  } else {
+
+  }else{
     if(ST.imgAns[ST.imgQ]===null){toast('Please choose a description first!','tr');return;}
     if(ST.imgQ<2){ST.imgQ++;renderSec();}else completeSection();
   }
@@ -611,7 +661,7 @@ function advanceSection(){
     document.getElementById('eftr').style.display='flex';
     startTimer(SECS[ST.sec].secs);
     renderSec();
-  } else {
+  }else{
     buildReport();
   }
 }
@@ -665,7 +715,6 @@ ${wrongReview}
 
 function buildWrongReview(){
   const sections=[];
-  // Reading
   const rWrong=[];let rqi=0;
   DATA.reading.forEach(p=>p.qs.forEach(q=>{
     const chosen=ST.rAns[rqi];
@@ -673,7 +722,6 @@ function buildWrongReview(){
     rqi++;
   }));
   if(rWrong.length)sections.push({title:'📖 Reading',items:rWrong});
-  // Listening
   const lWrong=[];let lqi=0;
   DATA.listening.forEach(cl=>cl.qs.forEach(q=>{
     const chosen=ST.lAns[lqi];
@@ -681,19 +729,14 @@ function buildWrongReview(){
     lqi++;
   }));
   if(lWrong.length)sections.push({title:'🎧 Listening',items:lWrong});
-  // Writing
   const wWrong=ST.wHistory.filter(h=>!h.ok).map(h=>({q:h.q,opts:h.opts,chosen:h.chosen,ans:h.ans,explain:h.explain}));
   if(wWrong.length)sections.push({title:'✍️ Writing',items:wWrong});
-  // Speaking
   const spWrong=ST.spHistory.filter(h=>!h.ok).map(h=>({q:'<em style="color:#64748b;font-size:.82rem">'+h.scenario+'</em><br>'+h.q,opts:h.opts,chosen:h.chosen,ans:h.ans,explain:h.explain}));
   if(spWrong.length)sections.push({title:'💬 Speaking',items:spWrong});
-  // Images
   const imgWrong=[];
   ST.imgAns.forEach((chosen,i)=>{if(chosen!==DATA.images[i].ans)imgWrong.push({q:'Image description ('+DATA.images[i].scene+')',opts:DATA.images[i].options,chosen,ans:DATA.images[i].ans,explain:DATA.images[i].explain});});
   if(imgWrong.length)sections.push({title:'🖼️ Images',items:imgWrong});
-
   if(!sections.length)return '<div class="no-wrong">🌟 No mistakes — outstanding work, '+ST.name+'!</div>';
-
   return sections.map(sec=>'<div class="wrong-section"><div class="wrong-sec-title">'+sec.title+'</div>'+sec.items.map(item=>{
     const yourChoice=(item.chosen===-1||item.chosen===null)?'⚠️ No answer (time ran out)':item.opts[item.chosen]||'—';
     const correct=item.opts[item.ans];
@@ -750,7 +793,12 @@ function restart(){
   stopTimer();
   if(window.speechSynthesis)window.speechSynthesis.cancel();
   stopWv();
-  ST={name:'Student',sec:0,rQ:0,rAns:Array(9).fill(null),lQ:0,lAns:Array(6).fill(null),lPlays:[2,2,2],wLevel:'easy',wQ:0,wAns:[],wStreak:0,wMaxLevel:'easy',wHistory:[],spLevel:'easy',spQ:0,spAns:[],spStreak:0,spMaxLevel:'easy',spHistory:[],imgQ:0,imgAns:Array(3).fill(null),scores:{reading:0,listening:0,writing:0,speaking:0,images:0},rCor:0,lCor:0,wCor:0,spCor:0,imgCor:0,feedback:null,secTimeLeft:0};
+  ST={name:'Student',sec:0,rQ:0,rAns:Array(9).fill(null),lQ:0,lAns:Array(6).fill(null),lPlays:[2,2,2],
+      wLevel:'easy',wQ:0,wAns:[],wStreak:0,wMaxLevel:'easy',wHistory:[],wFeedback:null,
+      spLevel:'easy',spQ:0,spAns:[],spStreak:0,spMaxLevel:'easy',spHistory:[],spFeedback:null,
+      imgQ:0,imgAns:Array(3).fill(null),
+      scores:{reading:0,listening:0,writing:0,speaking:0,images:0},
+      rCor:0,lCor:0,wCor:0,spCor:0,imgCor:0,secTimeLeft:0};
   document.getElementById('eftr').style.display='flex';
   document.getElementById('sname').value='';
   show('splash');
